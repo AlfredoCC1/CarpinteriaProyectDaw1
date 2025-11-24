@@ -22,15 +22,16 @@ public class UsuarioService {
         return usuarioRepo.findAll();
     }
 
-    public Usuario obtener(Long id) {
+    public Usuario obtener(Integer id) { // 👈 mejor que Long, porque el repo usa Integer
         return usuarioRepo.findById(id).orElse(null);
     }
 
-    public Usuario login(String correo, String clave) {
-        Usuario u = usuarioRepo.findByCorreo(correo).orElse(null);
+    public Usuario login(String username, String clave) {
+        Usuario u = usuarioRepo.findByUsername(username).orElse(null);
         if (u != null && u.getPassword().equals(clave)) {
             return u;
         }
         return null;
     }
+
 }

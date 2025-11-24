@@ -32,8 +32,8 @@ public class UsuarioController {
 
     // Obtener usuario por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> obtener(@PathVariable Long id) {
-        Usuario usuario = usuarioService.obtener(id);
+    public ResponseEntity<Usuario> obtener(@PathVariable Integer id) {  // 👈 aquí Integer
+        Usuario usuario = usuarioService.obtener(id);                    // 👈 ahora coincide
         if (usuario == null) {
             return ResponseEntity.notFound().build();
         }
