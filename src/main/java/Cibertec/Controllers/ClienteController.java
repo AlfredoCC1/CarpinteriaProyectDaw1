@@ -12,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     // Listar todos los clientes
     @GetMapping
@@ -42,7 +45,6 @@ public class ClienteController {
             Cliente nuevo = clienteService.registrarCliente(cliente);
             return ResponseEntity.ok(nuevo);
         } catch (RuntimeException e) {
-            // Por ejemplo: "El DNI ya está registrado."
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
