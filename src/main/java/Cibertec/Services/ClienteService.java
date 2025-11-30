@@ -1,5 +1,3 @@
-package Cibertec.Services;
-
 import Cibertec.Model.Cliente;
 import Cibertec.Repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
