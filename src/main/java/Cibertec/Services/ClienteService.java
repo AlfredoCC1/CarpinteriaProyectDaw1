@@ -2,7 +2,6 @@ package Cibertec.Services;
 
 import Cibertec.Model.Cliente;
 import Cibertec.Repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +9,12 @@ import java.util.List;
 @Service
 public class ClienteService {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+
+    private final ClienteRepository clienteRepository;
+
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     // Registrar cliente (validación de DNI)
     public Cliente registrarCliente(Cliente cliente) {

@@ -11,18 +11,22 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepo;
 
     public UsuarioService(UsuarioRepository usuarioRepo) {
+
         this.usuarioRepo = usuarioRepo;
     }
 
     public Usuario registrar(Usuario usuario) {
+
         return usuarioRepo.save(usuario);
     }
 
     public List<Usuario> listar() {
+
         return usuarioRepo.findAll();
     }
 
     public Usuario obtener(Integer id) { // 👈 mejor que Long, porque el repo usa Integer
+
         return usuarioRepo.findById(id).orElse(null);
     }
 

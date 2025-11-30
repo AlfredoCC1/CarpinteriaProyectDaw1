@@ -2,7 +2,6 @@ package Cibertec.Controllers;
 
 import Cibertec.Model.Cliente;
 import Cibertec.Services.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +38,7 @@ public class ClienteController {
     }
 
     // Registrar nuevo cliente
-    @PostMapping
+    @PostMapping("/registro")
     public ResponseEntity<?> registrar(@RequestBody Cliente cliente) {
         try {
             Cliente nuevo = clienteService.registrarCliente(cliente);
