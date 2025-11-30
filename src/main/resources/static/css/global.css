@@ -1,0 +1,15 @@
+:root {
+    --primary: #8B5A2B;      /* marrón madera */
+    --primary-dark: #5C3B1B;
+    --accent: #FFC857;
+    --bg: #F5F3EF;
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+}

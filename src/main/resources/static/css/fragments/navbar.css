@@ -1,0 +1,9 @@
+/* NAVBAR */
+.navbar-custom {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-brand span {
+    color: var(--accent);
+    font-weight: 700;
+}
