@@ -17,8 +17,8 @@ public class VistasController {
         return "login";
     }
 
-    @GetMapping("/registro")
+    @GetMapping("/registra-cuenta")
     public String mostrarFormularioRegistro() {
-        return "registro";   // templates/registro.html
+        return "register";
     }
 }

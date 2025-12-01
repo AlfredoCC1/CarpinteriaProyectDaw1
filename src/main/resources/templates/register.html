@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Carpintería</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <!-- AOS Animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+
+</head>
+
+<body>
+
+<div class="register-card" data-aos="zoom-in">
+
+    <div class="text-center mb-4">
+        <i class="fa-solid fa-hammer fa-2x mb-2"></i>
+        <h3>Crear cuenta</h3>
+        <p class="text-white-50 small">
+            Registra un nuevo usuario administrador para la carpintería.
+        </p>
+        <span class="badge-role">
+            <i class="fa-solid fa-shield-halved me-1"></i> Acceso restringido
+        </span>
+    </div>
+
+    <!-- FORMULARIO REGISTRO -->
+    <!-- Si luego usas Thymeleaf + Spring Security, puedes ajustar th:action y th:field -->
+    <form th:action="@{/registro}" method="post">
+
+        <!-- NOMBRE COMPLETO -->
+        <label class="form-label">Nombre completo</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+            <input type="text" class="form-control" name="nombreCompleto"
+                   placeholder="Ej: Juan Pérez" required>
+        </div>
+
+        <!-- EMAIL -->
+        <label class="form-label">Correo electrónico</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+            <input type="email" class="form-control" name="correo"
+                   placeholder="tucorreo@ejemplo.com" required>
+        </div>
+
+        <!-- USUARIO -->
+        <label class="form-label">Usuario</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa-solid fa-id-badge"></i></span>
+            <input type="text" class="form-control" name="usuario"
+                   placeholder="Nombre de usuario" required>
+        </div>
+
+        <!-- ROL -->
+        <label class="form-label">Rol</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa-solid fa-user-gear"></i></span>
+            <select class="form-select" name="rol">
+                <option value="ADMIN" selected>Administrador</option>
+                <option value="EMPLEADO">Empleado</option>
+            </select>
+        </div>
+
+        <!-- CONTRASEÑA -->
+        <label class="form-label">Contraseña</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+            <input id="password" type="password" class="form-control" name="password"
+                   placeholder="********" required>
+            <span class="input-group-text" style="cursor:pointer;" onclick="togglePassword('password','iconPass1')">
+                <i id="iconPass1" class="fa-solid fa-eye"></i>
+            </span>
+        </div>
+
+        <!-- CONFIRMAR CONTRASEÑA -->
+        <label class="form-label">Confirmar contraseña</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+            <input id="password2" type="password" class="form-control" name="passwordConfirm"
+                   placeholder="Repite la contraseña" required>
+            <span class="input-group-text" style="cursor:pointer;" onclick="togglePassword('password2','iconPass2')">
+                <i id="iconPass2" class="fa-solid fa-eye"></i>
+            </span>
+        </div>
+
+        <!-- MENSAJE DE ERROR CLIENTE -->
+        <div id="errorMsg" class="text-danger small mb-2" style="display:none;">
+            <i class="fa-solid fa-triangle-exclamation me-1"></i>
+            Las contraseñas no coinciden.
+        </div>
+
+        <!-- BOTÓN -->
+        <button type="submit" class="btn btn-main w-100 mt-2" onclick="return validarPasswords();">
+            Crear cuenta <i class="fa-solid fa-user-plus ms-1"></i>
+        </button>
+    </form>
+
+    <div class="text-center mt-3">
+        <a th:href="@{/login}" class="small-link small">
+            <i class="fa-solid fa-arrow-left"></i> Ya tengo cuenta, ir a login
+        </a>
+    </div>
+
+    <div class="text-center mt-2">
+        <a th:href="@{/index}" class="small-link small"><i class="fa-solid fa-house"></i> Volver al inicio </a>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>AOS.init();</script>
+
+<script>
+    // Mostrar/Ocultar contraseña (reutilizable)
+    function togglePassword(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+    }
+
+    // Validación simple en el cliente para confirmar contraseñas
+    function validarPasswords() {
+        const pass1 = document.getElementById("password").value;
+        const pass2 = document.getElementById("password2").value;
+        const errorMsg = document.getElementById("errorMsg");
+
+        if (pass1 !== pass2) {
+            errorMsg.style.display = "block";
+            return false; // Bloquea el submit
+        }
+        errorMsg.style.display = "none";
+        return true;
+    }
+</script>
+
+</body>
+</html>
