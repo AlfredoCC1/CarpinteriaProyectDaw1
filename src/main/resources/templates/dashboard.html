@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control | Carpintería</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <!-- AOS (animaciones) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #8B5A2B;
+            --primary-dark: #5C3B1B;
+            --accent: #FFC857;
+            --bg: #F5F3EF;
+            --dark: #111;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+        }
+
+        /* LAYOUT GENERAL */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, #1b1b1b, #050505);
+            color: #eee;
+            padding: 1.5rem 1rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .sidebar-brand span {
+            font-weight: 700;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: .4rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .55rem .75rem;
+            border-radius: .7rem;
+            color: #bbb;
+            text-decoration: none;
+            font-size: .92rem;
+        }
+
+        .sidebar-menu a i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(255,255,255,0.08);
+            color: var(--accent);
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin-top: 2rem;
+            padding-top: 1rem;
+            font-size: .8rem;
+            color: #777;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background-color: #fff;
+            padding: .75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .topbar-title {
+            font-weight: 600;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar-sm {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* CONTENIDO INTERIOR */
+        .content-inner {
+            padding: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: .75rem;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .section-header small {
+            color: #777;
+        }
+
+        /* CARDS RESUMEN */
+        .card-metric {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 12px 30px rgba(0,0,0,.06);
+        }
+
+        .card-metric-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .bg-soft-primary {
+            background: linear-gradient(135deg, #8B5A2B, #5C3B1B);
+        }
+
+        .bg-soft-success {
+            background: linear-gradient(135deg, #3fb67c, #268a59);
+        }
+
+        .bg-soft-warning {
+            background: linear-gradient(135deg, #FFC857, #ff9b1a);
+        }
+
+        .bg-soft-info {
+            background: linear-gradient(135deg, #3f89ff, #245cbe);
+        }
+
+        .metric-label {
+            font-size: .8rem;
+            color: #777;
+        }
+
+        .metric-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .metric-trend {
+            font-size: .75rem;
+        }
+
+        /* TARJETAS CONTENIDO */
+        .card-soft {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 12px 30px rgba(0,0,0,.06);
+        }
+
+        /* TABLA */
+        .table thead {
+            background-color: #f3f2ed;
+            font-size: .85rem;
+        }
+
+        .status-badge {
+            border-radius: 999px;
+            padding: .2rem .7rem;
+            font-size: .75rem;
+        }
+
+        /* SIDEBAR RESPONSIVE */
+        .sidebar-toggle-btn {
+            display: none;
+        }
+
+        @media (max-width: 992px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                transform: translateX(-100%);
+                transition: transform .25s ease;
+                z-index: 1050;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .content {
+                flex: none;
+            }
+
+            .sidebar-toggle-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 34px;
+                height: 34px;
+                border-radius: 50%;
+                border: none;
+                background: #f0f0f0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand mb-4">
+            <div class="sidebar-brand-icon">
+                <i class="fa-solid fa-hammer"></i>
+            </div>
+            <div>
+                <span>Carpintería</span><br>
+                <small class="text-muted">Panel administrador</small>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/dashboard" class="active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+            <li><a href="/productos"><i class="fa-solid fa-chair"></i> Productos</a></li>
+            <li><a href="/clientes"><i class="fa-solid fa-user-group"></i> Clientes</a></li>
+            <li><a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Pedidos</a></li>
+            <li><a href="#"><i class="fa-solid fa-users-gear"></i> Usuarios</a></li>
+            <li><a href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+        </ul>
+
+        <div class="sidebar-footer mt-4">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fa-regular fa-circle-check text-success"></i>
+                <span>Sistema operativo</span>
+            </div>
+            <small>Sesión iniciada como <strong>admin</strong>.</small>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="content">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="d-flex align-items-center gap-2">
+                <button class="sidebar-toggle-btn d-lg-none me-2" id="sidebarToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div>
+                    <div class="topbar-title">Dashboard</div>
+                    <small class="text-muted">Resumen general de la carpintería</small>
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <button class="btn btn-sm btn-outline-secondary d-none d-md-inline-flex">
+                    <i class="fa-regular fa-bell me-1"></i> Notificaciones
+                </button>
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-decoration-none text-dark" href="#" data-bs-toggle="dropdown">
+                        <img class="avatar-sm me-2"
+                             src="https://randomuser.me/api/portraits/men/11.jpg" alt="Usuario">
+                        <div class="d-none d-sm-block">
+                            <div class="small fw-semibold">Admin Carpintería</div>
+                            <div class="small text-muted">Administrador</div>
+                        </div>
+                        <i class="fa-solid fa-caret-down ms-1 small"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-gear me-2"></i> Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-sliders me-2"></i> Ajustes</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENIDO INTERIOR -->
+        <main class="content-inner">
+
+            <!-- RESUMEN DE MÉTRICAS -->
+            <div class="section-header" data-aos="fade-up">
+                <div>
+                    <h2>Resumen de hoy</h2>
+                    <small>Estado general del negocio en las últimas 24 horas.</small>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary">
+                    <i class="fa-solid fa-rotate me-1"></i> Actualizar datos
+                </button>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="0">
+                    <div class="card card-metric">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="metric-label">Productos activos</div>
+                                <div class="metric-value" th:text="${totalProductos}">48</div>
+                                <div class="metric-trend text-success">
+                                    <i class="fa-solid fa-arrow-up me-1"></i> +5 nuevos
+                                </div>
+                            </div>
+                            <div class="card-metric-icon bg-soft-primary">
+                                <i class="fa-solid fa-chair"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card card-metric">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="metric-label">Clientes registrados</div>
+                                <div class="metric-value" th:text="${totalClientes}">132</div>
+                                <div class="metric-trend text-success">
+                                    <i class="fa-solid fa-user-plus me-1"></i> +3 hoy
+                                </div>
+                            </div>
+                            <div class="card-metric-icon bg-soft-success">
+                                <i class="fa-solid fa-user-group"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card card-metric">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="metric-label">Pedidos del mes</div>
+                                <div class="metric-value" th:text="${pedidosMes}">27</div>
+                                <div class="metric-trend text-warning">
+                                    <i class="fa-solid fa-clock me-1"></i> 6 en progreso
+                                </div>
+                            </div>
+                            <div class="card-metric-icon bg-soft-warning">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card card-metric">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="metric-label">Ingresos aprox. (S/)</div>
+                                <div class="metric-value" th:text="${ingresosMes}">18,450</div>
+                                <div class="metric-trend text-success">
+                                    <i class="fa-solid fa-arrow-up-right-dots me-1"></i> +12% vs mes anterior
+                                </div>
+                            </div>
+                            <div class="card-metric-icon bg-soft-info">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRÁFICOS Y PANELES -->
+            <div class="row g-3 mb-4">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h6 class="mb-0">Pedidos por mes</h6>
+                                    <small class="text-muted">Últimos 6 meses</small>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                        Ver: 6 meses
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#">Últimos 3 meses</a></li>
+                                        <li><a class="dropdown-item" href="#">Últimos 6 meses</a></li>
+                                        <li><a class="dropdown-item" href="#">Último año</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <canvas id="ordersChart" height="140"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <h6 class="mb-2">Distribución de productos</h6>
+                            <small class="text-muted d-block mb-2">Por categoría principal</small>
+                            <canvas id="productsChart" height="180"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLA + TAREAS -->
+            <div class="row g-3">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="card card-soft">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0">Últimos pedidos</h6>
+                                <a href="#" class="small text-decoration-none">Ver todos</a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-sm align-middle mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Proyecto</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th class="text-end">Total (S/)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Lucía Morales</td>
+                                        <td>Cocina integral</td>
+                                        <td>26/11</td>
+                                        <td><span class="status-badge bg-success-subtle text-success">En producción</span></td>
+                                        <td class="text-end">7,800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Carlos Peña</td>
+                                        <td>Mobiliario cafetería</td>
+                                        <td>25/11</td>
+                                        <td><span class="status-badge bg-warning-subtle text-warning">Diseño</span></td>
+                                        <td class="text-end">5,450</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Andrea Salas</td>
+                                        <td>Restauración comedor</td>
+                                        <td>24/11</td>
+                                        <td><span class="status-badge bg-info-subtle text-info">Entregado</span></td>
+                                        <td class="text-end">2,300</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pedro Díaz</td>
+                                        <td>Closet empotrado</td>
+                                        <td>23/11</td>
+                                        <td><span class="status-badge bg-secondary-subtle text-secondary">Cotización</span></td>
+                                        <td class="text-end">1,950</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card card-soft mb-3">
+                        <div class="card-body">
+                            <h6 class="mb-2">Tareas pendientes</h6>
+                            <small class="text-muted d-block mb-2">Hoy</small>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                    <span><i class="fa-regular fa-square me-2"></i> Llamar a proveedor de madera</span>
+                                    <span class="badge bg-light text-muted">09:30</span>
+                                </li>
+                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                    <span><i class="fa-regular fa-square me-2"></i> Enviar cotización a Sr. Díaz</span>
+                                    <span class="badge bg-light text-muted">11:00</span>
+                                </li>
+                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                    <span><i class="fa-regular fa-square me-2"></i> Revisar diseño de cafetería</span>
+                                    <span class="badge bg-light text-muted">15:00</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card card-soft">
+                        <div class="card-body">
+                            <h6 class="mb-2">Notas rápidas</h6>
+                            <textarea class="form-control form-control-sm mb-2" rows="3"
+                                      placeholder="Apunta ideas, medidas o recordatorios breves..."></textarea>
+                            <button class="btn btn-sm btn-outline-secondary w-100">
+                                <i class="fa-regular fa-floppy-disk me-1"></i> Guardar nota
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- JS LIBS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+    AOS.init({ duration: 700, once: true });
+
+    // Toggle sidebar en mobile
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+    }
+
+    // Gráfico de pedidos por mes
+    const ordersCtx = document.getElementById('ordersChart');
+    if (ordersCtx) {
+        new Chart(ordersCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'],
+                datasets: [{
+                    label: 'Pedidos',
+                    data: [14, 18, 21, 19, 24, 27],
+                    borderRadius: 6,
+                    backgroundColor: 'rgba(139, 90, 43, 0.8)'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { stepSize: 5 } }
+                }
+            }
+        });
+    }
+
+    // Gráfico de distribución de productos
+    const productsCtx = document.getElementById('productsChart');
+    if (productsCtx) {
+        new Chart(productsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Muebles hogar', 'Comercial', 'Cocina/Closets', 'Restauración'],
+                datasets: [{
+                    data: [45, 20, 25, 10],
+                    backgroundColor: [
+                        '#8B5A2B',
+                        '#FFC857',
+                        '#3f89ff',
+                        '#3fb67c'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 14, usePointStyle: true }
+                    }
+                },
+                cutout: '65%'
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

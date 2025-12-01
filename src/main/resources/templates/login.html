@@ -32,6 +32,10 @@
         <p class="text-white-50 small">Acceso para administradores</p>
     </div>
 
+    <div th:if="${error}" class="alert alert-danger text-center py-2">
+        <span th:text="${error}"></span>
+    </div>
+
     <!-- FORMULARIO LOGIN -->
     <form th:action="@{/login}" method="post">
 

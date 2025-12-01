@@ -63,8 +63,11 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    // (Opcional) Login súper básico (solo ejemplo)
+
+    // 🔥 LOGIN — AQUÍ VA TU MÉTODO 🔥
+
     public Usuario login(String username, String password) {
+
         Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuario o contraseña incorrectos."));
 

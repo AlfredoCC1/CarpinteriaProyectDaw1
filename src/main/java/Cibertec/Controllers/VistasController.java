@@ -12,11 +12,6 @@ public class VistasController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-
     @GetMapping("/registra-cuenta")
     public String mostrarFormularioRegistro() {
         return "register";
