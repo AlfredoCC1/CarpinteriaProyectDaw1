@@ -24,10 +24,7 @@ public class LoginController {
 
     // Procesar formulario de login (solo JAVA)
     @PostMapping("/login")
-    public String procesarLogin(@RequestParam String username,
-                                @RequestParam String password,
-                                Model model,
-                                HttpSession session) {
+    public String procesarLogin(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
         try {
             Usuario usuario = usuarioService.login(username, password);
 

@@ -2,6 +2,7 @@ package Cibertec.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -16,6 +17,7 @@ public class Usuario {
     // FK a empleado (1:1)
     @OneToOne
     @JoinColumn(name = "id_empleado", nullable = false)
+    @ToString.Exclude   // ← evita el ciclo infinito
     private Empleado empleado;
 
     @Column(name = "username", nullable = false, unique = true, length = 50)

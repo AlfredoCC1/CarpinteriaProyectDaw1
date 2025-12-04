@@ -40,10 +40,17 @@ public class DashboardController {
             return "redirect:/login";
         }
 
+        // 👇 NUEVO: totales para las tarjetas
+        long totalClientes = clienteService.listarClientes().size();
+        long totalProductos = productoService.listarProductos().size();
+
         model.addAttribute("usuario", usuarioLogueado);
+        model.addAttribute("totalClientes", totalClientes);
+        model.addAttribute("totalProductos", totalProductos);
 
         return "dashboard"; // templates/dashboard.html
     }
+
 
 
     // ==========================
@@ -76,8 +83,14 @@ public class DashboardController {
 
     @GetMapping("/productos-mas-vendidos")
     @ResponseBody
-    public List<Object[]> productosMasVendidos() {
-        return detallePedidoService.getProductosMasVendidos();
+    public List<Object[]> productosMasVendidos(
+            @RequestParam int mes,
+            @RequestParam int anio
+    ) {
+        return detallePedidoService.getProductosMasVendidosMes(mes, anio);
     }
+
+
+
 }
 

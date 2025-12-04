@@ -2,6 +2,7 @@ package Cibertec.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -15,7 +16,6 @@ public class Empleado {
     @Column(name = "id_empleado")
     private Integer idEmpleado;
 
-    // FK a rol
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;
@@ -45,12 +45,12 @@ public class Empleado {
     private String direccion;
 
     @Column(name = "genero", length = 20)
-    private String genero;   // "Masculino", "Femenino", etc.
+    private String genero;
 
     @Column(name = "celular", length = 20)
     private String celular;
 
-    // Relación 1:1 con Usuario (lado inverso)
     @OneToOne(mappedBy = "empleado")
+    @ToString.Exclude     // ⛔ evita ciclo infinito con Usuario
     private Usuario usuario;
 }

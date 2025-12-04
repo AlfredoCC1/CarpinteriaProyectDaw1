@@ -48,8 +48,8 @@ public class ClienteService {
         }
 
         cliente.setNombre(datos.getNombre());
-        cliente.setApellido(datos.getApellido());
-        cliente.setTelefono(datos.getTelefono());
+        cliente.setApellidos(datos.getApellidos());
+        cliente.setCelular(datos.getCelular());
         cliente.setCorreo(datos.getCorreo());
         cliente.setDni(datos.getDni());
 

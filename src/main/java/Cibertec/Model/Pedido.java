@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Pedido")
+@Table(name = "pedido")
 public class Pedido {
 
     @Id
@@ -21,17 +22,13 @@ public class Pedido {
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 
-    @Column(name = "fecha_pedido")
-    private LocalDateTime fechaPedido;
+    @Column(name = "fecha")
+    private LocalDate fecha;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "estado")
-    private EstadoPedido estado;
-
-    @Column(name = "total", nullable = false)
+    @Column(name = "total")
     private BigDecimal total;
 
-    // Relación 1:N con Detalle_Pedido
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pedido")
     private List<DetallePedido> detalles;
 }
+

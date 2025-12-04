@@ -2,13 +2,12 @@ package Cibertec.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Cliente")
+@Table(name = "cliente")
 public class Cliente {
 
     @Id
@@ -19,26 +18,35 @@ public class Cliente {
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(name = "apellido", nullable = false, length = 100)
-    private String apellido;
+    @Column(name = "apellidos", nullable = false, length = 150)
+    private String apellidos;
 
     @Column(name = "dni", nullable = false, unique = true, length = 15)
     private String dni;
 
+    @Column(name = "celular", length = 20)
+    private String celular;
+
+    @Column(name = "correo", length = 100)
+    private String correo;
+
+    @Column(name = "direccion", length = 255)
+    private String direccion;
+
+    @Column(name = "fecha_registro")
+    private LocalDateTime fechaRegistro; // 👈 AGREGADO
+
     @Column(name = "telefono", length = 20)
     private String telefono;
 
-    @Column(name = "correo", unique = true, length = 100)
-    private String correo;
-
-    @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro;
-
-    // Relación 1:N con Direccion
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Direccion> direcciones;
-
-    // Relación 1:N con Pedido
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
+
+    @PrePersist
+    public void preRegistro() {
+        if (fechaRegistro == null) {
+            fechaRegistro = LocalDateTime.now();
+        }
+    }
 }
+

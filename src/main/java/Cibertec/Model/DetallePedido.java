@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
-@Table(name = "Detalle_Pedido")
+@Table(name = "detalle_Pedido")
 public class DetallePedido {
 
     @Id
@@ -30,6 +30,7 @@ public class DetallePedido {
     private BigDecimal precioUnitario;
 
     // Campo generado por MySQL (cantidad * precio_unitario)
-    @Column(name = "subtotal", insertable = false, updatable = false)
+    @Column(name = "subtotal")
     private BigDecimal subtotal;
+
 }

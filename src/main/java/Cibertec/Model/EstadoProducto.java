@@ -4,3 +4,4 @@ public enum EstadoProducto {
     ACTIVO,
     INACTIVO
 }
+

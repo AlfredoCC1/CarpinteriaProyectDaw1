@@ -26,9 +26,7 @@
             --dark: #111;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -314,7 +312,7 @@
                 <i class="fa-regular fa-circle-check text-success"></i>
                 <span>Sistema operativo</span>
             </div>
-            <small>Sesión iniciada como <strong>admin</strong>.</small>
+            <small>Sesión iniciada como <strong th:text="${usuario}">admin</strong>.</small>
         </div>
     </aside>
 
@@ -365,21 +363,54 @@
                     <h2>Resumen de hoy</h2>
                     <small>Estado general del negocio en las últimas 24 horas.</small>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary">
-                    <i class="fa-solid fa-rotate me-1"></i> Actualizar datos
-                </button>
+
+                <!-- 🔽 NUEVO: FILTROS MES / AÑO + MISMO BOTÓN 🔽 -->
+                <div class="d-flex align-items-center gap-2">
+                    <select id="selectMes" class="form-select form-select-sm">
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+
+                    <select id="selectAnio" class="form-select form-select-sm">
+                        <!-- puedes ajustar años según tu necesidad -->
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+
+                    </select>
+
+                    <button class="btn btn-sm btn-outline-secondary" id="btnRefrescar">
+                        <i class="fa-solid fa-rotate me-1"></i> Actualizar datos
+                    </button>
+                </div>
+                <!-- 🔼 FIN FILTROS 🔼 -->
             </div>
 
             <div class="row g-3 mb-4">
-                <div class="col-md-3" data-aos="fade-up" data-aos-delay="0">
+
+                <!-- Productos activos -->
+                <div class="col-md-3">
                     <div class="card card-metric">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="metric-label">Productos activos</div>
-                                <div class="metric-value" th:text="${totalProductos}">48</div>
-                                <div class="metric-trend text-success">
-                                    <i class="fa-solid fa-arrow-up me-1"></i> +5 nuevos
-                                </div>
+                                <div id="totalProductos" class="metric-value" th:text="${totalProductos}">0</div>
                             </div>
                             <div class="card-metric-icon bg-soft-primary">
                                 <i class="fa-solid fa-chair"></i>
@@ -388,15 +419,13 @@
                     </div>
                 </div>
 
-                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <!-- Clientes registrados -->
+                <div class="col-md-3">
                     <div class="card card-metric">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="metric-label">Clientes registrados</div>
-                                <div class="metric-value" th:text="${totalClientes}">132</div>
-                                <div class="metric-trend text-success">
-                                    <i class="fa-solid fa-user-plus me-1"></i> +3 hoy
-                                </div>
+                                <div id="totalClientes" class="metric-value" th:text="${totalClientes}">0</div>
                             </div>
                             <div class="card-metric-icon bg-soft-success">
                                 <i class="fa-solid fa-user-group"></i>
@@ -405,15 +434,13 @@
                     </div>
                 </div>
 
-                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <!-- Pedidos del mes -->
+                <div class="col-md-3">
                     <div class="card card-metric">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="metric-label">Pedidos del mes</div>
-                                <div class="metric-value" th:text="${pedidosMes}">27</div>
-                                <div class="metric-trend text-warning">
-                                    <i class="fa-solid fa-clock me-1"></i> 6 en progreso
-                                </div>
+                                <div id="pedidosMes" class="metric-value">0</div>
                             </div>
                             <div class="card-metric-icon bg-soft-warning">
                                 <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -422,15 +449,13 @@
                     </div>
                 </div>
 
-                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <!-- Ingresos del mes -->
+                <div class="col-md-3">
                     <div class="card card-metric">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
-                                <div class="metric-label">Ingresos aprox. (S/)</div>
-                                <div class="metric-value" th:text="${ingresosMes}">18,450</div>
-                                <div class="metric-trend text-success">
-                                    <i class="fa-solid fa-arrow-up-right-dots me-1"></i> +12% vs mes anterior
-                                </div>
+                                <div class="metric-label">Ingresos (S/)</div>
+                                <div id="ingresosMes" class="metric-value">0.00</div>
                             </div>
                             <div class="card-metric-icon bg-soft-info">
                                 <i class="fa-solid fa-sack-dollar"></i>
@@ -438,27 +463,19 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
-            <!-- GRÁFICOS Y PANELES -->
+            <!-- GRÁFICOS -->
             <div class="row g-3 mb-4">
+                <!-- Actividad del mes -->
                 <div class="col-lg-8" data-aos="fade-up">
                     <div class="card card-soft h-100">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div>
-                                    <h6 class="mb-0">Pedidos por mes</h6>
-                                    <small class="text-muted">Últimos 6 meses</small>
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
-                                        Ver: 6 meses
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="#">Últimos 3 meses</a></li>
-                                        <li><a class="dropdown-item" href="#">Últimos 6 meses</a></li>
-                                        <li><a class="dropdown-item" href="#">Último año</a></li>
-                                    </ul>
+                                    <h6 class="mb-0">Actividad del mes</h6>
+                                    <small class="text-muted">Pedidos vs productos vendidos</small>
                                 </div>
                             </div>
                             <canvas id="ordersChart" height="140"></canvas>
@@ -466,18 +483,19 @@
                     </div>
                 </div>
 
+                <!-- Productos más vendidos -->
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card card-soft h-100">
                         <div class="card-body">
-                            <h6 class="mb-2">Distribución de productos</h6>
-                            <small class="text-muted d-block mb-2">Por categoría principal</small>
+                            <h6 class="mb-2">Productos más vendidos</h6>
+                            <small class="text-muted d-block mb-2">Top por cantidad</small>
                             <canvas id="productsChart" height="180"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TABLA + TAREAS -->
+            <!-- TABLA + TAREAS (igual que tenías) -->
             <div class="row g-3">
                 <div class="col-lg-8" data-aos="fade-up">
                     <div class="card card-soft">
@@ -580,57 +598,95 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <script>
+    console.log("Dashboard JS cargado");
     AOS.init({ duration: 700, once: true });
 
-    // Toggle sidebar en mobile
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-        });
+    // ===============================
+    // FUNCIÓN PRINCIPAL: CARGAR DATOS DEL BACKEND
+    // ===============================
+    async function cargarMetricas(mes, anio) {
+
+        console.log("Cargando métricas para -> Mes:", mes, "Año:", anio);
+
+        try {
+            const pedidos = await fetch(`/dashboard/pedidos-mes?mes=${mes}&anio=${anio}`).then(r => r.json());
+            const ingresos = await fetch(`/dashboard/ventas-mes?mes=${mes}&anio=${anio}`).then(r => r.json());
+            const productosVendidos = await fetch(`/dashboard/productos-vendidos?mes=${mes}&anio=${anio}`).then(r => r.json());
+            const masVendidos = await fetch(`/dashboard/productos-mas-vendidos?mes=${mes}&anio=${anio}`)
+                .then(r => r.json());
+
+
+            // MOSTRAR EN LAS TARJETAS
+            document.getElementById("pedidosMes").textContent = pedidos ?? 0;
+            document.getElementById("ingresosMes").textContent = ingresos ?? 0;
+
+            // CARGAR GRÁFICOS
+            actualizarGraficoActividad(pedidos ?? 0, productosVendidos ?? 0);
+            actualizarGraficoProductos(masVendidos ?? []);
+
+        } catch (e) {
+            console.error("ERROR cargando métricas:", e);
+        }
     }
 
-    // Gráfico de pedidos por mes
-    const ordersCtx = document.getElementById('ordersChart');
-    if (ordersCtx) {
-        new Chart(ordersCtx, {
+    // ===============================
+    // GRÁFICO: ACTIVIDAD DEL MES
+    // ===============================
+    let chartActividad = null;
+
+    function actualizarGraficoActividad(pedidos, productosVendidos) {
+
+        const ctx = document.getElementById("ordersChart");
+
+        if (!ctx) return;
+
+        if (chartActividad) chartActividad.destroy();
+
+        chartActividad = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'],
+                labels: ['Pedidos del mes', 'Productos vendidos'],
                 datasets: [{
-                    label: 'Pedidos',
-                    data: [14, 18, 21, 19, 24, 27],
-                    borderRadius: 6,
-                    backgroundColor: 'rgba(139, 90, 43, 0.8)'
+                    data: [pedidos, productosVendidos],
+                    backgroundColor: ['rgba(139, 90, 43, 0.9)', 'rgba(63, 137, 255, 0.8)'],
+                    borderRadius: 8
                 }]
             },
             options: {
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: { beginAtZero: true, ticks: { stepSize: 5 } }
-                }
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
             }
         });
     }
 
-    // Gráfico de distribución de productos
-    const productsCtx = document.getElementById('productsChart');
-    if (productsCtx) {
-        new Chart(productsCtx, {
+    // ===============================
+    // GRÁFICO: PRODUCTOS MÁS VENDIDOS
+    // ===============================
+    let chartProductos = null;
+
+    function actualizarGraficoProductos(datos) {
+
+        const ctx = document.getElementById("productsChart");
+        if (!ctx) return;
+
+        if (!Array.isArray(datos) || datos.length === 0) {
+            console.warn("No hay productos más vendidos.");
+            if (chartProductos) chartProductos.destroy();
+            return;
+        }
+
+        const labels = datos.map(item => item[0]);
+        const values = datos.map(item => item[1]);
+
+        if (chartProductos) chartProductos.destroy();
+
+        chartProductos = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Muebles hogar', 'Comercial', 'Cocina/Closets', 'Restauración'],
+                labels,
                 datasets: [{
-                    data: [45, 20, 25, 10],
-                    backgroundColor: [
-                        '#8B5A2B',
-                        '#FFC857',
-                        '#3f89ff',
-                        '#3fb67c'
-                    ],
+                    data: values,
+                    backgroundColor: ['#8B5A2B', '#FFC857', '#3f89ff', '#3fb67c', '#ff7f50'],
                     borderWidth: 0
                 }]
             },
@@ -645,6 +701,45 @@
             }
         });
     }
+
+    // ===============================
+    // BOTÓN "Actualizar datos"
+    // ===============================
+    document.getElementById("btnRefrescar").addEventListener("click", () => {
+
+        const mes = parseInt(document.getElementById("selectMes").value, 10);
+        const anio = parseInt(document.getElementById("selectAnio").value, 10);
+
+        console.log("Filtrando dashboard -> Mes:", mes, "Año:", anio);
+
+        cargarMetricas(mes, anio);
+    });
+
+    // ===============================
+    // SIDEBAR RESPONSIVO (MÓVIL)
+    // ===============================
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener("click", () => {
+            sidebar.classList.toggle('open');
+        });
+    }
+
+    // ===============================
+    // EJECUCIÓN INICIAL
+    // ===============================
+    window.addEventListener('DOMContentLoaded', () => {
+
+        const fecha = new Date();
+
+        // Mes y año actual
+        document.getElementById("selectMes").value = (fecha.getMonth() + 1).toString();
+        document.getElementById("selectAnio").value = fecha.getFullYear().toString();
+
+        cargarMetricas(fecha.getMonth() + 1, fecha.getFullYear());
+    });
 </script>
 
 </body>
