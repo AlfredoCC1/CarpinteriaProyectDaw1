@@ -6,6 +6,11 @@
     padding: 0.75rem 0;
     transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
 }
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
 
 /* Cuando se hace scroll, que se vea más compacta y sólida */
 .navbar-custom.navbar-scrolled {
