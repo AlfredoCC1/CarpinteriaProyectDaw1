@@ -1,10 +1,374 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Cotización | Carpintería Art&Wood</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+    <!-- AOS Animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- CSS global + fragments -->
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/fragments/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/fragments/desplazate.css}">
+    <link rel="stylesheet" th:href="@{/css/fragments/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/proceso.css}">
+
+
+    <style>
+        /* HERO */
+        .hero-banner {
+            background: linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.8)),
+            url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=80")
+            center/cover no-repeat;
+            padding: 4rem 0 3rem;
+            color: #fff;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .35rem .9rem;
+            border-radius: 999px;
+            background-color: rgba(0,0,0,.4);
+            font-size: .85rem;
+        }
+
+        .hero-badge i {
+            color: var(--accent);
+        }
+
+        /* SECCIONES */
+        section {
+            padding: 3.5rem 0;
+        }
+
+        .section-title {
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #777;
+            font-size: .95rem;
+        }
+
+        /* CARD FORMULARIO */
+        .quote-card {
+            border-radius: 1.2rem;
+            background-color: #fff;
+            box-shadow: 0 14px 36px rgba(0,0,0,.1);
+            padding: 2rem;
+        }
+
+        .info-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            padding: .2rem .75rem;
+            border-radius: 999px;
+            font-size: .8rem;
+            background-color: rgba(0,0,0,.04);
+            margin-bottom: .5rem;
+        }
+
+        .info-pill i {
+            color: var(--accent);
+        }
+
+        .small-note {
+            font-size: .8rem;
+            color: #888;
+        }
+
+        .btn-main {
+            background-color: var(--accent);
+            border: none;
+            font-weight: 600;
+            border-radius: 50px;
+        }
+
+        .btn-main:hover {
+            background-color: #ffb52c;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .list-check {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .list-check li {
+            font-size: .9rem;
+            margin-bottom: .35rem;
+        }
+
+        .list-check i {
+            color: #28a745;
+            margin-right: .35rem;
+        }
+
+        .badge-estimate {
+            background-color: rgba(255,200,87,0.15);
+            border-radius: 999px;
+            padding: .25rem .7rem;
+            font-size: .8rem;
+            color: #9c6b26;
+        }
+    </style>
 </head>
 <body>
+
+<!-- HERO -->
+<header class="hero-banner">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7" data-aos="fade-right">
+                <div class="hero-badge mb-3">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                    <span>Solicita una cotización personalizada para tu proyecto</span>
+                </div>
+
+                <h1 class="display-6 fw-bold mb-2">
+                    Solicitar Cotización
+                </h1>
+                <p class="lead mb-3">
+                    Cuéntanos con el mayor detalle posible qué necesitas y te enviaremos
+                    una propuesta estimada de precio y tiempo.
+                </p>
+
+                <p class="mb-2">
+                    <i class="fa-solid fa-clock me-1 text-warning"></i>
+                    <span class="badge-estimate">Tiempo de respuesta: menos de 24 horas hábiles</span>
+                </p>
+
+                <div class="mt-3">
+                    <a href="/" class="btn btn-outline-light btn-sm me-2">
+                        <i class="fa-solid fa-house"></i> Volver al inicio
+                    </a>
+                    <a href="/productos" class="btn btn-outline-light btn-sm">
+                        <i class="fa-solid fa-chair"></i> Ver productos
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-5 d-none d-lg-block" data-aos="fade-left">
+                <ul class="list-check mt-3">
+                    <li><i class="fa-solid fa-check-circle"></i> Muebles 100% a medida</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Asesoría en elección de materiales</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Opciones según tu presupuesto</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Servicio para hogar y negocios</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- INDICADOR "DESPLÁZATE" -->
+    <div class="scroll-indicator d-none d-md-flex">
+        <span>Desplázate</span>
+        <div class="scroll-indicator-dot"></div>
+    </div>
+</header>
+
+<!-- NAVBAR reutilizable -->
+<div th:replace="~{fragments/navbar :: mainNavbar}"></div>
+
+<!-- FORMULARIO DE COTIZACIÓN -->
+<section>
+    <div class="container">
+        <div class="row g-4">
+            <!-- INFO LATERAL -->
+            <div class="col-lg-5" data-aos="fade-right">
+                <h2 class="section-title mb-2">Detalles para una buena cotización</h2>
+                <p class="section-subtitle mb-3">
+                    Mientras más información nos brindes, más precisa será nuestra propuesta.
+                </p>
+
+                <div class="mb-3">
+                    <div class="info-pill">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Antes de enviar el formulario, ten a la mano:</span>
+                    </div>
+                    <ul class="list-check mt-2">
+                        <li><i class="fa-solid fa-check"></i> Medidas aproximadas del espacio o mueble.</li>
+                        <li><i class="fa-solid fa-check"></i> Tipo de madera o acabado que te gustaría.</li>
+                        <li><i class="fa-solid fa-check"></i> Referencias o fotos de inspiración (opcional).</li>
+                        <li><i class="fa-solid fa-check"></i> Presupuesto aproximado o rango estimado.</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box small-note">
+                    <i class="fa-solid fa-circle-info me-1"></i>
+                    La cotización enviada es una estimación. El monto final puede variar según la visita
+                    técnica, la elección final de materiales y ajustes de diseño.
+                </div>
+            </div>
+
+            <!-- FORMULARIO -->
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="quote-card">
+                    <h5 class="mb-1">
+                        <i class="fa-solid fa-envelope-open-text me-2 text-warning"></i>
+                        Formulario de cotización
+                    </h5>
+                    <p class="small-note mb-3">
+                        Los campos marcados con <span class="required">*</span> son obligatorios.
+                    </p>
+
+                    <!-- Si usas Spring/Thymeleaf puedes cambiar action por: th:action="@{/cotizacion}" -->
+                    <form action="/cotizacion" method="post">
+                        <div class="row g-3">
+
+                            <!-- Datos personales -->
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre completo <span class="required">*</span></label>
+                                <input type="text" name="nombre" class="form-control" placeholder="Tu nombre y apellido" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Correo electrónico <span class="required">*</span></label>
+                                <input type="email" name="correo" class="form-control" placeholder="tucorreo@ejemplo.com" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono / WhatsApp <span class="required">*</span></label>
+                                <input type="tel" name="telefono" class="form-control" placeholder="+51 999 888 777" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Distrito / Ciudad <span class="required">*</span></label>
+                                <input type="text" name="ubicacion" class="form-control" placeholder="Ej: Surco, Miraflores, etc." required>
+                            </div>
+
+                            <!-- Proyecto -->
+                            <div class="col-md-6">
+                                <label class="form-label">Tipo de proyecto <span class="required">*</span></label>
+                                <select name="tipoProyecto" class="form-select" required>
+                                    <option value="" selected disabled>Selecciona una opción</option>
+                                    <option value="hogar">Mueble para hogar</option>
+                                    <option value="comercial">Local comercial / negocio</option>
+                                    <option value="cocina">Cocina</option>
+                                    <option value="closet">Closet / vestidor</option>
+                                    <option value="restauracion">Restauración de mueble</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Presupuesto estimado (opcional)</label>
+                                <select name="presupuesto" class="form-select">
+                                    <option value="" selected>Prefiero que me orienten</option>
+                                    <option value="500-1000">S/ 500 - 1,000</option>
+                                    <option value="1000-3000">S/ 1,000 - 3,000</option>
+                                    <option value="3000-6000">S/ 3,000 - 6,000</option>
+                                    <option value="6000+">Más de S/ 6,000</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Fecha ideal de entrega</label>
+                                <input type="date" name="fechaEntrega" class="form-control">
+                                <div class="small-note mt-1">
+                                    Si no tienes una fecha exacta, puedes dejarlo en blanco.
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">¿Dónde será instalado?</label>
+                                <select name="lugarInstalacion" class="form-select">
+                                    <option value="" selected>Selecciona una opción</option>
+                                    <option value="sala">Sala / Comedor</option>
+                                    <option value="dormitorio">Dormitorio</option>
+                                    <option value="cocina">Cocina</option>
+                                    <option value="oficina">Oficina</option>
+                                    <option value="exterior">Terraza / Exterior</option>
+                                    <option value="local">Local comercial</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="col-12">
+                                <label class="form-label">Descripción del proyecto <span class="required">*</span></label>
+                                <textarea name="descripcion" class="form-control" rows="4"
+                                          placeholder="Describe el tipo de mueble o proyecto, medidas aproximadas, estilo (rústico, moderno, clásico), tipo de madera si tienes preferencia, colores, etc."
+                                          required></textarea>
+                            </div>
+
+                            <!-- Medidas -->
+                            <div class="col-12">
+                                <label class="form-label">Medidas aproximadas</label>
+                                <textarea name="medidas" class="form-control" rows="2"
+                                          placeholder="Ejemplo: 2.00m de largo x 0.90m de alto x 0.40m de fondo."></textarea>
+                            </div>
+
+                            <!-- Inspiraciones -->
+                            <div class="col-12">
+                                <label class="form-label">Referencias o links de inspiración (opcional)</label>
+                                <textarea name="referencias" class="form-control" rows="2"
+                                          placeholder="Puedes pegar enlaces a imágenes, Pinterest, Instagram, etc."></textarea>
+                            </div>
+
+                            <!-- Preferencia de contacto -->
+                            <div class="col-md-6">
+                                <label class="form-label">¿Cómo prefieres que te contactemos?</label>
+                                <select name="preferenciaContacto" class="form-select">
+                                    <option value="whatsapp" selected>WhatsApp</option>
+                                    <option value="llamada">Llamada telefónica</option>
+                                    <option value="correo">Correo electrónico</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Horario preferido</label>
+                                <select name="horario" class="form-select">
+                                    <option value="" selected>Indistinto</option>
+                                    <option value="manana">Mañana (9:00 - 12:00)</option>
+                                    <option value="tarde">Tarde (12:00 - 18:00)</option>
+                                    <option value="noche">Noche (18:00 - 21:00)</option>
+                                </select>
+                            </div>
+
+                            <!-- Botón -->
+                            <div class="col-12 mt-2">
+                                <button type="submit" class="btn btn-main w-100">
+                                    Enviar solicitud de cotización
+                                    <i class="fa-solid fa-paper-plane ms-1"></i>
+                                </button>
+                                <p class="small-note mt-2 mb-0 text-center">
+                                    Al enviar este formulario aceptas que nos comuniquemos contigo por los medios indicados
+                                    para coordinar detalles y enviarte una propuesta.
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- quote-card -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div th:replace="~{fragments/footer :: mainFooter}"></div>
+
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script th:src="@{/js/InicializaAOS.js}"></script>
 
 </body>
 </html>

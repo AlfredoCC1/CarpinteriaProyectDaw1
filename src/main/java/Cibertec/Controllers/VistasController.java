@@ -31,4 +31,9 @@ public class VistasController {
     public String servicio() {
         return "servicios";
     }
+
+    @GetMapping("/cotizacion")
+    public String cotizacion() {
+        return "cotizacion";
+    }
 }
