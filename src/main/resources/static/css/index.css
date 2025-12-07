@@ -1,0 +1,168 @@
+/* SECCIONES GENERALES */
+section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: .4rem;
+}
+
+.section-subtitle {
+    color: #777;
+    font-size: .95rem;
+}
+
+@media (max-width: 767.98px) {
+    section {
+        padding: 3rem 0;
+    }
+    .section-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* CARDS GENERALES */
+.card-soft {
+    border: none;
+    border-radius: 1.2rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    transition: transform .25s, box-shadow .25s, background-color .25s;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+}
+
+.card-soft::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at top right, rgba(255,200,87,.28), transparent 55%);
+    transition: opacity .25s;
+}
+
+.card-soft:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+.card-soft:hover::before {
+    opacity: 1;
+}
+
+.icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: rgba(139, 90, 43, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.4rem;
+    transition: transform .25s;
+}
+
+.card-soft:hover .icon-circle {
+    transform: translateY(-3px) rotate(-6deg);
+}
+
+/* PRODUCTOS DESTACADOS */
+.product-card {
+    overflow: hidden;
+}
+
+.product-img {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.08);
+}
+
+.badge-tag {
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    border-radius: 999px;
+    padding: .15rem .7rem;
+    font-size: .75rem;
+}
+
+/* TIMELINE PROCESO */
+.timeline-step {
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 1.7rem;
+}
+
+.timeline-step:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-step::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: -1.2rem;
+    width: 2px;
+    background: linear-gradient(var(--primary), var(--accent));
+}
+
+.timeline-step:last-child::before {
+    bottom: 0; /* que no se salga del último */
+}
+
+.timeline-badge {
+    position: absolute;
+    left: .55rem;
+    top: .2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--accent);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.3);
+}
+
+.timeline-step h6 {
+    font-weight: 600;
+}
+
+/* TESTIMONIOS */
+.avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.card-soft:hover .avatar {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 3px rgba(255,200,87,.6);
+}
+
+/* CONTACTO */
+#contacto .card-soft {
+    border-radius: 1.4rem;
+}
+
+.form-control,
+.form-select,
+textarea {
+    border-radius: .9rem;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 .12rem rgba(255,200,87,.6);
+}
+

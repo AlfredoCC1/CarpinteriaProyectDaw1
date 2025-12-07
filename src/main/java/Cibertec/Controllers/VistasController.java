@@ -16,4 +16,19 @@ public class VistasController {
     public String mostrarFormularioRegistro() {
         return "register";
     }
+
+    @GetMapping("/productos")
+    public String producto() {
+        return "productos";
+    }
+
+    @GetMapping("/proceso")
+    public String proceso() {
+        return "proceso";
+    }
+
+    @GetMapping("/servicios")
+    public String servicio() {
+        return "servicios";
+    }
 }

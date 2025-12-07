@@ -17,456 +17,353 @@
     <!-- AOS (animaciones on scroll) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 
-    <!-- CSS Link -->
+    <!-- CSS global + fragments -->
     <link rel="stylesheet" th:href="@{/css/global.css}">
     <link rel="stylesheet" th:href="@{/css/fragments/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/fragments/header.css}">
-
-    <style>
-
-
-        /* SECCIONES */
-        section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            font-weight: 700;
-            margin-bottom: .4rem;
-        }
-
-        .section-subtitle {
-            color: #777;
-            font-size: .95rem;
-        }
-
-        /* CARDS */
-        .card-soft {
-            border: none;
-            border-radius: 1.2rem;
-            box-shadow: 0 12px 30px rgba(0,0,0,.08);
-            transition: transform .25s, box-shadow .25s;
-            overflow: hidden;
-        }
-
-        .card-soft:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 40px rgba(0,0,0,.12);
-        }
-
-        .icon-circle {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background-color: rgba(139, 90, 43, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-
-        /* PRODUCTOS DESTACADOS */
-        .product-img {
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .badge-tag {
-            background-color: rgba(0,0,0,0.7);
-            color: #fff;
-            border-radius: 999px;
-            padding: .15rem .7rem;
-            font-size: .75rem;
-        }
-
-        /* TIMELINE PROCESO */
-        .timeline-step {
-            position: relative;
-            padding-left: 3rem;
-        }
-
-        .timeline-step::before {
-            content: '';
-            position: absolute;
-            left: 1rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(var(--primary), var(--accent));
-        }
-
-        .timeline-badge {
-            position: absolute;
-            left: .6rem;
-            width: 1.4rem;
-            height: 1.4rem;
-            border-radius: 50%;
-            background-color: var(--accent);
-            border: 3px solid #fff;
-            box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.3);
-        }
-
-        /* TESTIMONIOS */
-        .avatar {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* FOOTER */
-        footer {
-            background-color: #111;
-            color: #ccc;
-        }
-
-        footer a {
-            color: #eee;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: var(--accent);
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/fragments/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
+
 <body>
     <!-- NAVBAR reutilizable -->
     <div th:replace="~{fragments/navbar :: mainNavbar}"></div>
+
     <!-- HEADER reutilizable -->
     <div th:replace="~{fragments/header :: mainHeader}"></div>
-<!-- SERVICIOS -->
-<section id="servicios">
 
-    <div class="container">
-        <div class="text-center mb-4" data-aos="fade-up">
-            <h2 class="section-title">¿Qué hacemos?</h2>
-            <p class="section-subtitle">Servicios de carpintería pensados para cada tipo de proyecto.</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-                <div class="card card-soft h-100">
-                    <div class="card-body">
-                        <div class="icon-circle mb-3">
-                            <i class="fa-solid fa-couch"></i>
-                        </div>
-                        <h5>Mobiliario a medida</h5>
-                        <p class="small text-muted">
-                            Diseñamos y fabricamos muebles personalizados para salas, comedores,
-                            dormitorios, oficinas y locales comerciales.
-                        </p>
-                    </div>
-                </div>
+    <!-- SERVICIOS -->
+    <section id="servicios">
+        <div class="container">
+            <div class="text-center mb-4" data-aos="fade-up">
+                <h2 class="section-title">¿Qué hacemos?</h2>
+                <p class="section-subtitle">Servicios de carpintería pensados para cada tipo de proyecto.</p>
             </div>
 
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="card card-soft h-100">
-                    <div class="card-body">
-                        <div class="icon-circle mb-3">
-                            <i class="fa-solid fa-kitchen-set"></i>
-                        </div>
-                        <h5>Cocinas y closets</h5>
-                        <p class="small text-muted">
-                            Implementación completa de cocinas, closets y vestidores con acabados modernos,
-                            optimizando cada centímetro de espacio.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="card card-soft h-100">
-                    <div class="card-body">
-                        <div class="icon-circle mb-3">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>
-                        </div>
-                        <h5>Restauración y mantenimiento</h5>
-                        <p class="small text-muted">
-                            Restauramos muebles antiguos, reparamos estructuras y renovamos acabados para
-                            prolongar la vida de tus piezas favoritas.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- PRODUCTOS DESTACADOS -->
-<section id="productos" class="bg-white">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-3" data-aos="fade-up">
-            <div>
-                <h2 class="section-title">Productos destacados</h2>
-                <p class="section-subtitle">Algunas piezas que representan nuestro trabajo.</p>
-            </div>
-            <a href="/productos" class="btn btn-sm btn-main">
-                Ver catálogo completo
-                <i class="fa-solid fa-arrow-right ms-1"></i>
-            </a>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="zoom-in">
-                <div class="card card-soft h-100">
-                    <div class="position-relative">
-                        <img class="product-img w-100"
-                             src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                             alt="Mesa de comedor">
-                        <span class="badge-tag position-absolute m-2"><i class="fa-solid fa-fire me-1"></i>Top ventas</span>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="mb-1">Mesa de comedor rústica</h5>
-                        <p class="small text-muted mb-2">Madera maciza de roble, acabado natural.</p>
-                        <span class="fw-semibold text-success">S/ 1,250.00</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-                <div class="card card-soft h-100">
-                    <div class="position-relative">
-                        <img class="product-img w-100"
-                             src="https://huk.pe/wp-content/uploads/2024/09/Estante-Modular-Decorativo-Ivett-Duna-01.jpg"
-                             alt="Estantería">
-                        <span class="badge-tag position-absolute m-2">Hecho a medida</span>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="mb-1">Estantería modular</h5>
-                        <p class="small text-muted mb-2">Para salas u oficinas, configurable por módulos.</p>
-                        <span class="fw-semibold text-success">Desde S/ 890.00</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-                <div class="card card-soft h-100">
-                    <div class="position-relative">
-                        <img class="product-img w-100"
-                             src="https://www.bkciandre.com/wp-content/uploads/2025/04/Modern-built-in-wardrobe-with-closed-storage-scaled.webp"
-                             alt="Closet">
-                        <span class="badge-tag position-absolute m-2">Proyecto premium</span>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="mb-1">Closet empotrado</h5>
-                        <p class="small text-muted mb-2">Puertas corredizas, iluminación LED integrada.</p>
-                        <span class="fw-semibold text-success">A cotizar</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- PROCESO DE TRABAJO -->
-<section id="proceso">
-    <div class="container">
-        <div class="row g-4 align-items-center">
-            <div class="col-lg-6" data-aos="fade-right">
-                <h2 class="section-title">Nuestro proceso de trabajo</h2>
-                <p class="section-subtitle mb-3">
-                    Acompañamos tu proyecto desde la idea inicial hasta la instalación final.
-                </p>
-
-                <div class="timeline-step mb-4">
-                    <div class="timeline-badge"></div>
-                    <h6>1. Escuchamos tu idea</h6>
-                    <p class="small text-muted">Nos cuentas qué necesitas: usos, medidas, estilo, presupuesto aproximado.</p>
-                </div>
-
-                <div class="timeline-step mb-4">
-                    <div class="timeline-badge"></div>
-                    <h6>2. Diseño y cotización</h6>
-                    <p class="small text-muted">Preparamos bocetos o renders y una propuesta económica clara.</p>
-                </div>
-
-                <div class="timeline-step mb-4">
-                    <div class="timeline-badge"></div>
-                    <h6>3. Fabricación en taller</h6>
-                    <p class="small text-muted">Seleccionamos la madera, realizamos cortes, armado y acabado con máxima precisión.</p>
-                </div>
-
-                <div class="timeline-step">
-                    <div class="timeline-badge"></div>
-                    <h6>4. Entrega e instalación</h6>
-                    <p class="small text-muted">Llevamos el mueble a tu espacio y lo instalamos listo para usar.</p>
-                </div>
-            </div>
-
-            <div class="col-lg-6" data-aos="fade-left">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80"
-                     alt="Taller de carpintería" class="img-fluid rounded-4 shadow">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- TESTIMONIOS -->
-<section id="testimonios" class="bg-white">
-    <div class="container">
-        <div class="text-center mb-4" data-aos="fade-up">
-            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-            <p class="section-subtitle">Historias reales de personas que confiaron en nuestro trabajo.</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up">
-                <div class="card card-soft h-100">
-                    <div class="card-body">
-                        <p class="small mb-3">
-                            “Encargamos la implementación completa de la cocina y quedó mejor de lo esperado.
-                            Son puntuales, ordenados y muy detallistas.”
-                        </p>
-                        <div class="d-flex align-items-center gap-2">
-                            <img class="avatar"
-                                 src="https://randomuser.me/api/portraits/women/68.jpg"
-                                 alt="Cliente 1">
-                            <div>
-                                <strong>Lucía Morales</strong><br>
-                                <span class="small text-muted">Proyecto cocina integral</span>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <div class="icon-circle mb-3">
+                                <i class="fa-solid fa-couch"></i>
                             </div>
+                            <h5>Mobiliario a medida</h5>
+                            <p class="small text-muted mb-0">
+                                Diseñamos y fabricamos muebles personalizados para salas, comedores,
+                                dormitorios, oficinas y locales comerciales, aprovechando al máximo tu espacio.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="card card-soft h-100">
-                    <div class="card-body">
-                        <p class="small mb-3">
-                            “Nos fabricaron todo el mobiliario de la cafetería. Las mesas y barras son resistentes,
-                            bonitas y se adaptan al estilo que buscábamos.”
-                        </p>
-                        <div class="d-flex align-items-center gap-2">
-                            <img class="avatar"
-                                 src="https://randomuser.me/api/portraits/men/32.jpg"
-                                 alt="Cliente 2">
-                            <div>
-                                <strong>Carlos Peña</strong><br>
-                                <span class="small text-muted">Dueño de cafetería</span>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <div class="icon-circle mb-3">
+                                <i class="fa-solid fa-kitchen-set"></i>
                             </div>
+                            <h5>Cocinas y closets</h5>
+                            <p class="small text-muted mb-0">
+                                Implementación completa de cocinas, closets y vestidores con acabados modernos,
+                                almacenamiento inteligente y herrajes de alta calidad.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="card card-soft h-100">
-                    <div class="card-body">
-                        <p class="small mb-3">
-                            “Restauraron un comedor heredado de mis abuelos y ahora luce como nuevo,
-                            respetando el diseño original. Trabajo impecable.”
-                        </p>
-                        <div class="d-flex align-items-center gap-2">
-                            <img class="avatar"
-                                 src="https://randomuser.me/api/portraits/women/12.jpg"
-                                 alt="Cliente 3">
-                            <div>
-                                <strong>Andrea Salas</strong><br>
-                                <span class="small text-muted">Restauración de mobiliario</span>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <div class="icon-circle mb-3">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
                             </div>
+                            <h5>Restauración y mantenimiento</h5>
+                            <p class="small text-muted mb-0">
+                                Restauramos muebles antiguos, reparamos estructuras y renovamos acabados para
+                                prolongar la vida de tus piezas favoritas sin perder su esencia.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CONTACTO -->
-<section id="contacto">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-6" data-aos="fade-right">
-                <h2 class="section-title">Hablemos de tu proyecto</h2>
-                <p class="section-subtitle mb-3">Escríbenos y coordinemos una visita o una reunión virtual.</p>
-
-                <div class="mb-3">
-                    <i class="fa-solid fa-location-dot me-2 text-warning"></i>
-                    <strong>Dirección: </strong> Av. Ejemplo 123, Lima
+    <!-- PRODUCTOS DESTACADOS -->
+    <section id="productos" class="bg-white">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-3" data-aos="fade-up">
+                <div>
+                    <h2 class="section-title">Productos destacados</h2>
+                    <p class="section-subtitle mb-0">Algunas piezas que representan nuestro trabajo.</p>
                 </div>
-                <div class="mb-3">
-                    <i class="fa-brands fa-whatsapp me-2 text-success"></i>
-                    <strong>WhatsApp: </strong> +51 999 888 777
-                </div>
-                <div class="mb-3">
-                    <i class="fa-solid fa-envelope me-2 text-info"></i>
-                    <strong>Correo: </strong> contacto@carpinteriaartwood.com
-                </div>
-
-                <p class="small text-muted">
-                    También puedes seguirnos en redes sociales para ver más proyectos terminados.
-                </p>
-                <div class="d-flex gap-3 fs-4">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
+                <a href="/productos" class="btn btn-sm btn-main d-inline-flex align-items-center">
+                    Ver catálogo completo
+                    <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
             </div>
 
-            <div class="col-lg-6" data-aos="fade-left">
-                <div class="card card-soft">
-                    <div class="card-body">
-                        <h5 class="mb-3"><i class="fa-solid fa-envelope-open-text me-2 text-warning"></i> Envíanos un mensaje</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Nombre completo</label>
-                                <input type="text" class="form-control" placeholder="Tu nombre">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" placeholder="tucorreo@ejemplo.com">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Tipo de proyecto</label>
-                                <select class="form-select">
-                                    <option selected>Selecciona una opción</option>
-                                    <option value="1">Mobiliario hogar</option>
-                                    <option value="2">Local comercial</option>
-                                    <option value="3">Cocina / closet</option>
-                                    <option value="4">Restauración</option>
-                                    <option value="5">Otro</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Mensaje</label>
-                                <textarea class="form-control" rows="4" placeholder="Describe tu idea, medidas aproximadas, estilo, etc."></textarea>
-                            </div>
-                            <button type="button" class="btn btn-main w-100">
-                                Enviar mensaje <i class="fa-solid fa-paper-plane ms-1"></i>
-                            </button>
-                        </form>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="card card-soft product-card h-100">
+                        <div class="position-relative">
+                            <img class="product-img"
+                                 src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                                 alt="Mesa de comedor">
+                            <span class="badge-tag position-absolute m-2">
+                                <i class="fa-solid fa-fire me-1"></i>Top ventas
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="mb-1">Mesa de comedor rústica</h5>
+                            <p class="small text-muted mb-2">Madera maciza de roble, acabado natural y estructura reforzada.</p>
+                            <span class="fw-semibold text-success">S/ 1,250.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card card-soft product-card h-100">
+                        <div class="position-relative">
+                            <img class="product-img"
+                                 src="https://huk.pe/wp-content/uploads/2024/09/Estante-Modular-Decorativo-Ivett-Duna-01.jpg"
+                                 alt="Estantería">
+                            <span class="badge-tag position-absolute m-2">Hecho a medida</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="mb-1">Estantería modular</h5>
+                            <p class="small text-muted mb-2">Ideal para salas u oficinas, configurable por módulos según tu espacio.</p>
+                            <span class="fw-semibold text-success">Desde S/ 890.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card card-soft product-card h-100">
+                        <div class="position-relative">
+                            <img class="product-img"
+                                 src="https://www.bkciandre.com/wp-content/uploads/2025/04/Modern-built-in-wardrobe-with-closed-storage-scaled.webp"
+                                 alt="Closet">
+                            <span class="badge-tag position-absolute m-2">Proyecto premium</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="mb-1">Closet empotrado</h5>
+                            <p class="small text-muted mb-2">Puertas corredizas, iluminación LED y organización interior personalizada.</p>
+                            <span class="fw-semibold text-success">A cotizar</span>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- FOOTER -->
-<footer class="py-3 mt-4">
-    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center small">
-        <div>
-            &copy; 2025 Carpintería Art&Wood. Todos los derechos reservados.
-        </div>
-        <div class="mt-2 mt-md-0">
-            <a href="#top" class="me-3">Volver arriba</a>
-            <a href="/login">Área administrativa</a>
-        </div>
-    </div>
-</footer>
+    <!-- PROCESO DE TRABAJO -->
+    <section id="proceso">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title">Nuestro proceso de trabajo</h2>
+                    <p class="section-subtitle mb-3">
+                        Acompañamos tu proyecto desde la idea inicial hasta la instalación final.
+                    </p>
 
-<!-- JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script>
-    AOS.init({
-        once: true,
-        duration: 700
-    });
-</script>
+                    <div class="timeline-step">
+                        <div class="timeline-badge"></div>
+                        <h6>1. Escuchamos tu idea</h6>
+                        <p class="small text-muted mb-0">
+                            Nos cuentas qué necesitas: usos, medidas, estilo que te gusta
+                            y presupuesto aproximado. Podemos coordinar una llamada, videollamada o visita.
+                        </p>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-badge"></div>
+                        <h6>2. Diseño y cotización</h6>
+                        <p class="small text-muted mb-0">
+                            Preparamos bocetos o renders, te sugerimos materiales y te entregamos
+                            una propuesta económica clara con tiempos estimados.
+                        </p>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="timeline-badge"></div>
+                        <h6>3. Fabricación en taller</h6>
+                        <p class="small text-muted mb-0">
+                            Seleccionamos la madera, realizamos cortes, armado y acabado con máxima precisión.
+                            Te enviamos avances por fotos o videos si lo deseas.
+                        </p>
+                    </div>
+
+                    <div class="timeline-step mb-0">
+                        <div class="timeline-badge"></div>
+                        <h6>4. Entrega e instalación</h6>
+                        <p class="small text-muted mb-0">
+                            Llevamos el mueble a tu espacio, lo instalamos listo para usar
+                            y realizamos los ajustes finales para que quede perfecto.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80"
+                         alt="Taller de carpintería" class="img-fluid rounded-4 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="bg-white">
+        <div class="container">
+            <div class="text-center mb-4" data-aos="fade-up">
+                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+                <p class="section-subtitle">Historias reales de personas que confiaron en nuestro trabajo.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <p class="small mb-3">
+                                “Encargamos la implementación completa de la cocina y quedó mejor de lo esperado.
+                                Son puntuales, ordenados y muy detallistas.”
+                            </p>
+                            <div class="d-flex align-items-center gap-2">
+                                <img class="avatar"
+                                     src="https://randomuser.me/api/portraits/women/68.jpg"
+                                     alt="Cliente 1">
+                                <div>
+                                    <strong>Lucía Morales</strong><br>
+                                    <span class="small text-muted">Proyecto cocina integral</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <p class="small mb-3">
+                                “Nos fabricaron todo el mobiliario de la cafetería. Las mesas y barras son resistentes,
+                                bonitas y se adaptan al estilo que buscábamos.”
+                            </p>
+                            <div class="d-flex align-items-center gap-2">
+                                <img class="avatar"
+                                     src="https://randomuser.me/api/portraits/men/32.jpg"
+                                     alt="Cliente 2">
+                                <div>
+                                    <strong>Carlos Peña</strong><br>
+                                    <span class="small text-muted">Dueño de cafetería</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card card-soft h-100">
+                        <div class="card-body">
+                            <p class="small mb-3">
+                                “Restauraron un comedor heredado de mis abuelos y ahora luce como nuevo,
+                                respetando el diseño original. Trabajo impecable.”
+                            </p>
+                            <div class="d-flex align-items-center gap-2">
+                                <img class="avatar"
+                                     src="https://randomuser.me/api/portraits/women/12.jpg"
+                                     alt="Cliente 3">
+                                <div>
+                                    <strong>Andrea Salas</strong><br>
+                                    <span class="small text-muted">Restauración de mobiliario</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title">Hablemos de tu proyecto</h2>
+                    <p class="section-subtitle mb-3">Escríbenos y coordinemos una visita o una reunión virtual.</p>
+
+                    <div class="mb-3">
+                        <i class="fa-solid fa-location-dot me-2 text-warning"></i>
+                        <strong>Dirección: </strong> Av. Ejemplo 123, Lima
+                    </div>
+                    <div class="mb-3">
+                        <i class="fa-brands fa-whatsapp me-2 text-success"></i>
+                        <strong>WhatsApp: </strong> +51 999 888 777
+                    </div>
+                    <div class="mb-3">
+                        <i class="fa-solid fa-envelope me-2 text-info"></i>
+                        <strong>Correo: </strong> contacto@carpinteriaartwood.com
+                    </div>
+
+                    <p class="small text-muted">
+                        También puedes seguirnos en redes sociales para ver más proyectos terminados.
+                    </p>
+                    <div class="d-flex gap-3 fs-4">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card card-soft">
+                        <div class="card-body">
+                            <h5 class="mb-3">
+                                <i class="fa-solid fa-envelope-open-text me-2 text-warning"></i>
+                                Envíanos un mensaje
+                            </h5>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre completo</label>
+                                    <input type="text" class="form-control" placeholder="Tu nombre">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" placeholder="tucorreo@ejemplo.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Tipo de proyecto</label>
+                                    <select class="form-select">
+                                        <option selected>Selecciona una opción</option>
+                                        <option value="1">Mobiliario hogar</option>
+                                        <option value="2">Local comercial</option>
+                                        <option value="3">Cocina / closet</option>
+                                        <option value="4">Restauración</option>
+                                        <option value="5">Otro</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mensaje</label>
+                                    <textarea class="form-control" rows="4" placeholder="Describe tu idea, medidas aproximadas, estilo, etc."></textarea>
+                                </div>
+                                <button type="button" class="btn btn-main w-100 d-flex justify-content-center align-items-center gap-1">
+                                    Enviar mensaje <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER reutilizable -->
+    <div th:replace="~{fragments/footer :: mainFooter}"></div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script th:src="@{/js/InicializaAOS.js}"></script>
 </body>
 </html>

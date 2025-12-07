@@ -1,0 +1,86 @@
+/* Indicador "Desplázate" */
+.scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 1.3rem;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    font-size: .75rem;
+    color: #fff;
+    opacity: .9;
+}
+
+.scroll-indicator-dot {
+    width: 18px;
+    height: 30px;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,.8);
+    position: relative;
+}
+
+.scroll-indicator-dot::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    transform: translateX(-50%);
+    animation: scrollDot 1.4s infinite;
+}
+
+@keyframes scrollDot {
+    0%   { opacity: 0; transform: translate(-50%, 0); }
+    40%  { opacity: 1; transform: translate(-50%, 8px); }
+    100% { opacity: 0; transform: translate(-50%, 14px); }
+}
+
+
+/* ===========================
+   INDICADOR "DESPLÁZATE"
+=========================== */
+.scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 1.3rem;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    font-size: .75rem;
+    color: #fff;
+    opacity: .9;
+}
+
+.scroll-indicator-dot {
+    width: 18px;
+    height: 30px;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,.8);
+    position: relative;
+}
+
+.scroll-indicator-dot::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    transform: translateX(-50%);
+    animation: scrollDot 1.4s infinite;
+}
+
+@keyframes scrollDot {
+    0%   { opacity: 0; transform: translate(-50%, 0); }
+    40%  { opacity: 1; transform: translate(-50%, 8px); }
+    100% { opacity: 0; transform: translate(-50%, 14px); }
+}
