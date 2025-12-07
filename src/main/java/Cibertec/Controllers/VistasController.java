@@ -36,4 +36,9 @@ public class VistasController {
     public String cotizacion() {
         return "cotizacion";
     }
+
+    @GetMapping("/detalle")
+    public String detalle() {
+        return "detalle";
+    }
 }
