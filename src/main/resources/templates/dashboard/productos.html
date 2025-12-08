@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+<!-- ========== VISTA 2: PRODUCTOS (ADMIN) ========== -->
+<div th:fragment="mainProducto" id="viewProductos" class="d-none products-section" data-aos="fade-up">
+
+    <!-- HEADER DE LA SECCIÓN -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold mb-1 text-dark">📦 Registrar Nuevo <span>Producto</span></h1>
+            <p class="text-muted mb-0">Complete la ficha técnica para agregar un mueble al catálogo.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-2">
+                <i class="fa-solid fa-download"></i> Exportar
+            </button>
+            <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2">
+                <i class="fa-solid fa-filter"></i> Filtros
+            </button>
+        </div>
+    </div>
+
+    <!-- FORMULARIO DE PRODUCTO - MEJORADO Y RESPONSIVE -->
+    <div class="product-form-container mb-5">
+        <div class="form-card-body">
+            <form id="formProducto" th:action="@{/productos/guardar}" method="post" novalidate>
+
+                <!-- INFORMACIÓN BÁSICA - MEJORADO PARA RESPONSIVE -->
+                <div class="field-group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="field-group-label">
+                        <i class="fa-solid fa-info-circle"></i>
+                        <span>Información Básica</span>
+                    </div>
+
+                    <div class="row g-2 g-md-3">
+                        <!-- NOMBRE - Ocupa todo el ancho en móvil -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating-custom">
+                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                       placeholder=" " required maxlength="100">
+                                <label for="nombre" class="required-field">Nombre del Producto</label>
+                                <div class="char-counter">0/100</div>
+                            </div>
+                        </div>
+
+                        <!-- PRECIO Y CATEGORÍA - Stack en móvil -->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="form-floating-custom">
+                                <input type="number" class="form-control" id="precio" name="precio"
+                                       placeholder=" " step="0.01" min="0">
+                                <label for="precio">Precio (S/)</label>
+                                <div class="form-text small text-muted">Dejar vacío para "A cotizar"</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <div class="form-floating-custom">
+                                <select class="form-select" id="categoria" name="idCategoria" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option th:each="cat : ${categorias}"
+                                            th:value="${cat.idCategoria}"
+                                            th:text="${cat.nombre}">
+                                    </option>
+                                </select>
+                                <label for="categoria" class="required-field">Categoría</label>
+                            </div>
+                        </div>
+
+                        <!-- LÍNEA Y MATERIAL - Stack en móvil -->
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-floating-custom">
+                                <select class="form-select" id="linea" name="idLinea">
+                                    <option value="">Sin línea específica</option>
+                                    <option th:each="linea : ${lineas}"
+                                            th:value="${linea.idLinea}"
+                                            th:text="${linea.nombre}">
+                                    </option>
+                                </select>
+                                <label for="linea">Línea de Diseño</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-floating-custom">
+                                <input type="text" class="form-control" id="material" name="material"
+                                       placeholder=" " maxlength="100">
+                                <label for="material">Material Principal</label>
+                                <div class="char-counter">0/100</div>
+                            </div>
+                        </div>
+
+                        <!-- DESTACADO - Ocupa todo el ancho -->
+                        <div class="col-12">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                       id="destacado" name="destacado" value="1">
+                                <label class="form-check-label" for="destacado">
+                                    <i class="fa-solid fa-star text-warning me-1"></i>
+                                    Marcar como producto destacado
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DESCRIPCIONES - Stack vertical en móvil -->
+                <div class="field-group" data-aos="fade-up" data-aos-delay="150">
+                    <div class="field-group-label">
+                        <i class="fa-solid fa-align-left"></i>
+                        <span>Descripciones</span>
+                    </div>
+
+                    <div class="row g-2 g-md-3">
+                        <!-- DESCRIPCIÓN CARD -->
+                        <div class="col-12">
+                            <div class="form-floating-custom">
+                            <textarea class="form-control" id="descripcionCard" name="descripcionCard"
+                                      placeholder=" " rows="2" maxlength="200" style="min-height: 80px;"></textarea>
+                                <label for="descripcionCard">Descripción Corta (Tarjeta)</label>
+                                <div class="char-counter">0/200</div>
+                                <div class="form-text small text-muted">Aparece en las tarjetas de producto</div>
+                            </div>
+                        </div>
+
+                        <!-- DESCRIPCIÓN CORTA -->
+                        <div class="col-12">
+                            <div class="form-floating-custom">
+                            <textarea class="form-control" id="descripcionCorta" name="descCorta"
+                                      placeholder=" " rows="2" maxlength="350" style="min-height: 80px;"></textarea>
+                                <label for="descripcionCorta">Descripción Resumida</label>
+                                <div class="char-counter">0/350</div>
+                            </div>
+                        </div>
+
+                        <!-- DESCRIPCIÓN LARGA -->
+                        <div class="col-12">
+                            <div class="form-floating-custom">
+                            <textarea class="form-control" id="descripcionLarga" name="descLarga"
+                                      placeholder=" " rows="4" style="min-height: 120px;"></textarea>
+                                <label for="descripcionLarga">Descripción Detallada</label>
+                                <div class="form-text small text-muted">Aparece en la página de detalles del producto</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARACTERÍSTICAS - Grid responsive -->
+                <div class="field-group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="field-group-label">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span>Características Principales</span>
+                        <span class="badge bg-light text-dark ms-2 d-none d-md-inline">Recomendado: 3-4 características</span>
+                    </div>
+
+                    <div class="characteristics-grid">
+                        <!-- Las características mantienen su grid -->
+                        <div class="char-input-wrapper">
+                            <div class="form-floating-custom">
+                                <input type="text" class="form-control" id="carac1" name="carac1"
+                                       placeholder=" " maxlength="50">
+                                <label for="carac1">Característica 1</label>
+                                <div class="char-counter">0/50</div>
+                            </div>
+                        </div>
+
+                        <div class="char-input-wrapper">
+                            <div class="form-floating-custom">
+                                <input type="text" class="form-control" id="carac2" name="carac2"
+                                       placeholder=" " maxlength="50">
+                                <label for="carac2">Característica 2</label>
+                                <div class="char-counter">0/50</div>
+                            </div>
+                        </div>
+
+                        <div class="char-input-wrapper">
+                            <div class="form-floating-custom">
+                                <input type="text" class="form-control" id="carac3" name="carac3"
+                                       placeholder=" " maxlength="50">
+                                <label for="carac3">Característica 3</label>
+                                <div class="char-counter">0/50</div>
+                            </div>
+                        </div>
+
+                        <div class="char-input-wrapper">
+                            <div class="form-floating-custom">
+                                <input type="text" class="form-control" id="carac4" name="carac4"
+                                       placeholder=" " maxlength="50">
+                                <label for="carac4">Característica 4 (Opcional)</label>
+                                <div class="char-counter">0/50</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEDIDAS - Grid responsive mejorado -->
+                <div class="field-group" data-aos="fade-up" data-aos-delay="250">
+                    <div class="field-group-label">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                        <span>Medidas del Producto</span>
+                    </div>
+
+                    <div class="measures-grid">
+                        <!-- Cada medida se ajusta automáticamente -->
+                        <div class="measure-input">
+                            <div class="form-floating-custom">
+                                <input type="number" class="form-control" id="largo" name="largo"
+                                       placeholder=" " min="0" step="1">
+                                <label for="largo">Largo</label>
+                                <span class="measure-unit">cm</span>
+                            </div>
+                        </div>
+
+                        <div class="measure-input">
+                            <div class="form-floating-custom">
+                                <input type="number" class="form-control" id="ancho" name="ancho"
+                                       placeholder=" " min="0" step="1">
+                                <label for="ancho">Ancho</label>
+                                <span class="measure-unit">cm</span>
+                            </div>
+                        </div>
+
+                        <div class="measure-input">
+                            <div class="form-floating-custom">
+                                <input type="number" class="form-control" id="altura" name="altura"
+                                       placeholder=" " min="0" step="1">
+                                <label for="altura">Altura</label>
+                                <span class="measure-unit">cm</span>
+                            </div>
+                        </div>
+
+                        <div class="measure-input">
+                            <div class="form-floating-custom">
+                                <input type="number" class="form-control" id="peso" name="peso"
+                                       placeholder=" " min="0" step="1">
+                                <label for="peso">Peso</label>
+                                <span class="measure-unit">kg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IMÁGENES - Stack vertical en móvil -->
+                <div class="field-group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="field-group-label">
+                        <i class="fa-solid fa-images"></i>
+                        <span>Imágenes del Producto</span>
+                        <span class="badge bg-light text-dark ms-2 d-none d-md-inline">Máximo 3 imágenes</span>
+                    </div>
+
+                    <div class="row g-2 g-md-3">
+                        <div class="col-12 col-md-4">
+                            <div class="card border-dashed h-100">
+                                <div class="card-body text-center py-4">
+                                    <i class="fa-solid fa-upload display-6 text-muted mb-3"></i>
+                                    <h6 class="mb-2">Imagen Principal</h6>
+                                    <input type="file" class="d-none" id="imagen1" name="imagen1" accept="image/*">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('imagen1').click()">
+                                        Subir Imagen
+                                    </button>
+                                    <div class="upload-progress mt-3 d-none">
+                                        <div class="upload-progress-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="card border-dashed h-100">
+                                <div class="card-body text-center py-4">
+                                    <i class="fa-solid fa-image display-6 text-muted mb-3"></i>
+                                    <h6 class="mb-2">Imagen Secundaria</h6>
+                                    <input type="file" class="d-none" id="imagen2" name="imagen2" accept="image/*">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('imagen2').click()">
+                                        Subir Opcional
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="card border-dashed h-100">
+                                <div class="card-body text-center py-4">
+                                    <i class="fa-solid fa-image display-6 text-muted mb-3"></i>
+                                    <h6 class="mb-2">Tercera Imagen</h6>
+                                    <input type="file" class="d-none" id="imagen3" name="imagen3" accept="image/*">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('imagen3').click()">
+                                        Subir Opcional
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTONES DE ACCIÓN - Stack en móvil -->
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-4 pt-3 border-top"
+                     data-aos="fade-up" data-aos-delay="350">
+                    <div class="d-flex flex-wrap gap-2 mb-3 mb-md-0">
+                        <button type="button" class="btn btn-outline-secondary" id="btnCancelar">
+                            <i class="fa-solid fa-times me-2"></i>Cancelar
+                        </button>
+                        <button type="reset" class="btn btn-light">
+                            <i class="fa-solid fa-eraser me-2"></i>Limpiar
+                        </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-submit-product">
+                            <i class="fa-solid fa-plus-circle me-2"></i>Agregar Producto
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ... resto del código ... -->
+
+    <!-- TABLA DE PRODUCTOS - MEJORADA -->
+    <div class="products-table-container">
+        <div class="table-header d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0"><i class="fa-solid fa-list me-2"></i>Lista de Productos</h5>
+                <small class="text-muted">Mostrando <span id="totalProductos">15</span> productos</small>
+            </div>
+            <div class="table-actions">
+                <div class="table-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" class="form-control" placeholder="Buscar productos..." id="searchProducts">
+                </div>
+                <button class="btn btn-primary btn-sm d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Nuevo
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-products">
+                <thead>
+                <tr>
+                    <th width="80" class="text-center">Imagen</th>
+                    <th>Producto</th>
+                    <th width="120" class="text-center">Categoría</th>
+                    <th width="120" class="text-center">Precio</th>
+                    <th width="100" class="text-center">Estado</th>
+                    <th width="150" class="text-center">Acciones</th>
+                </tr>
+                </thead>
+                <tbody id="tablaProductosBody">
+                <!-- Productos se cargan aquí -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGINACIÓN -->
+        <div class="pagination-custom">
+            <nav aria-label="Navegación de productos">
+                <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link-custom" href="#" tabindex="-1">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link-custom" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link-custom" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link-custom" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link-custom" href="#">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- ========== FIN VISTA PRODUCTOS ========== -->
+</body>
+</html>

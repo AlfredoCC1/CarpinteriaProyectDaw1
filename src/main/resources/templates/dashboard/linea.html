@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+
+<!-- ========== VISTA 2: LÍNEAS DE DISEÑO ========== -->
+<div th:fragment="mainLinea" id="view-lineas" class="view-container">
+    <div class="section-header" data-aos="fade-up">
+        <div>
+            <h2>Líneas de Diseño</h2>
+            <small>Administra las diferentes líneas de diseño de tus productos</small>
+        </div>
+    </div>
+
+    <!-- FORMULARIO DE LÍNEA -->
+    <div class="form-view" data-aos="fade-up">
+        <div class="form-header">
+            <h3>Agregar Nueva Línea</h3>
+            <small>Completa los campos para crear una nueva línea de diseño</small>
+        </div>
+
+        <form id="form-linea">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre de la Línea</label>
+                        <input type="text" class="form-control" placeholder="Ej: Clásico, Moderno, Rústico" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Estado</label>
+                        <select class="form-select" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <textarea class="form-control" rows="3" placeholder="Describe las características principales de esta línea..."></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fa-solid fa-save me-2"></i> Guardar Línea
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- TABLA DE LÍNEAS -->
+    <div class="table-view" data-aos="fade-up" data-aos-delay="100">
+        <div class="table-header">
+            <h4>Líneas Registradas</h4>
+            <div class="table-actions">
+                <div class="input-group input-group-sm" style="width: 200px;">
+                    <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Buscar línea...">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th width="100">Estado</th>
+                    <th width="120">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>Clásico</strong></td>
+                    <td>Diseños tradicionales y atemporales con detalles ornamentales</td>
+                    <td><span class="badge bg-success">Activo</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="fa-solid fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>Moderno</strong></td>
+                    <td>Líneas limpias, minimalistas y funcionales</td>
+                    <td><span class="badge bg-success">Activo</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="fa-solid fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>Rústico</strong></td>
+                    <td>Acabados naturales, texturas y madera en bruto</td>
+                    <td><span class="badge bg-secondary">Inactivo</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="fa-solid fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

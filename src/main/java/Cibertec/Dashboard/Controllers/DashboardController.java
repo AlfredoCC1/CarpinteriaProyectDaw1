@@ -20,11 +20,8 @@ public class DashboardController {
 
     @GetMapping({"/", "/dashboard"})
     public String dashboard(Model model) {
-
-
         // 👉 categorías para el <select>
         model.addAttribute("categorias", categoriaService.listarActivas());
-
         return "dashboard";  // dashboard.html en /templates
     }
 }

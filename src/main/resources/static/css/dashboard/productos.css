@@ -1,0 +1,246 @@
+/* ========== FORMULARIO DE PRODUCTO (COMPACTO / PRO) ========== */
+
+.product-form-container {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e4e6eb;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    transition: box-shadow .25s ease, transform .18s ease;
+}
+
+.product-form-container:hover {
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+    transform: translateY(-1px);
+}
+
+.form-card-body {
+    padding: 18px 20px;
+}
+
+/* Grupos de campos más compactos */
+.field-group {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 14px 14px 10px;
+    margin-bottom: 14px;
+    border: 1px solid #eceff2;
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.field-group:hover {
+    background: #ffffff;
+    border-color: #e0e4ea;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.field-group-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9rem;
+}
+
+.field-group-label i {
+    color: #8B5A2B;
+    font-size: .9rem;
+}
+
+/* -------- Floating inputs compactos -------- */
+.form-floating-custom {
+    position: relative;
+    margin-bottom: .85rem;
+}
+
+.form-floating-custom input,
+.form-floating-custom select {
+    height: 2.55rem; /* antes ~3.5rem -> ahora más compacto */
+    padding: .85rem .8rem .25rem;
+    border: 1px solid #d6d9e0;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    font-size: .9rem;
+    transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+
+.form-floating-custom textarea {
+    min-height: 72px;
+    padding: .85rem .8rem .4rem;
+    border: 1px solid #d6d9e0;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    font-size: .9rem;
+    resize: vertical;
+    transition: border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+
+.form-floating-custom input:focus,
+.form-floating-custom select:focus,
+.form-floating-custom textarea:focus {
+    border-color: #8B5A2B;
+    box-shadow: 0 0 0 2px rgba(139, 90, 43, 0.18);
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Label flotante ajustado a la nueva altura */
+.form-floating-custom label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: .65rem .85rem;
+    pointer-events: none;
+    transform-origin: 0 0;
+    transition: opacity .12s ease, transform .12s ease;
+    color: #6b7280;
+    font-size: .82rem;
+    font-weight: 500;
+}
+
+/* Cuando hay texto o focus, el label sube */
+.form-floating-custom input:not(:placeholder-shown) ~ label,
+.form-floating-custom input:focus ~ label,
+.form-floating-custom textarea:not(:placeholder-shown) ~ label,
+.form-floating-custom textarea:focus ~ label,
+.form-floating-custom select:not([value=""]) ~ label,
+.form-floating-custom select:focus ~ label {
+    opacity: .7;
+    transform: scale(.82) translateY(-0.45rem) translateX(.15rem);
+}
+
+/* Contador de caracteres más discreto */
+.char-counter {
+    position: absolute;
+    right: .65rem;
+    bottom: .25rem;
+    font-size: .7rem;
+    color: #9ca3af;
+    background: rgba(255,255,255,.85);
+    padding: 1px 6px;
+    border-radius: 999px;
+    font-weight: 500;
+}
+
+/* Switch "destacado" más compacto */
+.form-check.form-switch {
+    padding-left: 2.4rem;
+    font-size: .88rem;
+}
+
+.form-check-input {
+    width: 2.3rem;
+    height: 1.2rem;
+}
+
+/* -------- Grids más ligeros -------- */
+
+/* Características */
+.characteristics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: .75rem;
+}
+
+/* Medidas */
+.measures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .75rem;
+}
+
+.measure-input {
+    position: relative;
+}
+
+.measure-input input {
+    padding-right: 2.6rem;
+    font-weight: 600;
+}
+
+.measure-unit {
+    position: absolute;
+    right: .7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8B5A2B;
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+/* -------- Área de imágenes más fina -------- */
+.card.border-dashed {
+    border: 1px dashed #d4d7dd !important;
+    border-radius: 12px;
+    background: #fcfcfd;
+    transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.card.border-dashed:hover {
+    border-color: #8B5A2B;
+    background-color: #ffffff;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+.card.border-dashed h6 {
+    font-size: .9rem;
+}
+
+/* -------- Botones de acción del formulario -------- */
+.btn-submit-product {
+    background: linear-gradient(135deg, #8B5A2B 0%, #d4a76a 100%);
+    color: #fff;
+    border: none;
+    padding: .6rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .9rem;
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    box-shadow: 0 4px 12px rgba(139, 90, 43, 0.35);
+}
+
+.btn-submit-product i {
+    font-size: .95rem;
+}
+
+.btn-submit-product:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(139, 90, 43, 0.45);
+    filter: brightness(1.03);
+    color: #fff;
+}
+
+.btn-submit-product:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(139, 90, 43, 0.3);
+}
+
+/* Botones secundarios más pequeños */
+#btnCancelar,
+button[type="reset"] {
+    padding: .45rem 1.1rem;
+    font-size: .85rem;
+    border-radius: 999px;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 768px) {
+    .form-card-body {
+        padding: 16px 14px;
+    }
+
+    .field-group {
+        padding: 12px 10px 8px;
+    }
+
+    .characteristics-grid,
+    .measures-grid {
+        grid-template-columns: 1fr;
+    }
+}

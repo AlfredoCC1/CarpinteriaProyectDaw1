@@ -20,7 +20,6 @@ public class ProductoController {
     private final ProductoService productoService;
     private final CategoriaService categoriaService;
 
-    // 🔹 Inyección por constructor (como tú prefieres)
     public ProductoController(ProductoService productoService,
                               CategoriaService categoriaService) {
         this.productoService = productoService;
@@ -51,15 +50,6 @@ public class ProductoController {
         model.addAttribute("categorias", categorias);
         model.addAttribute("productos", productos);
         return "productos"; // otra vista, si la usas
-    }
-
-    // =========================
-    // VISTA ADMIN (DASHBOARD)
-    // =========================
-    @GetMapping("/admin")
-    public String vistaAdminProductos(Model model) {
-        model.addAttribute("categorias", categoriaService.listarActivas());
-        return "dashboard";   // aquí va el nombre real de tu dashboard.html
     }
 
     // =========================

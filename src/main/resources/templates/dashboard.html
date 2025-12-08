@@ -17,421 +17,51 @@
     <!-- AOS (animaciones) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary: #8B5A2B;
-            --primary-dark: #5C3B1B;
-            --accent: #FFC857;
-            --bg: #F5F3EF;
-            --dark: #111;
-        }
+    <!-- CSS global + fragments -->
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard/topbar.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard/asidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-        }
-
-        /* LAYOUT GENERAL */
-        .layout {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* SIDEBAR */
-        .sidebar {
-            width: 260px;
-            background: linear-gradient(180deg, #1b1b1b, #050505);
-            color: #eee;
-            padding: 1.5rem 1rem;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-        }
-
-        .sidebar-brand {
-            display: flex;
-            align-items: center;
-            gap: .6rem;
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-brand-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-        }
-
-        .sidebar-brand span {
-            font-weight: 700;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: .4rem;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            gap: .6rem;
-            padding: .55rem .75rem;
-            border-radius: .7rem;
-            color: #bbb;
-            text-decoration: none;
-            font-size: .92rem;
-        }
-
-        .sidebar-menu a i {
-            width: 18px;
-            text-align: center;
-        }
-
-        .sidebar-menu a:hover,
-        .sidebar-menu a.active {
-            background: rgba(255,255,255,0.08);
-            color: var(--accent);
-        }
-
-        .sidebar-footer {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            margin-top: 2rem;
-            padding-top: 1rem;
-            font-size: .8rem;
-            color: #777;
-        }
-
-        /* CONTENIDO PRINCIPAL */
-        .content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }
-
-        /* TOPBAR */
-        .topbar {
-            background-color: #fff;
-            padding: .75rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 0;
-            z-index: 5;
-        }
-
-        .topbar-title {
-            font-weight: 600;
-        }
-
-        .topbar-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .avatar-sm {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* CONTENIDO INTERIOR */
-        .content-inner {
-            padding: 1.5rem;
-        }
-
-        .section-header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: .75rem;
-            align-items: center;
-            margin-bottom: 1.2rem;
-        }
-
-        .section-header h2 {
-            margin: 0;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
-
-        .section-header small {
-            color: #777;
-        }
-
-        /* CARDS RESUMEN */
-        .card-metric {
-            border-radius: 1rem;
-            border: none;
-            box-shadow: 0 12px 30px rgba(0,0,0,.06);
-        }
-
-        .card-metric-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-        }
-
-        .bg-soft-primary {
-            background: linear-gradient(135deg, #8B5A2B, #5C3B1B);
-        }
-
-        .bg-soft-success {
-            background: linear-gradient(135deg, #3fb67c, #268a59);
-        }
-
-        .bg-soft-warning {
-            background: linear-gradient(135deg, #FFC857, #ff9b1a);
-        }
-
-        .bg-soft-info {
-            background: linear-gradient(135deg, #3f89ff, #245cbe);
-        }
-
-        .metric-label {
-            font-size: .8rem;
-            color: #777;
-        }
-
-        .metric-value {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .metric-trend {
-            font-size: .75rem;
-        }
-
-        /* TARJETAS CONTENIDO */
-        .card-soft {
-            border-radius: 1rem;
-            border: none;
-            box-shadow: 0 12px 30px rgba(0,0,0,.06);
-        }
-
-        /* TABLA */
-        .table thead {
-            background-color: #f3f2ed;
-            font-size: .85rem;
-        }
-
-        .status-badge {
-            border-radius: 999px;
-            padding: .2rem .7rem;
-            font-size: .75rem;
-        }
-
-        /* === ESTILOS PANEL PRODUCTOS === */
-        .card-form {
-            border-radius: 1rem;
-            border: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,.06);
-            padding: 1.5rem 2rem;
-        }
-
-        .form-label {
-            font-weight: 600;
-        }
-
-        .preview-img {
-            width: 100%;
-            height: 160px;
-            border-radius: .7rem;
-            object-fit: cover;
-            border: 1px solid #ddd;
-        }
-
-        .btn-main {
-            background-color: var(--accent);
-            border-radius: .7rem;
-            font-weight: 600;
-        }
-
-        /* SIDEBAR RESPONSIVE */
-        .sidebar-toggle-btn {
-            display: none;
-        }
-
-        @media (max-width: 992px) {
-            .layout {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                position: fixed;
-                left: 0;
-                top: 0;
-                height: 100vh;
-                transform: translateX(-100%);
-                transition: transform .25s ease;
-                z-index: 1050;
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .content {
-                flex: none;
-            }
-
-            .sidebar-toggle-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 34px;
-                height: 34px;
-                border-radius: 50%;
-                border: none;
-                background: #f0f0f0;
-            }
-        }
-    </style>
 </head>
 <body>
 
 <div class="layout">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-brand mb-4">
-            <div class="sidebar-brand-icon">
-                <i class="fa-solid fa-hammer"></i>
-            </div>
-            <div>
-                <span>Carpintería</span><br>
-                <small class="text-muted">Panel administrador</small>
-            </div>
-        </div>
-
-        <ul class="sidebar-menu">
-            <li><a href="#" class="active" data-view="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
-            <li><a href="#" data-view="productos"><i class="fa-solid fa-chair"></i> Productos</a></li>
-            <li><a href="#"><i class="fa-solid fa-user-group"></i> Clientes</a></li>
-            <li><a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Pedidos</a></li>
-            <li><a href="#"><i class="fa-solid fa-users-gear"></i> Usuarios</a></li>
-            <li><a href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
-        </ul>
-
-        <div class="sidebar-footer mt-4">
-            <div class="d-flex align-items-center gap-2 mb-2">
-                <i class="fa-regular fa-circle-check text-success"></i>
-                <span>Sistema operativo</span>
-            </div>
-            <small>Sesión iniciada como <strong>admin</strong>.</small>
-        </div>
-    </aside>
+    <!-- ASIDE Reutilizable -->
+    <div th:replace="~{dashboard/asidebar :: mainAsidebar}"></div>
 
     <!-- CONTENIDO PRINCIPAL -->
     <div class="content">
-        <!-- TOPBAR -->
-        <header class="topbar">
-            <div class="d-flex align-items-center gap-2">
-                <button class="sidebar-toggle-btn d-lg-none me-2" id="sidebarToggle">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <div>
-                    <div class="topbar-title">Dashboard</div>
-                    <small class="text-muted">Resumen general de la carpintería</small>
-                </div>
-            </div>
-
-            <div class="topbar-actions">
-                <button class="btn btn-sm btn-outline-secondary d-none d-md-inline-flex">
-                    <i class="fa-regular fa-bell me-1"></i> Notificaciones
-                </button>
-                <div class="dropdown">
-                    <a class="d-flex align-items-center text-decoration-none text-dark" href="#" data-bs-toggle="dropdown">
-                        <img class="avatar-sm me-2"
-                             src="https://randomuser.me/api/portraits/men/11.jpg" alt="Usuario">
-                        <div class="d-none d-sm-block">
-                            <div class="small fw-semibold">Admin Carpintería</div>
-                            <div class="small text-muted">Administrador</div>
-                        </div>
-                        <i class="fa-solid fa-caret-down ms-1 small"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-gear me-2"></i> Perfil</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-sliders me-2"></i> Ajustes</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            </div>
-        </header>
+        <!-- TOPBAR Reutilizable -->
+        <div th:replace="~{dashboard/topbar :: mainTopbar}"></div>
 
         <!-- CONTENIDO INTERIOR -->
         <main class="content-inner">
 
             <!-- ========== VISTA 1: DASHBOARD ========== -->
-            <div id="viewDashboard">
+            <div id="view-dashboard" class="view-container active">
+                <!-- RESUMEN DE MÉTRICAS -->
                 <div class="section-header" data-aos="fade-up">
                     <div>
                         <h2>Resumen de hoy</h2>
                         <small>Estado general del negocio en las últimas 24 horas.</small>
                     </div>
-
-                    <div class="d-flex align-items-center gap-2">
-                        <select id="selectMes" class="form-select form-select-sm">
-                            <option value="1">Enero</option>
-                            <option value="2">Febrero</option>
-                            <option value="3">Marzo</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Mayo</option>
-                            <option value="6">Junio</option>
-                            <option value="7">Julio</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Septiembre</option>
-                            <option value="10">Octubre</option>
-                            <option value="11">Noviembre</option>
-                            <option value="12">Diciembre</option>
-                        </select>
-
-                        <select id="selectAnio" class="form-select form-select-sm">
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
-                            <option value="2029">2029</option>
-                            <option value="2030">2030</option>
-                        </select>
-
-                        <button class="btn btn-sm btn-outline-secondary" id="btnRefrescar">
-                            <i class="fa-solid fa-rotate me-1"></i> Actualizar datos
-                        </button>
-                    </div>
+                    <button class="btn btn-sm btn-outline-secondary">
+                        <i class="fa-solid fa-rotate me-1"></i> Actualizar datos
+                    </button>
                 </div>
 
                 <div class="row g-3 mb-4">
-                    <div class="col-md-3">
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="0">
                         <div class="card card-metric">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <div class="metric-label">Productos activos</div>
-                                    <div id="totalProductos" class="metric-value">24</div>
+                                    <div class="metric-value" th:text="${totalProductos}">48</div>
+                                    <div class="metric-trend text-success">
+                                        <i class="fa-solid fa-arrow-up me-1"></i> +5 nuevos
+                                    </div>
                                 </div>
                                 <div class="card-metric-icon bg-soft-primary">
                                     <i class="fa-solid fa-chair"></i>
@@ -440,12 +70,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
                         <div class="card card-metric">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <div class="metric-label">Clientes registrados</div>
-                                    <div id="totalClientes" class="metric-value">10</div>
+                                    <div class="metric-value" th:text="${totalClientes}">132</div>
+                                    <div class="metric-trend text-success">
+                                        <i class="fa-solid fa-user-plus me-1"></i> +3 hoy
+                                    </div>
                                 </div>
                                 <div class="card-metric-icon bg-soft-success">
                                     <i class="fa-solid fa-user-group"></i>
@@ -454,12 +87,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
                         <div class="card card-metric">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <div class="metric-label">Pedidos del mes</div>
-                                    <div id="pedidosMes" class="metric-value">15</div>
+                                    <div class="metric-value" th:text="${pedidosMes}">27</div>
+                                    <div class="metric-trend text-warning">
+                                        <i class="fa-solid fa-clock me-1"></i> 6 en progreso
+                                    </div>
                                 </div>
                                 <div class="card-metric-icon bg-soft-warning">
                                     <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -468,12 +104,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
                         <div class="card card-metric">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <div class="metric-label">Ingresos (S/)</div>
-                                    <div id="ingresosMes" class="metric-value">12,500.00</div>
+                                    <div class="metric-label">Ingresos aprox. (S/)</div>
+                                    <div class="metric-value" th:text="${ingresosMes}">18,450</div>
+                                    <div class="metric-trend text-success">
+                                        <i class="fa-solid fa-arrow-up-right-dots me-1"></i> +12% vs mes anterior
+                                    </div>
                                 </div>
                                 <div class="card-metric-icon bg-soft-info">
                                     <i class="fa-solid fa-sack-dollar"></i>
@@ -483,15 +122,25 @@
                     </div>
                 </div>
 
-                <!-- GRÁFICOS -->
+                <!-- GRÁFICOS Y PANELES -->
                 <div class="row g-3 mb-4">
                     <div class="col-lg-8" data-aos="fade-up">
                         <div class="card card-soft h-100">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div>
-                                        <h6 class="mb-0">Actividad del mes</h6>
-                                        <small class="text-muted">Pedidos vs productos vendidos</small>
+                                        <h6 class="mb-0">Pedidos por mes</h6>
+                                        <small class="text-muted">Últimos 6 meses</small>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                            Ver: 6 meses
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Últimos 3 meses</a></li>
+                                            <li><a class="dropdown-item" href="#">Últimos 6 meses</a></li>
+                                            <li><a class="dropdown-item" href="#">Último año</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <canvas id="ordersChart" height="140"></canvas>
@@ -502,8 +151,8 @@
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="card card-soft h-100">
                             <div class="card-body">
-                                <h6 class="mb-2">Productos más vendidos</h6>
-                                <small class="text-muted d-block mb-2">Top por cantidad</small>
+                                <h6 class="mb-2">Distribución de productos</h6>
+                                <small class="text-muted d-block mb-2">Por categoría principal</small>
                                 <canvas id="productsChart" height="180"></canvas>
                             </div>
                         </div>
@@ -603,152 +252,287 @@
                     </div>
                 </div>
             </div>
-            <!-- ========== FIN VISTA DASHBOARD ========== -->
 
-            <!-- ========== VISTA 2: PRODUCTOS (ADMIN) ========== -->
-            <div id="viewProductos" class="d-none">
-                <div class="mb-3">
-                    <h2 class="mb-0">Administración de productos</h2>
-                    <small class="text-muted">Alta, edición y listado de productos.</small>
+            <!-- ========== VISTA 2: LÍNEAS DE DISEÑO ========== -->
+            <div th:replace="~{dashboard/linea :: mainLinea}"></div>
+
+            <!-- ========== VISTA 3: CATEGORÍAS ========== -->
+            <div th:replace="~{dashboard/categoria :: mainCategoria}"></div>
+
+            <!-- ========== VISTA 4: PRODUCTOS ========== -->
+            <div id="view-productos" class="view-container">
+                <div class="section-header" data-aos="fade-up">
+                    <div>
+                        <h2>Productos</h2>
+                        <small>Administra tu catálogo de productos</small>
+                    </div>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-plus me-1"></i> Nuevo Producto
+                    </button>
                 </div>
 
                 <!-- FORMULARIO DE PRODUCTO -->
-                <div class="card card-form mb-4">
-                    <h4 class="mb-3">Agregar nuevo producto</h4>
+                <div class="form-view" data-aos="fade-up">
+                    <div class="form-header">
+                        <h3>Agregar Nuevo Producto</h3>
+                        <small>Completa la información del nuevo producto</small>
+                    </div>
 
-                    <form id="formProducto"
-                          th:action="@{/productos/guardar}"
-                          method="post">
-
+                    <form id="form-producto">
                         <div class="row g-3">
-                            <!-- NOMBRE -->
                             <div class="col-md-6">
-                                <label class="form-label">Nombre del producto</label>
-                                <input type="text" class="form-control"
-                                       id="nombre" name="nombre" required>
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre del Producto</label>
+                                    <input type="text" class="form-control" placeholder="Ej: Mesa de Roble, Sofá Moderno" required>
+                                </div>
                             </div>
-
-                            <!-- PRECIO -->
                             <div class="col-md-3">
-                                <label class="form-label">Precio (S/)</label>
-                                <input type="number" class="form-control"
-                                       id="precio" name="precio" step="0.01">
+                                <div class="mb-3">
+                                    <label class="form-label">Categoría</label>
+                                    <select class="form-select" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Mesas</option>
+                                        <option value="2">Sillas</option>
+                                        <option value="3">Sofás</option>
+                                    </select>
+                                </div>
                             </div>
-
-                            <!-- CATEGORÍA -->
                             <div class="col-md-3">
-                                <label class="form-label">Categoría</label>
-                                <select class="form-select" id="categoria"
-                                        name="idCategoria" required>
-                                    <option value="">Seleccionar...</option>
-                                    <option th:each="cat : ${categorias}"
-                                            th:value="${cat.idCategoria}"
-                                            th:text="${cat.nombre}">
-                                    </option>
-                                </select>
+                                <div class="mb-3">
+                                    <label class="form-label">Línea de Diseño</label>
+                                    <select class="form-select">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="1">Clásico</option>
+                                        <option value="2">Moderno</option>
+                                        <option value="3">Rústico</option>
+                                    </select>
+                                </div>
                             </div>
-
-                            <!-- DESCRIPCIÓN CORTA -->
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Precio (S/)</label>
+                                    <input type="number" class="form-control" placeholder="0.00" step="0.01">
+                                    <small class="text-muted">Dejar vacío para "A cotizar"</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Material</label>
+                                    <input type="text" class="form-control" placeholder="Ej: Roble, Pino, MDF">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Estado</label>
+                                    <select class="form-select" required>
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-12">
-                                <label class="form-label">Descripción corta</label>
-                                <textarea id="descCorta" name="descCorta"
-                                          class="form-control" rows="2"></textarea>
+                                <div class="mb-3">
+                                    <label class="form-label">Descripción</label>
+                                    <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                                </div>
                             </div>
-
-                            <!-- DESCRIPCIÓN LARGA (la usaremos luego para producto_detalle) -->
                             <div class="col-12">
-                                <label class="form-label">Descripción detallada</label>
-                                <textarea id="descLarga" name="descLarga"
-                                          class="form-control" rows="3"></textarea>
-                            </div>
-
-                            <!-- CARACTERÍSTICAS -->
-                            <div class="col-md-6">
-                                <label class="form-label d-block mb-1">Características principales</label>
-
-                                <div class="mb-2">
-                                    <label for="carac1" class="form-label small mb-1">Característica 1</label>
-                                    <input type="text" class="form-control" id="carac1" name="carac1"
-                                           placeholder="Ej: Madera maciza">
-                                </div>
-
-                                <div class="mb-2">
-                                    <label for="carac2" class="form-label small mb-1">Característica 2</label>
-                                    <input type="text" class="form-control" id="carac2" name="carac2"
-                                           placeholder="Ej: Acabado natural">
-                                </div>
-
-                                <div class="mb-2">
-                                    <label for="carac3" class="form-label small mb-1">Característica 3</label>
-                                    <input type="text" class="form-control" id="carac3" name="carac3"
-                                           placeholder="Ej: Garantía 1 año">
-                                </div>
-
-                                <div>
-                                    <label for="carac4" class="form-label small mb-1">Característica 4 (opcional)</label>
-                                    <input type="text" class="form-control" id="carac4" name="carac4"
-                                           placeholder="Ej: Patas reforzadas">
-                                </div>
-                            </div>
-
-                            <!-- MEDIDAS -->
-                            <div class="col-md-6">
-                                <label class="form-label d-block mb-1">Medidas del producto</label>
-
-                                <div class="row g-2">
-                                    <div class="col-sm-6">
-                                        <label for="largo" class="form-label small mb-1">Largo (cm)</label>
-                                        <input type="number" class="form-control" id="largo" name="largo"
-                                               placeholder="Ej: 180">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="ancho" class="form-label small mb-1">Ancho (cm)</label>
-                                        <input type="number" class="form-control" id="ancho" name="ancho"
-                                               placeholder="Ej: 90">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="altura" class="form-label small mb-1">Altura (cm)</label>
-                                        <input type="number" class="form-control" id="altura" name="altura"
-                                               placeholder="Ej: 75">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="peso" class="form-label small mb-1">Peso aprox. (kg)</label>
-                                        <input type="number" class="form-control" id="peso" name="peso"
-                                               placeholder="Ej: 60">
-                                    </div>
-                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-solid fa-save me-2"></i> Guardar Producto
+                                </button>
                             </div>
                         </div>
-
-                        <div class="mt-3">
-                            <button type="submit" class="btn btn-main px-4">
-                                <i class="fa-solid fa-plus me-1"></i> Agregar producto
-                            </button>
-                        </div>
-
                     </form>
-
                 </div>
 
-                <!-- LISTA DE PRODUCTOS -->
-                <div class="table-responsive">
-                    <table class="table table-striped text-center" id="tablaProductos">
-                        <thead class="table-dark">
-                        <tr>
-                            <th>Imagen</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Precio</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- Se llena por JS (visual) -->
-                        </tbody>
-                    </table>
+                <!-- TABLA DE PRODUCTOS -->
+                <div class="table-view" data-aos="fade-up" data-aos-delay="100">
+                    <div class="table-header">
+                        <h4>Productos Registrados</h4>
+                        <div class="table-actions">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+                                <input type="text" class="form-control" placeholder="Buscar productos...">
+                            </div>
+                            <select class="form-select form-select-sm" style="width: 150px;">
+                                <option value="">Todas las categorías</option>
+                                <option value="1">Mesas</option>
+                                <option value="2">Sillas</option>
+                                <option value="3">Sofás</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                            <tr>
+                                <th width="60">ID</th>
+                                <th>Producto</th>
+                                <th width="120">Categoría</th>
+                                <th width="120">Línea</th>
+                                <th width="100">Precio</th>
+                                <th width="80">Estado</th>
+                                <th width="140">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <strong>Mesa de Comedor Extensible</strong><br>
+                                    <small class="text-muted">Roble macizo</small>
+                                </td>
+                                <td>Mesas</td>
+                                <td>Clásico</td>
+                                <td>S/ 850.00</td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger me-1">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <strong>Sofá Seccional 3 Piezas</strong><br>
+                                    <small class="text-muted">Tela gris antimanchas</small>
+                                </td>
+                                <td>Sofás</td>
+                                <td>Moderno</td>
+                                <td>S/ 1,200.00</td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger me-1">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <strong>Estantería Modular</strong><br>
+                                    <small class="text-muted">MDF laminado nogal</small>
+                                </td>
+                                <td>Estanterías</td>
+                                <td>Moderno</td>
+                                <td>S/ 380.00</td>
+                                <td><span class="badge bg-secondary">Inactivo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger me-1">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <!-- ========== FIN VISTA PRODUCTOS ========== -->
+
+            <!-- ========== VISTA 5: CLIENTES ========== -->
+            <div id="view-clientes" class="view-container">
+                <div class="section-header" data-aos="fade-up">
+                    <div>
+                        <h2>Clientes</h2>
+                        <small>Administra la información de tus clientes</small>
+                    </div>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-plus me-1"></i> Nuevo Cliente
+                    </button>
+                </div>
+
+                <!-- En construcción -->
+                <div class="card card-soft text-center py-5" data-aos="fade-up">
+                    <div class="card-body">
+                        <i class="fa-solid fa-tools display-4 text-muted mb-3"></i>
+                        <h4>En Construcción</h4>
+                        <p class="text-muted mb-0">La vista de clientes estará disponible próximamente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== VISTA 6: PEDIDOS ========== -->
+            <div id="view-pedidos" class="view-container">
+                <div class="section-header" data-aos="fade-up">
+                    <div>
+                        <h2>Pedidos</h2>
+                        <small>Gestiona y sigue los pedidos de tus clientes</small>
+                    </div>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-plus me-1"></i> Nuevo Pedido
+                    </button>
+                </div>
+
+                <!-- En construcción -->
+                <div class="card card-soft text-center py-5" data-aos="fade-up">
+                    <div class="card-body">
+                        <i class="fa-solid fa-tools display-4 text-muted mb-3"></i>
+                        <h4>En Construcción</h4>
+                        <p class="text-muted mb-0">La vista de pedidos estará disponible próximamente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== VISTA 7: USUARIOS ========== -->
+            <div id="view-usuarios" class="view-container">
+                <div class="section-header" data-aos="fade-up">
+                    <div>
+                        <h2>Usuarios</h2>
+                        <small>Administra los usuarios del sistema</small>
+                    </div>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-plus me-1"></i> Nuevo Usuario
+                    </button>
+                </div>
+
+                <!-- En construcción -->
+                <div class="card card-soft text-center py-5" data-aos="fade-up">
+                    <div class="card-body">
+                        <i class="fa-solid fa-tools display-4 text-muted mb-3"></i>
+                        <h4>En Construcción</h4>
+                        <p class="text-muted mb-0">La vista de usuarios estará disponible próximamente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== VISTA 8: CONFIGURACIÓN ========== -->
+            <div id="view-configuracion" class="view-container">
+                <div class="section-header" data-aos="fade-up">
+                    <div>
+                        <h2>Configuración</h2>
+                        <small>Configura los parámetros del sistema</small>
+                    </div>
+                </div>
+
+                <!-- En construcción -->
+                <div class="card card-soft text-center py-5" data-aos="fade-up">
+                    <div class="card-body">
+                        <i class="fa-solid fa-tools display-4 text-muted mb-3"></i>
+                        <h4>En Construcción</h4>
+                        <p class="text-muted mb-0">La vista de configuración estará disponible próximamente.</p>
+                    </div>
+                </div>
+            </div>
 
         </main>
     </div>
@@ -758,180 +542,245 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script th:src="@{/js/InicializaAOS.js}"></script>
 
 <script>
-    console.log("Dashboard HTML/JS cargado");
-    AOS.init({ duration: 700, once: true });
+    // Sistema de vistas
+    document.addEventListener('DOMContentLoaded', function() {
+        // Variables globales
+        let currentView = 'view-dashboard';
 
-    // ===============================
-    // GRÁFICO: ACTIVIDAD DEL MES (DATOS DE EJEMPLO)
-    // ===============================
-    let chartActividad = null;
+        // Elementos del DOM
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const pageTitle = document.getElementById('pageTitle');
+        const pageSubtitle = document.getElementById('pageSubtitle');
 
-    function actualizarGraficoActividad(pedidos, productosVendidos) {
-        const ctx = document.getElementById("ordersChart");
-        if (!ctx) return;
+        // Título de cada vista
+        const viewTitles = {
+            'view-dashboard': ['Dashboard', 'Resumen general de la carpintería'],
+            'view-lineas': ['Líneas de Diseño', 'Administra las líneas de diseño'],
+            'view-categorias': ['Categorías', 'Administra las categorías de productos'],
+            'view-productos': ['Productos', 'Administra tu catálogo de productos'],
+            'view-clientes': ['Clientes', 'Gestión de clientes'],
+            'view-pedidos': ['Pedidos', 'Seguimiento de pedidos'],
+            'view-usuarios': ['Usuarios', 'Administración de usuarios del sistema'],
+            'view-configuracion': ['Configuración', 'Configuración del sistema']
+        };
 
-        if (chartActividad) chartActividad.destroy();
-
-        chartActividad = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Pedidos del mes', 'Productos vendidos'],
-                datasets: [{
-                    data: [pedidos, productosVendidos],
-                    backgroundColor: ['rgba(139, 90, 43, 0.9)', 'rgba(63, 137, 255, 0.8)'],
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true } }
+        // Función para cambiar de vista
+        function switchView(viewId) {
+            // Ocultar vista actual
+            const currentElement = document.getElementById(currentView);
+            if (currentElement) {
+                currentElement.classList.remove('active');
             }
-        });
-    }
 
-    // ===============================
-    // GRÁFICO: PRODUCTOS MÁS VENDIDOS (DATOS DE EJEMPLO)
-    // ===============================
-    let chartProductos = null;
+            // Mostrar nueva vista
+            const newElement = document.getElementById(viewId);
+            if (newElement) {
+                newElement.classList.add('active');
+                currentView = viewId;
 
-    function actualizarGraficoProductos(datos) {
-        const ctx = document.getElementById("productsChart");
-        if (!ctx) return;
+                // Actualizar títulos en el topbar
+                if (viewTitles[viewId]) {
+                    if (pageTitle) pageTitle.textContent = viewTitles[viewId][0];
+                    if (pageSubtitle) pageSubtitle.textContent = viewTitles[viewId][1];
+                }
 
-        if (chartProductos) chartProductos.destroy();
+                // Reiniciar AOS para nuevas animaciones
+                AOS.refresh();
 
-        const labels = datos.map(item => item[0]);
-        const values = datos.map(item => item[1]);
+                // Si es dashboard, inicializar gráficos
+                if (viewId === 'view-dashboard') {
+                    setTimeout(initializeDashboardCharts, 100);
+                }
+            }
+        }
 
-        chartProductos = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: ['#8B5A2B', '#FFC857', '#3f89ff', '#3fb67c', '#ff7f50'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { boxWidth: 14, usePointStyle: true }
+        // Función para inicializar gráficos del dashboard
+        function initializeDashboardCharts() {
+            // Gráfico de pedidos por mes
+            const ordersCtx = document.getElementById('ordersChart');
+            if (ordersCtx && !ordersCtx.chart) {
+                ordersCtx.chart = new Chart(ordersCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov'],
+                        datasets: [{
+                            label: 'Pedidos',
+                            data: [14, 18, 21, 19, 24, 27],
+                            borderRadius: 6,
+                            backgroundColor: 'rgba(139, 90, 43, 0.8)'
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: { beginAtZero: true, ticks: { stepSize: 5 } }
+                        }
                     }
-                },
-                cutout: '65%'
+                });
             }
-        });
-    }
 
-    // BOTÓN "Actualizar datos" (solo cambia valores dummy)
-    const btnRefrescar = document.getElementById("btnRefrescar");
-    if (btnRefrescar) {
-        btnRefrescar.addEventListener("click", () => {
-            // Solo para que "parezca" que refresca
-            const pedidosRandom = Math.floor(Math.random() * 30) + 5;
-            const ingresosRandom = (Math.random() * 20000 + 3000).toFixed(2);
-
-            document.getElementById("pedidosMes").textContent = pedidosRandom;
-            document.getElementById("ingresosMes").textContent = ingresosRandom;
-
-            actualizarGraficoActividad(pedidosRandom, pedidosRandom * 3);
-        });
-    }
-
-    // SIDEBAR RESPONSIVO
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener("click", () => {
-            sidebar.classList.toggle('open');
-        });
-    }
-
-    // CAMBIO DE VISTAS DASHBOARD / PRODUCTOS
-    const linksMenu  = document.querySelectorAll('.sidebar-menu a[data-view]');
-    const viewDash   = document.getElementById('viewDashboard');
-    const viewProds  = document.getElementById('viewProductos');
-    const topbarTitle   = document.querySelector('.topbar-title');
-    const topbarSubtext = document.querySelector('.topbar small');
-
-    linksMenu.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const vista = this.dataset.view;
-            if (!vista) return;
-
-            linksMenu.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-
-            if (vista === 'dashboard') {
-                viewDash.classList.remove('d-none');
-                viewProds.classList.add('d-none');
-                topbarTitle.textContent = 'Dashboard';
-                topbarSubtext.textContent = 'Resumen general de la carpintería';
-            } else if (vista === 'productos') {
-                viewDash.classList.add('d-none');
-                viewProds.classList.remove('d-none');
-                topbarTitle.textContent = 'Productos';
-                topbarSubtext.textContent = 'Administración de productos';
+            // Gráfico de distribución de productos
+            const productsCtx = document.getElementById('productsChart');
+            if (productsCtx && !productsCtx.chart) {
+                productsCtx.chart = new Chart(productsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Muebles hogar', 'Comercial', 'Cocina/Closets', 'Restauración'],
+                        datasets: [{
+                            data: [45, 20, 25, 10],
+                            backgroundColor: [
+                                '#8B5A2B',
+                                '#FFC857',
+                                '#3f89ff',
+                                '#3fb67c'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { boxWidth: 14, usePointStyle: true }
+                            }
+                        },
+                        cutout: '65%'
+                    }
+                });
             }
-        });
-    });
-
-    // CRUD VISUAL DE PRODUCTOS (SIN BD)
-    let filaEditando = null;
-
-
-    function eliminarProducto(boton) {
-        const fila = boton.closest("tr");
-        if (confirm("¿Eliminar este producto de la tabla? (sin BD)")) {
-            fila.remove();
-        }
-    }
-
-    function editarProducto(boton) {
-        filaEditando = boton.closest("tr");
-
-        const nombre    = filaEditando.querySelector(".col-nombre").textContent.trim();
-        const categoria = filaEditando.querySelector(".col-categoria").textContent.trim();
-        const precioTxt = filaEditando.querySelector(".col-precio").textContent.trim();
-        const precio    = precioTxt.replace("S/","").trim();
-
-        document.getElementById("nombre").value    = nombre;
-        document.getElementById("categoria").value = categoria;
-        document.getElementById("precio").value    = precio;
-
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    window.eliminarProducto = eliminarProducto;
-    window.editarProducto   = editarProducto;
-
-    // EJECUCIÓN INICIAL
-    window.addEventListener('DOMContentLoaded', () => {
-        // Mes/año actual (solo visual)
-        const fecha = new Date();
-        const selMes  = document.getElementById("selectMes");
-        const selAnio = document.getElementById("selectAnio");
-
-        if (selMes && selAnio) {
-            selMes.value  = (fecha.getMonth() + 1).toString();
-            selAnio.value = fecha.getFullYear().toString();
         }
 
-        // Datos de ejemplo para los gráficos
-        actualizarGraficoActividad(15, 45);
-        actualizarGraficoProductos([
-            ["Mesa comedor", 12],
-            ["Silla clásica", 9],
-            ["Closet roble", 7],
-            ["Cocina modular", 5],
-            ["Repisa flotante", 4]
-        ]);
+        // Configurar enlaces del sidebar
+        document.querySelectorAll('[data-view]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const viewId = this.getAttribute('data-view');
+
+                // Cambiar vista
+                switchView(viewId);
+
+                // Cerrar sidebar en móvil
+                if (window.innerWidth < 992 && sidebar) {
+                    sidebar.classList.remove('open');
+                }
+
+                // Actualizar clase activa en sidebar
+                document.querySelectorAll('[data-view]').forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Toggle del sidebar en móvil
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', () => {
+                if (sidebar) {
+                    sidebar.classList.toggle('open');
+                }
+            });
+        }
+
+        // Configurar formularios (prevención de envío para demo)
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Simular envío exitoso
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i> Guardando...';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    // Mostrar mensaje de éxito
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success alert-dismissible fade show mt-3';
+                    alertDiv.innerHTML = `
+                        <i class="fa-solid fa-check-circle me-2"></i>
+                        <strong>¡Éxito!</strong> Los datos se han guardado correctamente.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+
+                    this.insertAdjacentElement('afterend', alertDiv);
+
+                    // Restaurar botón
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+
+                    // Limpiar formulario
+                    this.reset();
+
+                    // Auto-eliminar alerta después de 5 segundos
+                    setTimeout(() => {
+                        if (alertDiv.parentElement) {
+                            alertDiv.remove();
+                        }
+                    }, 5000);
+                }, 1500);
+            });
+        });
+
+        // Configurar botones de eliminación en tablas
+        document.querySelectorAll('.btn-outline-danger').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                if (row && confirm('¿Estás seguro de eliminar este elemento?')) {
+                    row.style.opacity = '0.5';
+                    setTimeout(() => {
+                        row.remove();
+                    }, 300);
+                }
+            });
+        });
+
+        // Configurar botones de edición
+        document.querySelectorAll('.btn-outline-primary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                if (row) {
+                    // Simular carga de datos para edición
+                    const formView = document.querySelector('.form-view');
+                    if (formView) {
+                        formView.scrollIntoView({ behavior: 'smooth' });
+
+                        // Simular que se cargan datos en el formulario
+                        const form = formView.querySelector('form');
+                        if (form) {
+                            form.querySelector('input[type="text"]').value = 'Datos de ejemplo cargados';
+                            form.querySelector('textarea').value = 'Esta información fue cargada automáticamente para edición.';
+
+                            // Cambiar texto del botón submit
+                            const submitBtn = form.querySelector('button[type="submit"]');
+                            if (submitBtn) {
+                                submitBtn.innerHTML = '<i class="fa-solid fa-pen me-2"></i> Actualizar';
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Inicializar vista por defecto (dashboard)
+        initializeDashboardCharts();
+
+        // Cerrar sidebar al hacer clic fuera (en móvil)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth < 992 && sidebar) {
+                if (!sidebar.contains(e.target) &&
+                    !sidebarToggle.contains(e.target) &&
+                    sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
     });
 </script>
 
