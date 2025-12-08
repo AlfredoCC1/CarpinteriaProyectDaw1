@@ -1,8 +1,8 @@
-package Cibertec.Controllers;
+package Cibertec.Login.Controllers;
 
 import Cibertec.Model.EstadoUsuario;
-import Cibertec.Model.Usuario;
-import Cibertec.Services.UsuarioService;
+import Cibertec.Login.Model.Usuario;
+import Cibertec.Login.Service.UsuarioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

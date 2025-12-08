@@ -241,6 +241,32 @@
             font-size: .75rem;
         }
 
+        /* === ESTILOS PANEL PRODUCTOS === */
+        .card-form {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,.06);
+            padding: 1.5rem 2rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .preview-img {
+            width: 100%;
+            height: 160px;
+            border-radius: .7rem;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .btn-main {
+            background-color: var(--accent);
+            border-radius: .7rem;
+            font-weight: 600;
+        }
+
         /* SIDEBAR RESPONSIVE */
         .sidebar-toggle-btn {
             display: none;
@@ -299,9 +325,9 @@
         </div>
 
         <ul class="sidebar-menu">
-            <li><a href="/dashboard" class="active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
-            <li><a href="/productos"><i class="fa-solid fa-chair"></i> Productos</a></li>
-            <li><a href="/clientes"><i class="fa-solid fa-user-group"></i> Clientes</a></li>
+            <li><a href="#" class="active" data-view="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+            <li><a href="#" data-view="productos"><i class="fa-solid fa-chair"></i> Productos</a></li>
+            <li><a href="#"><i class="fa-solid fa-user-group"></i> Clientes</a></li>
             <li><a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Pedidos</a></li>
             <li><a href="#"><i class="fa-solid fa-users-gear"></i> Usuarios</a></li>
             <li><a href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
@@ -312,7 +338,7 @@
                 <i class="fa-regular fa-circle-check text-success"></i>
                 <span>Sistema operativo</span>
             </div>
-            <small>Sesión iniciada como <strong th:text="${usuario}">admin</strong>.</small>
+            <small>Sesión iniciada como <strong>admin</strong>.</small>
         </div>
     </aside>
 
@@ -348,7 +374,7 @@
                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-gear me-2"></i> Perfil</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-sliders me-2"></i> Ajustes</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="/logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión</a></li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -357,236 +383,372 @@
         <!-- CONTENIDO INTERIOR -->
         <main class="content-inner">
 
-            <!-- RESUMEN DE MÉTRICAS -->
-            <div class="section-header" data-aos="fade-up">
-                <div>
-                    <h2>Resumen de hoy</h2>
-                    <small>Estado general del negocio en las últimas 24 horas.</small>
-                </div>
+            <!-- ========== VISTA 1: DASHBOARD ========== -->
+            <div id="viewDashboard">
+                <div class="section-header" data-aos="fade-up">
+                    <div>
+                        <h2>Resumen de hoy</h2>
+                        <small>Estado general del negocio en las últimas 24 horas.</small>
+                    </div>
 
-                <!-- 🔽 NUEVO: FILTROS MES / AÑO + MISMO BOTÓN 🔽 -->
-                <div class="d-flex align-items-center gap-2">
-                    <select id="selectMes" class="form-select form-select-sm">
-                        <option value="1">Enero</option>
-                        <option value="2">Febrero</option>
-                        <option value="3">Marzo</option>
-                        <option value="4">Abril</option>
-                        <option value="5">Mayo</option>
-                        <option value="6">Junio</option>
-                        <option value="7">Julio</option>
-                        <option value="8">Agosto</option>
-                        <option value="9">Septiembre</option>
-                        <option value="10">Octubre</option>
-                        <option value="11">Noviembre</option>
-                        <option value="12">Diciembre</option>
-                    </select>
+                    <div class="d-flex align-items-center gap-2">
+                        <select id="selectMes" class="form-select form-select-sm">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
 
-                    <select id="selectAnio" class="form-select form-select-sm">
-                        <!-- puedes ajustar años según tu necesidad -->
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                        <option value="2029">2029</option>
-                        <option value="2030">2030</option>
+                        <select id="selectAnio" class="form-select form-select-sm">
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                        </select>
 
-                    </select>
-
-                    <button class="btn btn-sm btn-outline-secondary" id="btnRefrescar">
-                        <i class="fa-solid fa-rotate me-1"></i> Actualizar datos
-                    </button>
-                </div>
-                <!-- 🔼 FIN FILTROS 🔼 -->
-            </div>
-
-            <div class="row g-3 mb-4">
-
-                <!-- Productos activos -->
-                <div class="col-md-3">
-                    <div class="card card-metric">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <div class="metric-label">Productos activos</div>
-                                <div id="totalProductos" class="metric-value" th:text="${totalProductos}">0</div>
-                            </div>
-                            <div class="card-metric-icon bg-soft-primary">
-                                <i class="fa-solid fa-chair"></i>
-                            </div>
-                        </div>
+                        <button class="btn btn-sm btn-outline-secondary" id="btnRefrescar">
+                            <i class="fa-solid fa-rotate me-1"></i> Actualizar datos
+                        </button>
                     </div>
                 </div>
 
-                <!-- Clientes registrados -->
-                <div class="col-md-3">
-                    <div class="card card-metric">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <div class="metric-label">Clientes registrados</div>
-                                <div id="totalClientes" class="metric-value" th:text="${totalClientes}">0</div>
-                            </div>
-                            <div class="card-metric-icon bg-soft-success">
-                                <i class="fa-solid fa-user-group"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pedidos del mes -->
-                <div class="col-md-3">
-                    <div class="card card-metric">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <div class="metric-label">Pedidos del mes</div>
-                                <div id="pedidosMes" class="metric-value">0</div>
-                            </div>
-                            <div class="card-metric-icon bg-soft-warning">
-                                <i class="fa-solid fa-file-invoice-dollar"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ingresos del mes -->
-                <div class="col-md-3">
-                    <div class="card card-metric">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <div class="metric-label">Ingresos (S/)</div>
-                                <div id="ingresosMes" class="metric-value">0.00</div>
-                            </div>
-                            <div class="card-metric-icon bg-soft-info">
-                                <i class="fa-solid fa-sack-dollar"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- GRÁFICOS -->
-            <div class="row g-3 mb-4">
-                <!-- Actividad del mes -->
-                <div class="col-lg-8" data-aos="fade-up">
-                    <div class="card card-soft h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="card card-metric">
+                            <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h6 class="mb-0">Actividad del mes</h6>
-                                    <small class="text-muted">Pedidos vs productos vendidos</small>
+                                    <div class="metric-label">Productos activos</div>
+                                    <div id="totalProductos" class="metric-value">24</div>
+                                </div>
+                                <div class="card-metric-icon bg-soft-primary">
+                                    <i class="fa-solid fa-chair"></i>
                                 </div>
                             </div>
-                            <canvas id="ordersChart" height="140"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-metric">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="metric-label">Clientes registrados</div>
+                                    <div id="totalClientes" class="metric-value">10</div>
+                                </div>
+                                <div class="card-metric-icon bg-soft-success">
+                                    <i class="fa-solid fa-user-group"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-metric">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="metric-label">Pedidos del mes</div>
+                                    <div id="pedidosMes" class="metric-value">15</div>
+                                </div>
+                                <div class="card-metric-icon bg-soft-warning">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-metric">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="metric-label">Ingresos (S/)</div>
+                                    <div id="ingresosMes" class="metric-value">12,500.00</div>
+                                </div>
+                                <div class="card-metric-icon bg-soft-info">
+                                    <i class="fa-solid fa-sack-dollar"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Productos más vendidos -->
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card card-soft h-100">
-                        <div class="card-body">
-                            <h6 class="mb-2">Productos más vendidos</h6>
-                            <small class="text-muted d-block mb-2">Top por cantidad</small>
-                            <canvas id="productsChart" height="180"></canvas>
+                <!-- GRÁFICOS -->
+                <div class="row g-3 mb-4">
+                    <div class="col-lg-8" data-aos="fade-up">
+                        <div class="card card-soft h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Actividad del mes</h6>
+                                        <small class="text-muted">Pedidos vs productos vendidos</small>
+                                    </div>
+                                </div>
+                                <canvas id="ordersChart" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card card-soft h-100">
+                            <div class="card-body">
+                                <h6 class="mb-2">Productos más vendidos</h6>
+                                <small class="text-muted d-block mb-2">Top por cantidad</small>
+                                <canvas id="productsChart" height="180"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLA + TAREAS -->
+                <div class="row g-3">
+                    <div class="col-lg-8" data-aos="fade-up">
+                        <div class="card card-soft">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Últimos pedidos</h6>
+                                    <a href="#" class="small text-decoration-none">Ver todos</a>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-sm align-middle mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>Cliente</th>
+                                            <th>Proyecto</th>
+                                            <th>Fecha</th>
+                                            <th>Estado</th>
+                                            <th class="text-end">Total (S/)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Lucía Morales</td>
+                                            <td>Cocina integral</td>
+                                            <td>26/11</td>
+                                            <td><span class="status-badge bg-success-subtle text-success">En producción</span></td>
+                                            <td class="text-end">7,800</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Carlos Peña</td>
+                                            <td>Mobiliario cafetería</td>
+                                            <td>25/11</td>
+                                            <td><span class="status-badge bg-warning-subtle text-warning">Diseño</span></td>
+                                            <td class="text-end">5,450</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Andrea Salas</td>
+                                            <td>Restauración comedor</td>
+                                            <td>24/11</td>
+                                            <td><span class="status-badge bg-info-subtle text-info">Entregado</span></td>
+                                            <td class="text-end">2,300</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pedro Díaz</td>
+                                            <td>Closet empotrado</td>
+                                            <td>23/11</td>
+                                            <td><span class="status-badge bg-secondary-subtle text-secondary">Cotización</span></td>
+                                            <td class="text-end">1,950</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card card-soft mb-3">
+                            <div class="card-body">
+                                <h6 class="mb-2">Tareas pendientes</h6>
+                                <small class="text-muted d-block mb-2">Hoy</small>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item px-0 d-flex justify-content-between">
+                                        <span><i class="fa-regular fa-square me-2"></i> Llamar a proveedor de madera</span>
+                                        <span class="badge bg-light text-muted">09:30</span>
+                                    </li>
+                                    <li class="list-group-item px-0 d-flex justify-content-between">
+                                        <span><i class="fa-regular fa-square me-2"></i> Enviar cotización a Sr. Díaz</span>
+                                        <span class="badge bg-light text-muted">11:00</span>
+                                    </li>
+                                    <li class="list-group-item px-0 d-flex justify-content-between">
+                                        <span><i class="fa-regular fa-square me-2"></i> Revisar diseño de cafetería</span>
+                                        <span class="badge bg-light text-muted">15:00</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card card-soft">
+                            <div class="card-body">
+                                <h6 class="mb-2">Notas rápidas</h6>
+                                <textarea class="form-control form-control-sm mb-2" rows="3"
+                                          placeholder="Apunta ideas, medidas o recordatorios breves..."></textarea>
+                                <button class="btn btn-sm btn-outline-secondary w-100">
+                                    <i class="fa-regular fa-floppy-disk me-1"></i> Guardar nota
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- ========== FIN VISTA DASHBOARD ========== -->
 
-            <!-- TABLA + TAREAS (igual que tenías) -->
-            <div class="row g-3">
-                <div class="col-lg-8" data-aos="fade-up">
-                    <div class="card card-soft">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h6 class="mb-0">Últimos pedidos</h6>
-                                <a href="#" class="small text-decoration-none">Ver todos</a>
-                            </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-sm align-middle mb-0">
-                                    <thead>
-                                    <tr>
-                                        <th>Cliente</th>
-                                        <th>Proyecto</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                        <th class="text-end">Total (S/)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Lucía Morales</td>
-                                        <td>Cocina integral</td>
-                                        <td>26/11</td>
-                                        <td><span class="status-badge bg-success-subtle text-success">En producción</span></td>
-                                        <td class="text-end">7,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Carlos Peña</td>
-                                        <td>Mobiliario cafetería</td>
-                                        <td>25/11</td>
-                                        <td><span class="status-badge bg-warning-subtle text-warning">Diseño</span></td>
-                                        <td class="text-end">5,450</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Andrea Salas</td>
-                                        <td>Restauración comedor</td>
-                                        <td>24/11</td>
-                                        <td><span class="status-badge bg-info-subtle text-info">Entregado</span></td>
-                                        <td class="text-end">2,300</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Pedro Díaz</td>
-                                        <td>Closet empotrado</td>
-                                        <td>23/11</td>
-                                        <td><span class="status-badge bg-secondary-subtle text-secondary">Cotización</span></td>
-                                        <td class="text-end">1,950</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
+            <!-- ========== VISTA 2: PRODUCTOS (ADMIN) ========== -->
+            <div id="viewProductos" class="d-none">
+                <div class="mb-3">
+                    <h2 class="mb-0">Administración de productos</h2>
+                    <small class="text-muted">Alta, edición y listado de productos.</small>
                 </div>
 
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card card-soft mb-3">
-                        <div class="card-body">
-                            <h6 class="mb-2">Tareas pendientes</h6>
-                            <small class="text-muted d-block mb-2">Hoy</small>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                    <span><i class="fa-regular fa-square me-2"></i> Llamar a proveedor de madera</span>
-                                    <span class="badge bg-light text-muted">09:30</span>
-                                </li>
-                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                    <span><i class="fa-regular fa-square me-2"></i> Enviar cotización a Sr. Díaz</span>
-                                    <span class="badge bg-light text-muted">11:00</span>
-                                </li>
-                                <li class="list-group-item px-0 d-flex justify-content-between">
-                                    <span><i class="fa-regular fa-square me-2"></i> Revisar diseño de cafetería</span>
-                                    <span class="badge bg-light text-muted">15:00</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <!-- FORMULARIO DE PRODUCTO -->
+                <div class="card card-form mb-4">
+                    <h4 class="mb-3">Agregar nuevo producto</h4>
 
-                    <div class="card card-soft">
-                        <div class="card-body">
-                            <h6 class="mb-2">Notas rápidas</h6>
-                            <textarea class="form-control form-control-sm mb-2" rows="3"
-                                      placeholder="Apunta ideas, medidas o recordatorios breves..."></textarea>
-                            <button class="btn btn-sm btn-outline-secondary w-100">
-                                <i class="fa-regular fa-floppy-disk me-1"></i> Guardar nota
+                    <form id="formProducto"
+                          th:action="@{/productos/guardar}"
+                          method="post">
+
+                        <div class="row g-3">
+                            <!-- NOMBRE -->
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre del producto</label>
+                                <input type="text" class="form-control"
+                                       id="nombre" name="nombre" required>
+                            </div>
+
+                            <!-- PRECIO -->
+                            <div class="col-md-3">
+                                <label class="form-label">Precio (S/)</label>
+                                <input type="number" class="form-control"
+                                       id="precio" name="precio" step="0.01">
+                            </div>
+
+                            <!-- CATEGORÍA -->
+                            <div class="col-md-3">
+                                <label class="form-label">Categoría</label>
+                                <select class="form-select" id="categoria"
+                                        name="idCategoria" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option th:each="cat : ${categorias}"
+                                            th:value="${cat.idCategoria}"
+                                            th:text="${cat.nombre}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- DESCRIPCIÓN CORTA -->
+                            <div class="col-12">
+                                <label class="form-label">Descripción corta</label>
+                                <textarea id="descCorta" name="descCorta"
+                                          class="form-control" rows="2"></textarea>
+                            </div>
+
+                            <!-- DESCRIPCIÓN LARGA (la usaremos luego para producto_detalle) -->
+                            <div class="col-12">
+                                <label class="form-label">Descripción detallada</label>
+                                <textarea id="descLarga" name="descLarga"
+                                          class="form-control" rows="3"></textarea>
+                            </div>
+
+                            <!-- CARACTERÍSTICAS -->
+                            <div class="col-md-6">
+                                <label class="form-label d-block mb-1">Características principales</label>
+
+                                <div class="mb-2">
+                                    <label for="carac1" class="form-label small mb-1">Característica 1</label>
+                                    <input type="text" class="form-control" id="carac1" name="carac1"
+                                           placeholder="Ej: Madera maciza">
+                                </div>
+
+                                <div class="mb-2">
+                                    <label for="carac2" class="form-label small mb-1">Característica 2</label>
+                                    <input type="text" class="form-control" id="carac2" name="carac2"
+                                           placeholder="Ej: Acabado natural">
+                                </div>
+
+                                <div class="mb-2">
+                                    <label for="carac3" class="form-label small mb-1">Característica 3</label>
+                                    <input type="text" class="form-control" id="carac3" name="carac3"
+                                           placeholder="Ej: Garantía 1 año">
+                                </div>
+
+                                <div>
+                                    <label for="carac4" class="form-label small mb-1">Característica 4 (opcional)</label>
+                                    <input type="text" class="form-control" id="carac4" name="carac4"
+                                           placeholder="Ej: Patas reforzadas">
+                                </div>
+                            </div>
+
+                            <!-- MEDIDAS -->
+                            <div class="col-md-6">
+                                <label class="form-label d-block mb-1">Medidas del producto</label>
+
+                                <div class="row g-2">
+                                    <div class="col-sm-6">
+                                        <label for="largo" class="form-label small mb-1">Largo (cm)</label>
+                                        <input type="number" class="form-control" id="largo" name="largo"
+                                               placeholder="Ej: 180">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="ancho" class="form-label small mb-1">Ancho (cm)</label>
+                                        <input type="number" class="form-control" id="ancho" name="ancho"
+                                               placeholder="Ej: 90">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="altura" class="form-label small mb-1">Altura (cm)</label>
+                                        <input type="number" class="form-control" id="altura" name="altura"
+                                               placeholder="Ej: 75">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="peso" class="form-label small mb-1">Peso aprox. (kg)</label>
+                                        <input type="number" class="form-control" id="peso" name="peso"
+                                               placeholder="Ej: 60">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-main px-4">
+                                <i class="fa-solid fa-plus me-1"></i> Agregar producto
                             </button>
                         </div>
-                    </div>
+
+                    </form>
+
+                </div>
+
+                <!-- LISTA DE PRODUCTOS -->
+                <div class="table-responsive">
+                    <table class="table table-striped text-center" id="tablaProductos">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Se llena por JS (visual) -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            <!-- ========== FIN VISTA PRODUCTOS ========== -->
 
         </main>
     </div>
@@ -598,46 +760,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <script>
-    console.log("Dashboard JS cargado");
+    console.log("Dashboard HTML/JS cargado");
     AOS.init({ duration: 700, once: true });
 
     // ===============================
-    // FUNCIÓN PRINCIPAL: CARGAR DATOS DEL BACKEND
-    // ===============================
-    async function cargarMetricas(mes, anio) {
-
-        console.log("Cargando métricas para -> Mes:", mes, "Año:", anio);
-
-        try {
-            const pedidos = await fetch(`/dashboard/pedidos-mes?mes=${mes}&anio=${anio}`).then(r => r.json());
-            const ingresos = await fetch(`/dashboard/ventas-mes?mes=${mes}&anio=${anio}`).then(r => r.json());
-            const productosVendidos = await fetch(`/dashboard/productos-vendidos?mes=${mes}&anio=${anio}`).then(r => r.json());
-            const masVendidos = await fetch(`/dashboard/productos-mas-vendidos?mes=${mes}&anio=${anio}`)
-                .then(r => r.json());
-
-
-            // MOSTRAR EN LAS TARJETAS
-            document.getElementById("pedidosMes").textContent = pedidos ?? 0;
-            document.getElementById("ingresosMes").textContent = ingresos ?? 0;
-
-            // CARGAR GRÁFICOS
-            actualizarGraficoActividad(pedidos ?? 0, productosVendidos ?? 0);
-            actualizarGraficoProductos(masVendidos ?? []);
-
-        } catch (e) {
-            console.error("ERROR cargando métricas:", e);
-        }
-    }
-
-    // ===============================
-    // GRÁFICO: ACTIVIDAD DEL MES
+    // GRÁFICO: ACTIVIDAD DEL MES (DATOS DE EJEMPLO)
     // ===============================
     let chartActividad = null;
 
     function actualizarGraficoActividad(pedidos, productosVendidos) {
-
         const ctx = document.getElementById("ordersChart");
-
         if (!ctx) return;
 
         if (chartActividad) chartActividad.destroy();
@@ -660,25 +792,18 @@
     }
 
     // ===============================
-    // GRÁFICO: PRODUCTOS MÁS VENDIDOS
+    // GRÁFICO: PRODUCTOS MÁS VENDIDOS (DATOS DE EJEMPLO)
     // ===============================
     let chartProductos = null;
 
     function actualizarGraficoProductos(datos) {
-
         const ctx = document.getElementById("productsChart");
         if (!ctx) return;
 
-        if (!Array.isArray(datos) || datos.length === 0) {
-            console.warn("No hay productos más vendidos.");
-            if (chartProductos) chartProductos.destroy();
-            return;
-        }
+        if (chartProductos) chartProductos.destroy();
 
         const labels = datos.map(item => item[0]);
         const values = datos.map(item => item[1]);
-
-        if (chartProductos) chartProductos.destroy();
 
         chartProductos = new Chart(ctx, {
             type: 'doughnut',
@@ -702,22 +827,22 @@
         });
     }
 
-    // ===============================
-    // BOTÓN "Actualizar datos"
-    // ===============================
-    document.getElementById("btnRefrescar").addEventListener("click", () => {
+    // BOTÓN "Actualizar datos" (solo cambia valores dummy)
+    const btnRefrescar = document.getElementById("btnRefrescar");
+    if (btnRefrescar) {
+        btnRefrescar.addEventListener("click", () => {
+            // Solo para que "parezca" que refresca
+            const pedidosRandom = Math.floor(Math.random() * 30) + 5;
+            const ingresosRandom = (Math.random() * 20000 + 3000).toFixed(2);
 
-        const mes = parseInt(document.getElementById("selectMes").value, 10);
-        const anio = parseInt(document.getElementById("selectAnio").value, 10);
+            document.getElementById("pedidosMes").textContent = pedidosRandom;
+            document.getElementById("ingresosMes").textContent = ingresosRandom;
 
-        console.log("Filtrando dashboard -> Mes:", mes, "Año:", anio);
+            actualizarGraficoActividad(pedidosRandom, pedidosRandom * 3);
+        });
+    }
 
-        cargarMetricas(mes, anio);
-    });
-
-    // ===============================
-    // SIDEBAR RESPONSIVO (MÓVIL)
-    // ===============================
+    // SIDEBAR RESPONSIVO
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementById('sidebarToggle');
 
@@ -727,18 +852,86 @@
         });
     }
 
-    // ===============================
+    // CAMBIO DE VISTAS DASHBOARD / PRODUCTOS
+    const linksMenu  = document.querySelectorAll('.sidebar-menu a[data-view]');
+    const viewDash   = document.getElementById('viewDashboard');
+    const viewProds  = document.getElementById('viewProductos');
+    const topbarTitle   = document.querySelector('.topbar-title');
+    const topbarSubtext = document.querySelector('.topbar small');
+
+    linksMenu.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const vista = this.dataset.view;
+            if (!vista) return;
+
+            linksMenu.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+
+            if (vista === 'dashboard') {
+                viewDash.classList.remove('d-none');
+                viewProds.classList.add('d-none');
+                topbarTitle.textContent = 'Dashboard';
+                topbarSubtext.textContent = 'Resumen general de la carpintería';
+            } else if (vista === 'productos') {
+                viewDash.classList.add('d-none');
+                viewProds.classList.remove('d-none');
+                topbarTitle.textContent = 'Productos';
+                topbarSubtext.textContent = 'Administración de productos';
+            }
+        });
+    });
+
+    // CRUD VISUAL DE PRODUCTOS (SIN BD)
+    let filaEditando = null;
+
+
+    function eliminarProducto(boton) {
+        const fila = boton.closest("tr");
+        if (confirm("¿Eliminar este producto de la tabla? (sin BD)")) {
+            fila.remove();
+        }
+    }
+
+    function editarProducto(boton) {
+        filaEditando = boton.closest("tr");
+
+        const nombre    = filaEditando.querySelector(".col-nombre").textContent.trim();
+        const categoria = filaEditando.querySelector(".col-categoria").textContent.trim();
+        const precioTxt = filaEditando.querySelector(".col-precio").textContent.trim();
+        const precio    = precioTxt.replace("S/","").trim();
+
+        document.getElementById("nombre").value    = nombre;
+        document.getElementById("categoria").value = categoria;
+        document.getElementById("precio").value    = precio;
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    window.eliminarProducto = eliminarProducto;
+    window.editarProducto   = editarProducto;
+
     // EJECUCIÓN INICIAL
-    // ===============================
     window.addEventListener('DOMContentLoaded', () => {
-
+        // Mes/año actual (solo visual)
         const fecha = new Date();
+        const selMes  = document.getElementById("selectMes");
+        const selAnio = document.getElementById("selectAnio");
 
-        // Mes y año actual
-        document.getElementById("selectMes").value = (fecha.getMonth() + 1).toString();
-        document.getElementById("selectAnio").value = fecha.getFullYear().toString();
+        if (selMes && selAnio) {
+            selMes.value  = (fecha.getMonth() + 1).toString();
+            selAnio.value = fecha.getFullYear().toString();
+        }
 
-        cargarMetricas(fecha.getMonth() + 1, fecha.getFullYear());
+        // Datos de ejemplo para los gráficos
+        actualizarGraficoActividad(15, 45);
+        actualizarGraficoProductos([
+            ["Mesa comedor", 12],
+            ["Silla clásica", 9],
+            ["Closet roble", 7],
+            ["Cocina modular", 5],
+            ["Repisa flotante", 4]
+        ]);
     });
 </script>
 

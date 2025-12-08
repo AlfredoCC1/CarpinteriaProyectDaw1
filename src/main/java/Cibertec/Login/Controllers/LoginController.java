@@ -1,7 +1,7 @@
-package Cibertec.Controllers;
+package Cibertec.Login.Controllers;
 
-import Cibertec.Model.Usuario;
-import Cibertec.Services.UsuarioService;
+import Cibertec.Login.Model.Usuario;
+import Cibertec.Login.Service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,5 +1,6 @@
 package Cibertec.Model;
 
+import Cibertec.Productos.Model.Producto;
 import jakarta.persistence.*;
 import lombok.Data;
 

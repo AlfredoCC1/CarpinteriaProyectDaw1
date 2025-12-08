@@ -1,5 +1,7 @@
 package Cibertec.Model;
 
+import Cibertec.Login.Model.Rol;
+import Cibertec.Login.Model.Usuario;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;

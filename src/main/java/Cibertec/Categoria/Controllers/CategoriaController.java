@@ -1,0 +1,14 @@
+package Cibertec.Categoria.Controllers;
+
+import Cibertec.Categoria.Model.Categoria;
+import Cibertec.Categoria.Services.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/categorias")
+public class CategoriaController {
+
+}

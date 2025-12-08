@@ -1,4 +1,4 @@
-package Cibertec.dto;
+package Cibertec.Login.dto;
 
 import lombok.Data;
 
