@@ -1,6 +1,6 @@
-package Cibertec.Login.Controllers;
+package Cibertec.Login.Controller;
 
-import Cibertec.Model.EstadoUsuario;
+import Cibertec.Login.Enun.EstadoUsuario;
 import Cibertec.Login.Model.Usuario;
 import Cibertec.Login.Service.UsuarioService;
 import org.springframework.http.ResponseEntity;

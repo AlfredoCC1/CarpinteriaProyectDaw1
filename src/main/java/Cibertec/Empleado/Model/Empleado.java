@@ -1,4 +1,4 @@
-package Cibertec.Model;
+package Cibertec.Empleado.Model;
 
 import Cibertec.Login.Model.Rol;
 import Cibertec.Login.Model.Usuario;

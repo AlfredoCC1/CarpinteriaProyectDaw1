@@ -1,14 +1,15 @@
 package Cibertec.Categoria.Repository;
 
 import Cibertec.Categoria.Model.Categoria;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-    // Traer solo categorías activas
-    List<Categoria> findByActivoTrue();
+public interface CategoriaRepository extends CrudRepository<Categoria, Long> {
 
-    // Buscar por nombre (contiene, sin importar mayúsculas/minúsculas)
-    List<Categoria> findByNombreContainingIgnoreCase(String nombre);
+    @Query("select c from Categoria c where lower(c.nombre) like lower(concat('%',:texto,'%'))")
+    List<Categoria> buscarPorNombre(@Param("texto") String texto);
 }
+

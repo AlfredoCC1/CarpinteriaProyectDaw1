@@ -1,5 +1,5 @@
 package Cibertec.Productos.Controllers;
-
+/*
 import Cibertec.Categoria.Model.Categoria;
 import Cibertec.Productos.Model.Producto;
 import Cibertec.Categoria.Services.CategoriaService;
@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+/*
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
@@ -103,4 +103,4 @@ public class ProductoController {
         // 4) Redirigir al dashboard
         return "redirect:/dashboard";
     }
-}
+}*/

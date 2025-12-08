@@ -1,5 +1,6 @@
-package Cibertec.Model;
+/*package Cibertec.Cliente.Model;
 
+import Cibertec.Model.Pedido;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -50,3 +51,4 @@ public class Cliente {
     }
 }
 
+*/

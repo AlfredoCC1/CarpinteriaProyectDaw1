@@ -1,4 +1,4 @@
-package Cibertec.Login.Controllers;
+package Cibertec.Login.Controller;
 
 import Cibertec.Login.Model.Usuario;
 import Cibertec.Login.Service.UsuarioService;
@@ -41,7 +41,7 @@ public class LoginController {
         }
     }
 
-    /*// Página del dashboard (vista protegida manualmente)
+    // Página del dashboard (vista protegida manualmente)
     @GetMapping("/dashboard")
     public String dashboard(HttpSession session) {
         // Chequeo simple de sesión (opcional, pero recomendable)
@@ -49,7 +49,7 @@ public class LoginController {
             return "redirect:/login";
         }
         return "dashboard";   // templates/dashboard.html
-    }*/
+    }
 
     // Cerrar sesión
     @GetMapping("/logout")

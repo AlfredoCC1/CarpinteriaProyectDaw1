@@ -1,8 +1,8 @@
-package Cibertec.Services;
+package Cibertec.Empleado.Service;
 
-import Cibertec.Model.Empleado;
+import Cibertec.Empleado.Model.Empleado;
 import Cibertec.Login.Model.Rol;
-import Cibertec.Repository.EmpleadoRepository;
+import Cibertec.Empleado.Repository.EmpleadoRepository;
 import Cibertec.Login.Respository.RolRepository;
 import org.springframework.stereotype.Service;
 

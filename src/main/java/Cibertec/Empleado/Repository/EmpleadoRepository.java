@@ -1,6 +1,6 @@
-package Cibertec.Repository;
+package Cibertec.Empleado.Repository;
 
-import Cibertec.Model.Empleado;
+import Cibertec.Empleado.Model.Empleado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

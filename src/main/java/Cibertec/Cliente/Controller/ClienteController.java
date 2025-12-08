@@ -1,7 +1,7 @@
-package Cibertec.Controllers;
+/*package Cibertec.Cliente.Controller;
 
-import Cibertec.Model.Cliente;
-import Cibertec.Services.ClienteService;
+import Cibertec.Cliente.Model.Cliente;
+import Cibertec.Cliente.Service.ClienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,3 +79,4 @@ public class ClienteController {
         }
     }
 }
+*/

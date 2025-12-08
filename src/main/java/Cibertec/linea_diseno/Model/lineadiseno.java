@@ -1,28 +1,28 @@
-package Cibertec.Categoria.Model;
+package Cibertec.linea_diseno.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name ="categoria")
-public class Categoria {
-
+@Table(name = "linea_diseno")
+public class lineadiseno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")
+    @Column(name = "id_linea")
     private Long id;
 
-    @Column(nullable = false, length = 80)
+    @Column(nullable = false, unique = true, length = 100)
     private String nombre;
 
     private String descripcion;
 
+    private String imagen;
+
     @Column(name = "activo")
-    private Boolean activo = true; // ← coincide con TINYINT
+    private Boolean activo = true;
 
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;

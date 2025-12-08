@@ -1,7 +1,7 @@
-package Cibertec.Controllers;
+package Cibertec.Empleado.Controller;
 
-import Cibertec.Model.Empleado;
-import Cibertec.Services.EmpleadoService;
+import Cibertec.Empleado.Model.Empleado;
+import Cibertec.Empleado.Service.EmpleadoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

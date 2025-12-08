@@ -1,4 +1,4 @@
-package Cibertec.Model;
+package Cibertec.Login.Enun;
 
 public enum EstadoUsuario {
     ACTIVO,

@@ -1,7 +1,7 @@
 package Cibertec.Login.Model;
 
-import Cibertec.Model.Empleado;
-import Cibertec.Model.EstadoUsuario;
+import Cibertec.Empleado.Model.Empleado;
+import Cibertec.Login.Enun.EstadoUsuario;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -14,7 +14,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Integer idUsuario;
+    private Long idUsuario;
 
     // FK a empleado (1:1)
     @OneToOne

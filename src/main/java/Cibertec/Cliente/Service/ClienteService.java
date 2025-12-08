@@ -1,7 +1,7 @@
-package Cibertec.Services;
+/*package Cibertec.Cliente.Service;
 
-import Cibertec.Model.Cliente;
-import Cibertec.Repository.ClienteRepository;
+import Cibertec.Cliente.Model.Cliente;
+import Cibertec.Cliente.Repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,3 +64,4 @@ public class ClienteService {
         clienteRepository.delete(cliente);
     }
 }
+*/
