@@ -8,6 +8,9 @@
     top: 0;
     height: 100vh;
 }
+.text-muted{
+    color: #ffffff !important;
+}
 
 .sidebar-brand {
     display: flex;
