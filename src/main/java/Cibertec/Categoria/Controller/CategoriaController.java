@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/categoria")
@@ -43,4 +45,49 @@ public class CategoriaController {
         categoriaService.eliminar(id);
         return "redirect:/categoria/listar";
     }
+
+    @GetMapping("/api/listar")
+    @ResponseBody
+    public List<Categoria> apiListar(){
+        return categoriaService.listar();
+    }
+
+    @PostMapping("/api/registrar")
+    @ResponseBody
+    public Categoria apiRegistrar(@RequestBody Categoria categoria){
+        return categoriaService.registrar(categoria);
+    }
+
+    @DeleteMapping("/api/eliminar/{id}")
+    @ResponseBody
+    public void apiEliminar(@PathVariable Long id){
+        categoriaService.eliminar(id);
+    }
+    @GetMapping("/api/buscar")
+    @ResponseBody
+    public List<Categoria> apiBuscar(@RequestParam String texto){
+        return categoriaService.buscarPorNombre(texto);
+    }
+
+    @PutMapping("/api/editar/{id}")
+    @ResponseBody
+    public Categoria apiEditar(@PathVariable Long id, @RequestBody Categoria categoria){
+
+        Categoria catDB = categoriaService.buscarPorId(id).orElse(null);
+
+        if(catDB == null){
+            throw new RuntimeException("No existe la categoría con id "+id);
+        }
+
+        catDB.setNombre(categoria.getNombre());
+        catDB.setDescripcion(categoria.getDescripcion());
+        catDB.setActivo(categoria.getActivo());
+
+        return categoriaService.registrar(catDB); // <- actualiza
+    }
+
+
+
+
+
 }

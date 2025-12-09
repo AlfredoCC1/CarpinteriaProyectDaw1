@@ -1,3 +1,4 @@
+
 // Mostrar/Ocultar contraseña
 function togglePassword() {
     const input = document.getElementById("passwordInput");

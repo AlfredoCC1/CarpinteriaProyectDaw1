@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <body>
-<!-- ========== VISTA 3: CATEGORÍAS ========== -->
+
 <div th:fragment="mainCategoria" id="view-categorias" class="view-container">
+
     <div class="section-header" data-aos="fade-up">
         <div>
             <h2>Categorías</h2>
@@ -10,7 +11,6 @@
         </div>
     </div>
 
-    <!-- FORMULARIO DE CATEGORÍA -->
     <div class="form-view" data-aos="fade-up">
         <div class="form-header">
             <h3>Agregar Nueva Categoría</h3>
@@ -19,121 +19,104 @@
 
         <form id="form-categoria">
             <div class="row g-3">
+
                 <div class="col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">Nombre de la Categoría</label>
-                        <input type="text" class="form-control" placeholder="Ej: Mesas, Sillas, Sofás" required>
-                    </div>
+                    <label class="form-label">Nombre</label>
+                    <input name="nombre" class="form-control" required>
                 </div>
+
                 <div class="col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label">Estado</label>
-                        <select class="form-select" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
-                    </div>
+                    <label class="form-label">Estado</label>
+                    <select name="activo" class="form-select">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
                 </div>
+
                 <div class="col-12">
-                    <div class="mb-3">
-                        <label class="form-label">Descripción</label>
-                        <textarea class="form-control" rows="3" placeholder="Describe esta categoría..."></textarea>
-                    </div>
+                    <label class="form-label">Descripción</label>
+                    <textarea name="descripcion" class="form-control"></textarea>
                 </div>
+
                 <div class="col-12">
-                    <button type="submit" class="btn btn-warning">
-                        <i class="fa-solid fa-save me-2"></i> Guardar Categoría
+                    <button class="btn btn-warning">
+                        <i class="fa-solid fa-save me-2"></i> Guardar
                     </button>
                 </div>
+
             </div>
         </form>
     </div>
 
-    <!-- TABLA DE CATEGORÍAS -->
     <div class="table-view" data-aos="fade-up" data-aos-delay="100">
         <div class="table-header">
             <h4>Categorías Registradas</h4>
+
             <div class="table-actions">
-                <div class="input-group input-group-sm" style="width: 200px;">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Buscar categoría...">
+                    <input type="text" id="inputBuscar" class="form-control">
                 </div>
             </div>
         </div>
 
         <div class="table-responsive">
-            <table class="table table-hover mb-0">
+            <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="50">ID</th>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th width="100">Estado</th>
-                    <th width="120" >Acciones</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><strong>Mesas</strong></td>
-                    <td>Mesas de diferentes tipos y usos</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="fa-solid fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><strong>Sillas</strong></td>
-                    <td>Sillas para comedor, oficina y otros usos</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="fa-solid fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><strong>Sofás</strong></td>
-                    <td>Sofás, seccionales y muebles de asiento</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="fa-solid fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><strong>Armarios</strong></td>
-                    <td>Roperos, clósets y muebles para guardar ropa</td>
-                    <td><span class="badge bg-secondary">Inactivo</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="fa-solid fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
+
+
+    <!-- 🔥 AQUI EL MODAL DENTRO DEL FRAGMENT -->
+    <div class="modal fade" id="modalEditarCategoria" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Categoría</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="hidden" id="edit-id">
+
+                    <label>Nombre</label>
+                    <input class="form-control" id="edit-nombre">
+
+                    <label class="mt-3">Descripción</label>
+                    <textarea class="form-control" id="edit-descripcion"></textarea>
+
+                    <label class="mt-3">Estado</label>
+                    <select id="edit-activo" class="form-select">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" id="btnActualizar">Actualizar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<script src="/js/Categoria.js"></script>
+
 </body>
 </html>
