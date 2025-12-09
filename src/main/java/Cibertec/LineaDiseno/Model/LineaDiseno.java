@@ -1,4 +1,4 @@
-package Cibertec.linea_diseno.Model;
+package Cibertec.LineaDiseno.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "linea_diseno")
-public class lineadiseno {
+public class LineaDiseno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_linea")
