@@ -4,6 +4,10 @@
     min-height: 100vh;
 }
 
+.text-muted{
+    color: #000000 !important;
+}
+
 /* CONTENIDO PRINCIPAL */
 .content {
     flex: 1;

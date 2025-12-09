@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<!-- ========== VISTA: EMPLEADOS ========== -->
+<div th:fragment="mainEmpleados" id="view-empleados" class="view-container">
+    <div class="section-header" data-aos="fade-up">
+        <div>
+            <h2>Empleados</h2>
+            <small>Administra la información del personal de la carpintería</small>
+        </div>
+        <button class="btn btn-sm btn-primary">
+            <i class="fa-solid fa-user-plus me-1"></i> Nuevo Empleado
+        </button>
+    </div>
+
+    <!-- FORMULARIO DE EMPLEADO -->
+    <div class="form-view" data-aos="fade-up">
+        <div class="form-header">
+            <h3>Registrar / Editar Empleado</h3>
+            <small>Completa los datos del trabajador</small>
+        </div>
+
+        <form id="form-empleado" th:action="@{/empleados/guardar}" method="post" novalidate>
+            <div class="row g-3">
+
+                <!-- ROL -->
+                <div class="col-md-4">
+                    <div class="mb-2">
+                        <label for="idRol" class="form-label">Rol</label>
+                        <select class="form-select" id="idRol" name="id_rol" required>
+                            <option value="">Seleccionar rol...</option>
+                            <option th:each="r : ${roles}"
+                                    th:value="${r.id_rol}"
+                                    th:text="${r.nombre}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- CÓDIGO TRABAJADOR -->
+                <div class="col-md-4">
+                    <div class="mb-2">
+                        <label for="codigoTrabajador" class="form-label">Código Trabajador</label>
+                        <input type="text" class="form-control"
+                               id="codigoTrabajador" name="codigo_trabajador"
+                               placeholder="Ej: JPEREZ123" required maxlength="20">
+                    </div>
+                </div>
+
+                <!-- DNI -->
+                <div class="col-md-4">
+                    <div class="mb-2">
+                        <label for="dni" class="form-label">DNI</label>
+                        <input type="text" class="form-control"
+                               id="dni" name="dni"
+                               placeholder="Documento de identidad" required maxlength="15">
+                    </div>
+                </div>
+
+                <!-- NOMBRE -->
+                <div class="col-md-6">
+                    <div class="mb-2">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control"
+                               id="nombre" name="nombre"
+                               placeholder="Nombres del empleado" required maxlength="100">
+                    </div>
+                </div>
+
+                <!-- APELLIDOS -->
+                <div class="col-md-6">
+                    <div class="mb-2">
+                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control"
+                               id="apellidos" name="apellidos"
+                               placeholder="Apellidos del empleado" required maxlength="150">
+                    </div>
+                </div>
+
+                <!-- CORREO -->
+                <div class="col-md-6">
+                    <div class="mb-2">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control"
+                               id="correo" name="correo"
+                               placeholder="ejemplo@carpinteria.com" required maxlength="100">
+                    </div>
+                </div>
+
+                <!-- CELULAR -->
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <label for="celular" class="form-label">Celular</label>
+                        <input type="tel" class="form-control"
+                               id="celular" name="celular"
+                               placeholder="999 999 999" maxlength="20">
+                    </div>
+                </div>
+
+                <!-- FECHA NACIMIENTO -->
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" class="form-control"
+                               id="fechaNacimiento" name="fecha_nacimiento" required>
+                    </div>
+                </div>
+
+                <!-- FECHA CONTRATACIÓN -->
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <label for="fechaContratacion" class="form-label">Fecha de contratación</label>
+                        <input type="date" class="form-control"
+                               id="fechaContratacion" name="fecha_contratacion" required>
+                    </div>
+                </div>
+
+                <!-- GÉNERO -->
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <label for="genero" class="form-label">Género</label>
+                        <select class="form-select" id="genero" name="genero">
+                            <option value="">Seleccionar...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- DIRECCIÓN -->
+                <div class="col-12">
+                    <div class="mb-2">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <textarea class="form-control" id="direccion" name="direccion"
+                                  rows="2" placeholder="Dirección completa del empleado"></textarea>
+                    </div>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="col-12 d-flex justify-content-between align-items-center mt-2 pt-2 border-top">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="reset" class="btn btn-light btn-sm">
+                            <i class="fa-solid fa-eraser me-1"></i> Limpiar
+                        </button>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Empleado
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- TABLA DE EMPLEADOS (LISTADO) -->
+    <div class="table-view mt-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="table-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Empleados Registrados</h4>
+            <div class="table-actions d-flex gap-2">
+                <div class="input-group input-group-sm" style="width: 240px;">
+                    <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Buscar empleado...">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead>
+                <tr>
+                    <th width="60">ID</th>
+                    <th>Código</th>
+                    <th>Empleado</th>
+                    <th>Rol</th>
+                    <th>DNI</th>
+                    <th>Correo</th>
+                    <th>Celular</th>
+                    <th width="140">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- EMPLEADO 1 -->
+                <tr>
+                    <td>1</td>
+                    <td>JPEREZ123</td>
+                    <td>
+                        <strong>Juan Pérez Ramírez</strong><br>
+                        <small class="text-muted">
+                            Ingreso: 10/01/2020
+                        </small>
+                    </td>
+                    <td>ADMINISTRADOR</td>
+                    <td>12345678</td>
+                    <td>admin@carpinteria.com</td>
+                    <td>999888777</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- EMPLEADO 2 -->
+                <tr>
+                    <td>2</td>
+                    <td>LMENDOZA45</td>
+                    <td>
+                        <strong>Lucía Mendoza Torres</strong><br>
+                        <small class="text-muted">
+                            Ingreso: 03/04/2021
+                        </small>
+                    </td>
+                    <td>SUPERVISOR</td>
+                    <td>45678912</td>
+                    <td>lmendoza@carpinteria.com</td>
+                    <td>987654321</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- EMPLEADO 3 -->
+                <tr>
+                    <td>3</td>
+                    <td>RCALDERON09</td>
+                    <td>
+                        <strong>Roberto Calderón Mejía</strong><br>
+                        <small class="text-muted">
+                            Ingreso: 22/09/2022
+                        </small>
+                    </td>
+                    <td>EMPLEADO</td>
+                    <td>78451236</td>
+                    <td>rcalderon@carpinteria.com</td>
+                    <td>912345678</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
