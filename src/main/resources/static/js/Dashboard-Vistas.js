@@ -10,7 +10,7 @@ function initializeViewSystem() {
         'view-lineas': ['Líneas de Diseño', 'Administra las líneas de diseño'],
         'view-categorias': ['Categorías', 'Administra las categorías de productos'],
         'view-productos': ['Productos', 'Administra tu catálogo de productos'],
-        'view-clientes': ['Clientes', 'Gestión de clientes'],
+        'view-empleados': ['Empleados', 'Gestión de Empleados'],
         'view-pedidos': ['Pedidos', 'Seguimiento de pedidos'],
         'view-usuarios': ['Usuarios', 'Administración de usuarios del sistema'],
         'view-configuracion': ['Configuración', 'Configuración del sistema']
