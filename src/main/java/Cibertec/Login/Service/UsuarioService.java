@@ -6,7 +6,6 @@ import Cibertec.Login.Model.Usuario;
 import Cibertec.Empleado.Repository.EmpleadoRepository;
 import Cibertec.Login.Respository.UsuarioRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

@@ -1,5 +1,6 @@
 package Cibertec.Categoria.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,6 +10,8 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name ="categoria")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+
 public class Categoria {
 
     @Id

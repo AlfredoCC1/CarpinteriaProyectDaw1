@@ -3,49 +3,51 @@ package Cibertec.Productos.Services;
 import Cibertec.Categoria.Model.Categoria;
 import Cibertec.Productos.Model.Producto;
 import Cibertec.Productos.Repository.ProductoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProductoService {
 
     private final ProductoRepository productoRepository;
 
-    public ProductoService(ProductoRepository productoRepository) {
-        this.productoRepository = productoRepository;
-    }
 
-    public List<Producto> listarTodos() {
+    // ========= LISTAR =========
+    public List<Producto> listar(){
         return productoRepository.findAll();
     }
 
-    public List<Producto> listarActivos() {
-        return productoRepository.findByActivoTrue();
-    }
 
-    public List<Producto> listarPorCategoriaActivos(Categoria categoria) {
-        return productoRepository.findByCategoriaAndActivoTrue(categoria);
-    }
-
-    public Optional<Producto> buscarPorId(Long id) {
+    // ========= BUSCAR POR ID =========
+    public Optional<Producto> buscarPorId(Long id){
         return productoRepository.findById(id);
     }
 
-    public Producto guardar(Producto producto) {
+
+    // ========= REGISTRAR / ACTUALIZAR =========
+    public Producto guardar(Producto producto){
         return productoRepository.save(producto);
     }
 
-    public void eliminarFisico(Long id) {
+
+    // ========= ELIMINAR =========
+    public void eliminar(Long id){
         productoRepository.deleteById(id);
     }
 
-    // "Eliminar" lógico → poner activo = false
-    public void desactivar(Long id) {
-        productoRepository.findById(id).ifPresent(p -> {
-            p.setActivo(false);
-            productoRepository.save(p);
-        });
+
+    // ========= BUSCAR POR NOMBRE =========
+    public List<Producto> buscarPorNombre(String texto){
+        return productoRepository.Buscarpornombre(texto);
+    }
+
+
+    // ========= BUSCAR POR CATEGORIA =========
+    public List<Producto> buscarPorCategoria(Long idCategoria){
+        return productoRepository.buscarPorCategoria(idCategoria);
     }
 }

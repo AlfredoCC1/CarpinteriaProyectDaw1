@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="mainProducto" id="view-productos" class="view-container">
     <div class="section-header" data-aos="fade-up">
@@ -9,7 +9,6 @@
         </div>
     </div>
 
-    <!-- FORMULARIO DE PRODUCTO -->
     <div class="form-view" data-aos="fade-up">
         <div class="form-header">
             <h3>Agregar Nuevo Producto</h3>
@@ -21,69 +20,83 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">Nombre del Producto</label>
-                        <input type="text" class="form-control" placeholder="Ej: Mesa de Roble, Sofá Moderno" required>
+                        <input type="text" class="form-control"
+                               id="nombre" name="nombre"
+                               placeholder="Ej: Mesa de Roble, Sofá Moderno" required>
                     </div>
                 </div>
+
                 <div class="col-md-3">
                     <div class="mb-3">
                         <label class="form-label">Categoría</label>
-                        <select class="form-select" required>
+                        <select class="form-select"
+                                id="categoria" name="categoria" required>
                             <option value="">Seleccionar...</option>
-                            <option value="1">Mesas</option>
-                            <option value="2">Sillas</option>
-                            <option value="3">Sofás</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="col-md-3">
                     <div class="mb-3">
                         <label class="form-label">Línea de Diseño</label>
-                        <select class="form-select">
+                        <select class="form-select"
+                                id="linea" name="linea">
                             <option value="">Seleccionar...</option>
-                            <option value="1">Clásico</option>
-                            <option value="2">Moderno</option>
-                            <option value="3">Rústico</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="col-md-2">
                     <div class="mb-3">
                         <label class="form-label">Precio (S/.)</label>
-                        <input type="number" class="form-control" placeholder="0.00" step="0.01">
+                        <input type="number" class="form-control"
+                               id="precio" name="precio"
+                               placeholder="0.00" step="0.01">
                         <small class="text-muted">Dejar vacío para "A cotizar"</small>
                     </div>
                 </div>
+
                 <div class="col-md-2">
                     <div class="mb-3">
                         <label class="form-label">Largo cm</label>
-                        <input type="number" class="form-control" placeholder="70 cm" step="0.01">
+                        <input type="number" class="form-control"
+                               id="largo" name="largo"
+                               placeholder="70 cm">
                     </div>
                 </div>
+
                 <div class="col-md-2">
                     <div class="mb-3">
                         <label class="form-label">Ancho cm</label>
-                        <input type="number" class="form-control" placeholder="80 cm" step="0.01">
+                        <input type="number" class="form-control"
+                               id="ancho" name="ancho"
+                               placeholder="80 cm">
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="mb-3">
                         <label class="form-label">Alto cm</label>
-                        <input type="number" class="form-control" placeholder="80 cm" step="0.01">
+                        <input type="number" class="form-control"
+                               id="alto" name="alto"
+                               placeholder="80 cm">
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="mb-3">
                         <label class="form-label">Peso kg</label>
-                        <input type="number" class="form-control" placeholder="80 cm" step="0.01">
+                        <input type="number" class="form-control"
+                               id="peso" name="peso"
+                               placeholder="20 kg">
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="mb-3">
                         <label class="form-label">Estado</label>
-                        <select class="form-select" required>
+                        <select class="form-select"
+                                id="activo" name="activo" required>
                             <option value="1">Activo</option>
                             <option value="0">Inactivo</option>
                         </select>
@@ -93,45 +106,63 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">Material</label>
-                        <input type="text" class="form-control" placeholder="Ej: Roble, Pino, MDF">
+                        <input type="text" class="form-control"
+                               id="material" name="material"
+                               placeholder="Ej: Roble, Pino, MDF">
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="mb-3">
                         <label class="form-label">Descripción Card</label>
-                        <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                        <textarea class="form-control" rows="3"
+                                  id="descripcionCard" name="descripcionCard"
+                                  placeholder="Describe el producto..."></textarea>
                     </div>
                 </div>
+
                 <div class="col-6">
                     <div class="mb-3">
                         <label class="form-label">Descripción Resumida</label>
-                        <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                        <textarea class="form-control" rows="3"
+                                  id="descripcionCorta" name="descripcionCorta"
+                                  placeholder="Describe el producto..."></textarea>
                     </div>
                 </div>
+
                 <div class="col-6">
                     <div class="mb-3">
                         <label class="form-label">Descripción Detallada</label>
-                        <textarea class="form-control" rows="3" placeholder="Describe el producto..."></textarea>
+                        <textarea class="form-control" rows="3"
+                                  id="descripcionLarga" name="descripcionLarga"
+                                  placeholder="Describe el producto..."></textarea>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="mb-3">
-                        <label class="form-label">URL Imagen Pincipal</label>
-                        <input type="text" class="form-control" placeholder="https://images.unsplash.com" required>
+                        <label class="form-label">URL Imagen Principal</label>
+                        <input type="text" class="form-control"
+                               id="imagen1" name="imagen1"
+                               placeholder="https://images.unsplash.com">
                     </div>
                 </div>
+
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label class="form-label">URL Imagen Secundaria</label>
-                        <input type="text" class="form-control" placeholder="https://images.unsplash.com" required>
+                        <input type="text" class="form-control"
+                               id="imagen2" name="imagen2"
+                               placeholder="https://images.unsplash.com">
                     </div>
                 </div>
+
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label class="form-label">URL Tercera Imagen </label>
-                        <input type="text" class="form-control" placeholder="https://images.unsplash.com" required>
+                        <input type="text" class="form-control"
+                               id="imagen3" name="imagen3"
+                               placeholder="https://images.unsplash.com">
                     </div>
                 </div>
 
@@ -144,20 +175,20 @@
         </form>
     </div>
 
-    <!-- TABLA DE PRODUCTOS -->
     <div class="table-view" data-aos="fade-up" data-aos-delay="100">
         <div class="table-header">
-            <h4>Productos Registrados</h4>
+            <h4>PRODUCTOS REGISTRADOS</h4>
             <div class="table-actions">
                 <div class="input-group input-group-sm" style="width: 250px;">
                     <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Buscar productos...">
+                    <input type="text" class="form-control"
+                           id="inputBuscarProducto"
+                           placeholder="Buscar productos...">
                 </div>
-                <select class="form-select form-select-sm" style="width: 150px;">
+
+                <select class="form-select form-select-sm"
+                        id="filtroCategoria" style="width: 180px;">
                     <option value="">Todas las categorías</option>
-                    <option value="1">Mesas</option>
-                    <option value="2">Sillas</option>
-                    <option value="3">Sofás</option>
                 </select>
             </div>
         </div>
@@ -167,85 +198,120 @@
                 <thead>
                 <tr>
                     <th width="60">ID</th>
-                    <th>Producto</th>
-                    <th width="120">Categoría</th>
-                    <th width="120">Línea</th>
-                    <th width="100">Precio</th>
-                    <th width="80">Estado</th>
-                    <th width="140">Acciones</th>
+                    <th>PRODUCTO</th>
+                    <th width="140">CATEGORÍA</th>
+                    <th width="140">LÍNEA</th>
+                    <th width="120">PRECIO</th>
+                    <th width="90">ESTADO</th>
+                    <th width="160">ACCIONES</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <strong>Mesa de Comedor Extensible</strong><br>
-                        <small class="text-muted">Roble macizo</small>
-                    </td>
-                    <td>Mesas</td>
-                    <td>Clásico</td>
-                    <td>S/ 850.00</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="fa-solid fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger me-1">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>
-                        <strong>Sofá Seccional 3 Piezas</strong><br>
-                        <small class="text-muted">Tela gris antimanchas</small>
-                    </td>
-                    <td>Sofás</td>
-                    <td>Moderno</td>
-                    <td>S/ 1,200.00</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="fa-solid fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger me-1">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>
-                        <strong>Estantería Modular</strong><br>
-                        <small class="text-muted">MDF laminado nogal</small>
-                    </td>
-                    <td>Estanterías</td>
-                    <td>Moderno</td>
-                    <td>S/ 380.00</td>
-                    <td><span class="badge bg-secondary">Inactivo</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="fa-solid fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger me-1">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
-                    </td>
-                </tr>
+                <tbody id="tbody-productos">
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-</body>
+
+<div class="modal fade" id="modalEditarProducto" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="edit-id">
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre</label>
+                        <input id="edit-nombre" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Categoría</label>
+                        <select id="edit-categoria" class="form-select"></select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Línea de diseño</label>
+                        <select id="edit-linea" class="form-select">
+                            <option value="">Sin línea</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Precio (S/.)</label>
+                        <input id="edit-precio" type="number" step="0.01" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Largo cm</label>
+                        <input id="edit-largo" type="number" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Ancho cm</label>
+                        <input id="edit-ancho" type="number" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Alto cm</label>
+                        <input id="edit-alto" type="number" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Peso kg</label>
+                        <input id="edit-peso" type="number" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Estado</label>
+                        <select id="edit-activo" class="form-select">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Material</label>
+                        <input id="edit-material" class="form-control">
+                    </div>
+
+                    <div class="col-6">
+                        <label class="form-label">Descripción Card</label>
+                        <textarea id="edit-descripcionCard" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Descripción Resumida</label>
+                        <textarea id="edit-descripcionCorta" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Descripción Detallada</label>
+                        <textarea id="edit-descripcionLarga" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">URL Imagen Principal</label>
+                        <input id="edit-imagen1" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">URL Imagen Secundaria</label>
+                        <input id="edit-imagen2" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">URL Tercera Imagen</label>
+                        <input id="edit-imagen3" type="text" class="form-control">
+                    </div>
+                </div>
+            </div> <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btnActualizarProducto">
+                <i class="fa-solid fa-save me-2"></i> Guardar Cambios
+            </button>
+        </div>
+
+        </div> </div> </div> </body>
 </html>

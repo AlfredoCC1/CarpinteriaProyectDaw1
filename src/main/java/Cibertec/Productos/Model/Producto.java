@@ -1,62 +1,99 @@
 package Cibertec.Productos.Model;
 
 import Cibertec.Categoria.Model.Categoria;
+import Cibertec.LineaDiseno.Model.LineaDiseno;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 @Data
 @Entity
-@Table(name = "producto")
+@Table(name="producto")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
+    @JsonProperty("id")
+    @Column(name="id_producto")
     private Long idProducto;
 
-    // FK a categoria.id_categoria
-    @ManyToOne(fetch = FetchType.LAZY)
+
+
+    // ========================= RELACION CATEGORIA ======================
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
 
-    @Column(name = "nombre", nullable = false, length = 120)
+
+    // ========================= RELACION LINEA DISEÑO ===================
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_linea", nullable = true)
+    private LineaDiseno lineaDiseno;
+
+
+    // ========================= CAMPOS BÁSICOS ==========================
+    @Column(nullable = false, length = 150)
     private String nombre;
 
-    @Column(name = "descripcion_corta", length = 255)
+    @Column(name="descripcion_card", length = 200)
+    private String descripcionCard;
+
+    @Column(name="descripcion_corta", length = 350)
     private String descripcionCorta;
 
-    @Column(name = "precio", precision = 10, scale = 2)
-    private BigDecimal precio;      // puede ser null -> "A cotizar"
+    @Column(name="descripcion_larga", columnDefinition = "TEXT")
+    private String descripcionLarga;
 
-    @Column(name = "etiqueta_precio", length = 40)
-    private String etiquetaPrecio;  // ej: "A cotizar"
+    // ========================= PRECIO ==========================
+    @Column(precision = 10, scale = 2)
+    private BigDecimal precio;
 
-    @Column(name = "activo", nullable = false)
-    private Boolean activo = true;  // mapea el TINYINT(1)
+    @Column(name="etiqueta_precio", length = 40)
+    private String etiquetaPrecio = "A cotizar";
 
-    @Column(name = "img_card_url", length = 255)
-    private String imgCardUrl;      // imagen tarjeta productos.html
+    // ========================= DIMENSIONES ==========================
+    private Integer largo;
+    private Integer ancho;
+    private Integer altura;
+    private Integer peso;
 
-    @Column(name = "img_hero_url", length = 255)
-    private String imgHeroUrl;      // imagen hero detalle.html
+    private String material;
 
-    @Column(name = "creado_en", updatable = false)
-    private LocalDateTime creadoEn;
+    // ========================= IMAGENES ==========================
+    @Column(length = 255)
+    private String imagen1;
+    @Column(length = 255)
+    private String imagen2;
+    @Column(length = 255)
+    private String imagen3;
 
-    @Column(name = "actualizado_en")
-    private LocalDateTime actualizadoEn;
+    private Boolean destacado = false;
+
+    @Column(name = "activo")
+    private Boolean activo = true;
+
+
+    // ========================= FECHAS ==========================
+    @Column(name="fecha_creacion")
+    private LocalDateTime fechaCreacion;
+
+    @Column(name="fecha_modificacion")
+    private LocalDateTime fechaModificacion;
 
     @PrePersist
-    public void prePersist() {
-        this.creadoEn = LocalDateTime.now();
-        this.actualizadoEn = LocalDateTime.now();
+    public void prePersist(){
+        fechaCreacion = LocalDateTime.now();
     }
 
     @PreUpdate
-    public void preUpdate() {
-        this.actualizadoEn = LocalDateTime.now();
+    public void preUpdate(){
+        fechaModificacion = LocalDateTime.now();
     }
+
+
 }

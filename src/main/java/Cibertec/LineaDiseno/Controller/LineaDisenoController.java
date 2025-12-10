@@ -52,4 +52,6 @@ public class LineaDisenoController {
     public List<LineaDiseno> buscar(@RequestParam String texto){
         return lineaDisenoService.Buscarporpornombre(texto);
     }
+
+
 }

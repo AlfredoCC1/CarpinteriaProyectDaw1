@@ -1,16 +1,23 @@
 package Cibertec.Productos.Repository;
 
-import Cibertec.Categoria.Model.Categoria;
 import Cibertec.Productos.Model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-    // para productos.html (solo activos)
-    List<Producto> findByActivoTrue();
+    List<Producto> findByCategoriaId(Integer id);
 
-    // para filtrar por categoría
-    List<Producto> findByCategoriaAndActivoTrue(Categoria categoria);
+    List<Producto> findByNombreContaining(String text);
+
+    @Query("select p from Producto p where lower(p.nombre) like lower(concat('%',:texto,'%'))")
+    List<Producto> Buscarpornombre(@Param("texto") String texto);
+
+    @Query("select p from Producto p where p.categoria.id = :idCategoria")
+    List<Producto> buscarPorCategoria(@Param("idCategoria") Long idCategoria);
 }
