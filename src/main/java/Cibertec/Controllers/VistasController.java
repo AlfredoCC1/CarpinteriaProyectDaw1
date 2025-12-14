@@ -37,6 +37,12 @@ public class VistasController {
         return "servicios";
     }
 
+    @GetMapping("/contacto")
+    public String contacto() {
+        return "contacto";
+    }
+
+
     @GetMapping("/cotizacion")
     public String cotizacion() {
         return "cotizacion";
