@@ -17,6 +17,11 @@ public class VistasController {
         return "register";
     }
 
+    @GetMapping("/nosotros")
+    public String nosotros() {
+        return "nosotros";
+    }
+
     @GetMapping("/vistaproducto")
     public String producto() {
         return "productos";

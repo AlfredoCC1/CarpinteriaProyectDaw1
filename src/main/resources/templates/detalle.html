@@ -20,6 +20,7 @@
     <!-- CSS global + fragments -->
     <link rel="stylesheet" th:href="@{/css/global.css}">
     <link rel="stylesheet" th:href="@{/css/fragments/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/fragments/desplazate.css}">
     <link rel="stylesheet" th:href="@{/css/fragments/footer.css}">
 
     <style>
@@ -284,6 +285,11 @@
         <div class="d-flex flex-wrap gap-3 align-items-center mt-2">
             <span class="badge bg-success bg-opacity-75">Hecho a pedido</span>
         </div>
+    </div>
+    <!-- Indicador "Desplázate" -->
+    <div class="scroll-indicator d-none d-md-flex">
+        <span>Desplázate</span>
+        <div class="scroll-indicator-dot"></div>
     </div>
 </header>
 

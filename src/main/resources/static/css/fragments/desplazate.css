@@ -11,6 +11,7 @@
     font-size: .75rem;
     color: #fff;
     opacity: .9;
+    z-index: 10;
 }
 
 .scroll-indicator-dot {

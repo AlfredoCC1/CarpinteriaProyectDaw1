@@ -48,14 +48,14 @@
 /* Botón "Ingresar" */
 .btn-outline-main {
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--accent) !important;
     border-radius: 999px;
     padding-inline: 1.4rem;
 }
 
 .btn-outline-main:hover {
     background-color: var(--accent);
-    color: #000;
+    color: #000 !important;
 }
 
 /* ---------- BREAKPOINTS RESPONSIVE ---------- */
