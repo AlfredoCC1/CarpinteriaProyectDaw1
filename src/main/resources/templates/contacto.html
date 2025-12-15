@@ -71,50 +71,49 @@
             <!-- Col izquierda -->
             <div class="col-lg-5" data-aos="fade-right">
                 <div class="glass-card h-100">
-                    <div class="pill mb-2">
-                        <i class="fa-solid fa-headset"></i> Canales rápidos
-                    </div>
-                    <h2 class="section-title mb-2">Hablemos hoy</h2>
+                    <h2 class="section-title mb-2">Hablemos de tu proyecto</h2>
                     <p class="section-subtitle mb-3">
-                        Elige el canal que prefieras. También puedes dejarnos tus datos y te contactamos.
+                        Escríbenos y coordinemos una visita o una reunión virtual.
                     </p>
 
-                    <div class="channel-grid">
-                        <a class="channel-card" id="btnWhatsCard" target="_blank" rel="noopener">
-                            <div class="cc-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                            <div class="cc-text">
-                                <strong>WhatsApp</strong>
-                                <span>Respuesta más rápida</span>
+                    <ul class="contact-simple-list">
+                        <li>
+                            <i class="fa-solid fa-location-dot text-warning"></i>
+                            <div>
+                                <strong>Dirección:</strong>
+                                <span>AA.HH. Nueva Esperanza – Mz. Fl Lote 1 – Puente Piedra</span>
                             </div>
-                            <i class="fa-solid fa-arrow-right-long cc-arrow"></i>
-                        </a>
+                        </li>
 
-                        <a class="channel-card" href="mailto:contacto@artwood.pe">
-                            <div class="cc-icon"><i class="fa-solid fa-at"></i></div>
-                            <div class="cc-text">
-                                <strong>Email</strong>
-                                <span>contacto@artwood.pe</span>
+                        <li>
+                            <i class="fa-brands fa-whatsapp text-success"></i>
+                            <div>
+                                <strong>WhatsApp:</strong>
+                                <span>+51 986 048 021 / +51 999 734 831</span>
                             </div>
-                            <i class="fa-solid fa-arrow-right-long cc-arrow"></i>
-                        </a>
+                        </li>
 
-                        <a class="channel-card" href="tel:+51999999999">
-                            <div class="cc-icon"><i class="fa-solid fa-phone"></i></div>
-                            <div class="cc-text">
-                                <strong>Llamada</strong>
-                                <span>+51 999 999 999</span>
+                        <li>
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <div>
+                                <strong>Correo:</strong>
+                                <span>carpinteria-toribio@hotmail.com</span>
                             </div>
-                            <i class="fa-solid fa-arrow-right-long cc-arrow"></i>
-                        </a>
+                        </li>
+                    </ul>
 
-                        <div class="channel-card channel-static">
-                            <div class="cc-icon"><i class="fa-solid fa-location-dot"></i></div>
-                            <div class="cc-text">
-                                <strong>Zona de atención</strong>
-                                <span>Lima (según evaluación)</span>
-                            </div>
-                        </div>
+                    <p class="small text-muted mt-3">
+                        También puedes seguirnos en redes sociales para ver más proyectos terminados.
+                    </p>
+
+                    <div class="social-row mt-2">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
                     </div>
+
+
+
 
                     <div class="divider my-3"></div>
 
@@ -135,7 +134,7 @@
                         <div>
                             <h3 class="mb-1">Envíanos tu solicitud</h3>
                             <p class="small text-muted mb-0">
-                                Completa el formulario. Mientras escribes, verás un resumen para que todo quede claro.
+                                Completa el formulario y te responderemos lo antes posible.
                             </p>
                         </div>
                         <div class="step-chip">
@@ -145,7 +144,7 @@
 
                     <div class="row g-3">
                         <!-- FORM -->
-                        <div class="col-12 col-xl-7">
+                        <div class="col-12 col-lg-8 mx-auto">
                             <form id="contactForm" class="needs-validation" novalidate>
 
                                 <div class="row g-3">
@@ -153,7 +152,7 @@
                                         <label class="form-label">Nombre completo</label>
                                         <div class="input-icon">
                                             <i class="fa-solid fa-user"></i>
-                                            <input type="text" class="form-control" id="name" placeholder="Ej: Alfredo Castro" required>
+                                            <input type="text" class="form-control" id="name" placeholder="Nombre Completo" required>
                                         </div>
                                         <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
                                     </div>
@@ -241,41 +240,6 @@
                                 Tip: Si tienes fotos o referencias, envíalas por WhatsApp para cotizar más rápido.
                             </div>
                         </div>
-
-                        <!-- PREVIEW -->
-                        <div class="col-12 col-xl-5">
-                            <div class="preview-card">
-                                <div class="pill mb-2"><i class="fa-solid fa-file-lines"></i> Resumen</div>
-                                <div class="preview-row">
-                                    <span>Nombre</span><strong id="pvName">—</strong>
-                                </div>
-                                <div class="preview-row">
-                                    <span>Teléfono</span><strong id="pvPhone">—</strong>
-                                </div>
-                                <div class="preview-row">
-                                    <span>Email</span><strong id="pvEmail">—</strong>
-                                </div>
-                                <div class="preview-row">
-                                    <span>Servicio</span><strong id="pvService">—</strong>
-                                </div>
-                                <div class="preview-row">
-                                    <span>Distrito</span><strong id="pvDistrict">—</strong>
-                                </div>
-
-                                <div class="preview-msg mt-3">
-                                    <div class="small text-muted mb-1">Mensaje</div>
-                                    <div id="pvMessage" class="pv-text">Escribe tu solicitud para ver el resumen aquí.</div>
-                                </div>
-
-                                <div class="divider my-3"></div>
-
-                                <div class="small text-muted">
-                                    <i class="fa-solid fa-stopwatch me-1"></i>
-                                    Tiempo estimado de respuesta: <strong>1–24h</strong> (según carga del día).
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -290,15 +254,15 @@
         <div class="row g-4 align-items-stretch">
             <div class="col-lg-6" data-aos="fade-right">
                 <div class="highlight-box h-100">
-                    <h4 class="mb-2"><i class="fa-solid fa-map-location-dot me-2 text-warning"></i>Mapa (referencial)</h4>
+                    <h4 class="mb-2"><i class="fa-solid fa-map-location-dot me-2 text-warning"></i>Mapa</h4>
                     <p class="section-subtitle mb-3">
                         Puedes colocar aquí tu ubicación o una zona general de atención.
                     </p>
 
                     <div class="map-frame">
                         <!-- Cambia el src a tu dirección si quieres -->
-                        <iframe
-                                src="https://www.google.com/maps?q=Lima%20Peru&output=embed"
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d860.298226293231!2d-77.0953770297672!3d-11.94762345341294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105d1fb955f9c93%3A0xdaed1240fd8c2b9b!2sAsoc%20Nueva%20Esperanza%2C%20Puente%20Piedra!5e0!3m2!1ses-419!2spe!4v1765760459661!5m2!1ses-419!2spe"
+                                width="600" height="450" style="border:0;" allowfullscreen=""
                                 loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
@@ -410,133 +374,115 @@
     AOS.init({ duration: 700, once: true });
 
     // ========= CONFIG =========
-    // Cambia a tu número real: +51XXXXXXXXX (sin espacios)
-    const WHATS_NUMBER = "51999999999";
+    const WHATS_NUMBER = "51926640717";
 
-    // Links de WhatsApp
-    function buildWhatsLink(text){
+    function buildWhatsLink(text) {
         return `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text)}`;
     }
 
+    // Links WhatsApp del HERO y CTA
     const heroWhats = document.getElementById("btnWhatsHero");
-    const cardWhats = document.getElementById("btnWhatsCard");
     const ctaWhats  = document.getElementById("btnWhatsCTA");
 
-    const defaultText = "Hola Art&Wood, quiero una cotización. ¿Podemos coordinar?";
-    [heroWhats, cardWhats, ctaWhats].forEach(btn => btn && (btn.href = buildWhatsLink(defaultText)));
+    const defaultText = "Hola Carpinteria Camargo, quiero una cotización. ¿Podemos coordinar?";
+    [heroWhats, ctaWhats].forEach(btn => btn && (btn.href = buildWhatsLink(defaultText)));
 
-    // ========= PREVIEW EN VIVO =========
-    const $ = (id) => document.getElementById(id);
-
-    const fields = {
-        name: $("name"),
-        phone: $("phone"),
-        email: $("email"),
-        service: $("service"),
-        district: $("district"),
-        message: $("message")
-    };
-
-    const preview = {
-        name: $("pvName"),
-        phone: $("pvPhone"),
-        email: $("pvEmail"),
-        service: $("pvService"),
-        district: $("pvDistrict"),
-        message: $("pvMessage"),
-        char: $("charCount")
-    };
-
-    function syncPreview(){
-        preview.name.textContent = fields.name.value.trim() || "—";
-        preview.phone.textContent = fields.phone.value.trim() || "—";
-        preview.email.textContent = fields.email.value.trim() || "—";
-        preview.service.textContent = fields.service.value || "—";
-        preview.district.textContent = fields.district.value.trim() || "—";
-
-        const msg = fields.message.value.trim();
-        preview.message.textContent = msg || "Escribe tu solicitud para ver el resumen aquí.";
-        preview.char.textContent = fields.message.value.length;
-    }
-
-    Object.values(fields).forEach(el => el.addEventListener("input", syncPreview));
-    fields.service.addEventListener("change", syncPreview);
-    syncPreview();
-
-    // ========= VALIDACIÓN + TOAST =========
-    const form = $("contactForm");
-    const toastEl = $("okToast");
+    // ========= FORM =========
+    const form = document.getElementById("contactForm");
+    const toastEl = document.getElementById("okToast");
     const okToast = toastEl ? new bootstrap.Toast(toastEl, { delay: 3500 }) : null;
 
+    // Inputs
+    const nameEl     = document.getElementById("name");
+    const phoneEl    = document.getElementById("phone");
+    const emailEl    = document.getElementById("email");
+    const serviceEl  = document.getElementById("service");
+    const districtEl = document.getElementById("district");
+    const messageEl  = document.getElementById("message");
+
+    const msgError = document.getElementById("msgError");
+    const charCount = document.getElementById("charCount");
+
+    // contador de caracteres (si quieres mantenerlo)
+    if (charCount && messageEl) {
+        charCount.textContent = messageEl.value.length;
+        messageEl.addEventListener("input", () => {
+            charCount.textContent = messageEl.value.length;
+            // mientras escribe, quita el error si ya cumple
+            if (messageEl.value.trim().length >= 12) {
+                msgError.style.display = "none";
+                messageEl.classList.remove("is-invalid");
+            }
+        });
+    }
+
+    function validateMessage() {
+        const msg = messageEl.value.trim();
+        if (msg.length < 12) {
+            msgError.style.display = "block";
+            messageEl.classList.add("is-invalid");
+            return false;
+        } else {
+            msgError.style.display = "none";
+            messageEl.classList.remove("is-invalid");
+            return true;
+        }
+    }
+
+    // SUBMIT normal (botón Enviar)
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        const msg = fields.message.value.trim();
-        const msgError = $("msgError");
+        const okMsg = validateMessage();
 
-        if(msg.length < 12){
-            msgError.style.display = "block";
-            fields.message.classList.add("is-invalid");
-        }else{
-            msgError.style.display = "none";
-            fields.message.classList.remove("is-invalid");
-        }
-
-        if(form.checkValidity() && msg.length >= 12){
+        if (form.checkValidity() && okMsg) {
             okToast && okToast.show();
-            // Aquí podrías hacer fetch() a tu backend si luego lo conectas
+            // Aquí luego conectas tu backend si deseas
         }
 
         form.classList.add("was-validated");
     });
 
-    // ========= BOTÓN ENVIAR WHATSAPP =========
-    function buildSummary(){
-        const lines = [
-            "Hola Art&Wood 👋, quiero una cotización:",
+    // ========= WhatsApp con resumen =========
+    function buildSummary() {
+        return [
+            "Hola Carpinteria Camargo 👋, quiero una cotización:",
             "",
-            `Nombre: ${fields.name.value.trim() || "-"}`,
-            `Teléfono: ${fields.phone.value.trim() || "-"}`,
-            `Email: ${fields.email.value.trim() || "-"}`,
-            `Servicio: ${fields.service.value || "-"}`,
-            `Distrito: ${fields.district.value.trim() || "-"}`,
+            `Nombre: ${nameEl.value.trim() || "-"}`,
+            `Teléfono: ${phoneEl.value.trim() || "-"}`,
+            `Email: ${emailEl.value.trim() || "-"}`,
+            `Servicio: ${serviceEl.value || "-"}`,
+            `Distrito: ${districtEl.value.trim() || "-"}`,
             "",
             "Detalle:",
-            `${fields.message.value.trim() || "-"}`
-        ];
-        return lines.join("\n");
+            `${messageEl.value.trim() || "-"}`
+        ].join("\n");
     }
 
-    $("btnSendWhats").addEventListener("click", () => {
-        // forzamos validación mínima antes de enviar
+    document.getElementById("btnSendWhats").addEventListener("click", () => {
         form.classList.add("was-validated");
-        if(!fields.name.value.trim() || !fields.phone.value.trim() || !fields.email.value.trim() ||
-            !fields.service.value || !fields.district.value.trim() || fields.message.value.trim().length < 12){
-            okToast && okToast.show(); // igual muestra guía
+
+        const okMsg = validateMessage();
+        if (!form.checkValidity() || !okMsg) {
+            okToast && okToast.show();
             return;
         }
+
         window.open(buildWhatsLink(buildSummary()), "_blank");
     });
 
     // ========= LIMPIAR =========
-    $("btnClear").addEventListener("click", () => {
+    document.getElementById("btnClear").addEventListener("click", () => {
         form.reset();
         form.classList.remove("was-validated");
-        $("msgError").style.display = "none";
-        syncPreview();
+        msgError.style.display = "none";
+        messageEl.classList.remove("is-invalid");
 
-        // restaurar links a texto default
-        [heroWhats, cardWhats, ctaWhats].forEach(btn => btn && (btn.href = buildWhatsLink(defaultText)));
+        if (charCount) charCount.textContent = "0";
     });
-
-    // Actualiza links de WhatsApp con un texto personalizado mientras escribe
-    function updateWhatsDynamic(){
-        const custom = buildSummary();
-        [heroWhats, cardWhats, ctaWhats].forEach(btn => btn && (btn.href = buildWhatsLink(custom)));
-    }
-    ["input","change"].forEach(evt => form.addEventListener(evt, updateWhatsDynamic));
 </script>
+
 
 </body>
 </html>
