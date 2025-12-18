@@ -2,6 +2,7 @@
   "dependencies": {
     "@angular/cli": "^21.0.3",
     "@fortawesome/fontawesome-free": "^7.1.0",
+    "aos": "^2.3.4",
     "bootstrap": "^5.3.8"
   }
 }
