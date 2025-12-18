@@ -1,0 +1,57 @@
+<body>
+<div class="login-card" data-aos="zoom-in">
+
+  <div class="text-center mb-4">
+    <img src="assets/img/IsotipoBlanco.png" alt="Logo" class="logo-icon me-2">
+    <h3>Carpintería Camargo</h3>
+    <p class="text-white-50 small">Acceso para administradores</p>
+  </div>
+
+  <div class="alert alert-danger text-center py-2">
+    <span ></span>
+  </div>
+
+  <!-- FORMULARIO LOGIN -->
+  <form method="post">
+
+    <!-- USUARIO -->
+    <label class="form-label">Usuario o correo</label>
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+      <!-- IMPORTANTE: agrega name para que el backend reciba el dato -->
+      <input type="text" name="username" class="form-control" placeholder="Ingrese su usuario" required>
+    </div>
+
+    <!-- PASSWORD -->
+    <label class="form-label">Contraseña</label>
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+      <input id="passwordInput" type="password" name="password" class="form-control" placeholder="********" required>
+
+      <span class="input-group-text" style="cursor:pointer;" onclick="togglePassword()">
+                <i id="toggleIcon" class="fa-solid fa-eye"></i>
+            </span>
+    </div>
+
+    <!-- BOTÓN -->
+    <button type="submit" class="btn btn-main w-100 mt-3">
+      Iniciar sesión <i class="fa-solid fa-arrow-right ms-1"></i>
+    </button>
+  </form>
+
+  <!-- Enlace para registrar cuenta -->
+  <div class="text-center mt-3">
+    <span class="small text-white-50">¿No tienes cuenta?</span>
+    <a routerLink="/register" class="small-link small ms-1">
+      Crear cuenta nueva
+    </a>
+  </div>
+
+  <!-- Enlace para volver al inicio -->
+  <div class="text-center mt-2">
+    <a routerLink="/" class="small-link small">
+      <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+    </a>
+  </div>
+</div>
+</body>
