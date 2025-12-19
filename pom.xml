@@ -44,14 +44,11 @@
              <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-
-      <!-- Base de datos H2
+        <!-- Spring security -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>-->
-
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

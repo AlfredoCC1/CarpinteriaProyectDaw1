@@ -7,39 +7,53 @@
     <p class="text-white-50 small">Acceso para administradores</p>
   </div>
 
-  <div class="alert alert-danger text-center py-2">
-    <span ></span>
+  <!-- ERROR -->
+  <div *ngIf="error" class="alert alert-danger text-center py-2">
+    {{ error }}
   </div>
 
   <!-- FORMULARIO LOGIN -->
-  <form method="post">
+  <form (ngSubmit)="login()" novalidate autocomplete="off">
 
     <!-- USUARIO -->
     <label class="form-label">Usuario o correo</label>
     <div class="input-group mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-      <!-- IMPORTANTE: agrega name para que el backend reciba el dato -->
-      <input type="text" name="username" class="form-control" placeholder="Ingrese su usuario" required>
+      <span class="input-group-text">
+        <i class="fa-solid fa-user"></i>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Ingrese su usuario"
+        name="username"
+        [(ngModel)]="username"
+        required
+      >
     </div>
 
     <!-- PASSWORD -->
     <label class="form-label">Contraseña</label>
     <div class="input-group mb-3">
-      <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-      <input id="passwordInput" type="password" name="password" class="form-control" placeholder="********" required>
-
-      <span class="input-group-text" style="cursor:pointer;" onclick="togglePassword()">
-                <i id="toggleIcon" class="fa-solid fa-eye"></i>
-            </span>
+      <span class="input-group-text">
+        <i class="fa-solid fa-lock"></i>
+      </span>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="********"
+        name="password"
+        [(ngModel)]="password"
+        required
+      >
     </div>
 
     <!-- BOTÓN -->
     <button type="submit" class="btn btn-main w-100 mt-3">
       Iniciar sesión <i class="fa-solid fa-arrow-right ms-1"></i>
     </button>
+
   </form>
 
-  <!-- Enlace para registrar cuenta -->
   <div class="text-center mt-3">
     <span class="small text-white-50">¿No tienes cuenta?</span>
     <a routerLink="/register" class="small-link small ms-1">
@@ -47,11 +61,11 @@
     </a>
   </div>
 
-  <!-- Enlace para volver al inicio -->
   <div class="text-center mt-2">
     <a routerLink="/" class="small-link small">
       <i class="fa-solid fa-arrow-left"></i> Volver al inicio
     </a>
   </div>
+
 </div>
 </body>

@@ -63,18 +63,5 @@ public class UsuarioController {
         }
     }
 
-    // Login básico
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
-        try {
-            String username = body.get("username");
-            String password = body.get("password");
 
-            Usuario usuario = usuarioService.login(username, password);
-            return ResponseEntity.ok(usuario); // en real: devolver token, no el usuario completo
-
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(401).body(e.getMessage());
-        }
-    }
 }
