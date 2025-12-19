@@ -15,7 +15,7 @@ import {NavbarComponent} from '../../core/navbar/navbar';
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [RouterLink, HeaderComponent, TopbarComponent, FooterComponent, NavbarComponent],
+  imports: [RouterLink, HeaderComponent, FooterComponent, NavbarComponent],
   templateUrl: './index.html',
   styleUrls: ['./index.css']
 })

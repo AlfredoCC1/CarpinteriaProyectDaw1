@@ -9,30 +9,44 @@ export class Auth {
 
   constructor(private http: HttpClient) {}
 
+  // ================= LOGIN =================
   login(username: string, password: string): Observable<Login> {
-    return this.http.post<Login>(this.apiUrl, { username, password }).pipe(
-      tap((user) => {
-        // SSR-safe: solo navegador
-        if (typeof window !== 'undefined' && window.localStorage) {
-          localStorage.setItem('user', JSON.stringify(user));
-        }
-      })
-    );
+    return this.http
+      .post<Login>(this.apiUrl, { username, password })
+      .pipe(
+        tap((user) => {
+          // ✅ guardar usuario
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('user', JSON.stringify(user));
+
+            // ✅ guardar auth BASIC (lo necesitas para endpoints protegidos)
+            localStorage.setItem(
+              'auth',
+              btoa(`${username}:${password}`)
+            );
+          }
+        })
+      );
   }
 
+  // ================= LOGOUT =================
   logout(): void {
-    if (typeof window !== 'undefined' && window.localStorage) {
+    if (typeof window !== 'undefined') {
       localStorage.removeItem('user');
+      localStorage.removeItem('auth');
     }
   }
 
+  // ================= OBTENER USUARIO =================
   getUser(): Login | null {
-    if (typeof window === 'undefined' || !window.localStorage) return null;
+    if (typeof window === 'undefined') return null;
+
     const raw = localStorage.getItem('user');
     return raw ? (JSON.parse(raw) as Login) : null;
   }
 
+  // ================= VALIDAR SESIÓN =================
   isLoggedIn(): boolean {
-    return !!this.getUser();
+    return !!this.getUser() && !!localStorage.getItem('auth');
   }
 }

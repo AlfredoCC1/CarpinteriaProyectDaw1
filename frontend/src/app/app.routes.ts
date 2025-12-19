@@ -1,19 +1,25 @@
 import { Routes } from '@angular/router';
 import { IndexComponent } from './pages/index/index';
 import { NosotrosComponent } from './pages/nosotros/nosotros';
-import {DashboardComponent} from './pages/dashboard/dashboard';
-import {LoginComponent} from './pages/login/login';
-import {RegisterComponent} from './pages/register/register';
-import {ServiciosComponent} from './pages/servicios/servicios';
-import {ProductosComponent} from './pages/productos/productos';
-import {ProcesoComponent} from './pages/proceso/proceso';
-import {ContactoComponent} from './pages/contacto/contacto';
-
+import { DashboardComponent } from './pages/dashboard/dashboard';
+import { LoginComponent } from './pages/login/login';
+import { RegisterComponent } from './pages/register/register';
+import { ServiciosComponent } from './pages/servicios/servicios';
+import { ProductosComponent } from './pages/productos/productos';
+import { ProcesoComponent } from './pages/proceso/proceso';
+import { ContactoComponent } from './pages/contacto/contacto';
+import { AdminGuard } from './core/services/Login/AdminGuard'; // 👈 IMPORTANTE
 
 export const routes: Routes = [
-  {path: '', component: IndexComponent},
+  { path: '', component: IndexComponent },
   { path: 'nosotros', component: NosotrosComponent },
-  { path: 'dashboard', component: DashboardComponent },
+
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AdminGuard]   // ✅ ESTO FALTABA
+  },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'servicios', component: ServiciosComponent },

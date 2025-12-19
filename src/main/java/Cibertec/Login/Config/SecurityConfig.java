@@ -2,40 +2,39 @@ package Cibertec.Login.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config .Customizer;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(encoder.encode("admin123"))
-                .roles("ADMIN")
-                .build();
-
-        UserDetails user = User.builder()
-                .username("user")
-                .password(encoder.encode("user123"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, user);
-    }
-
+    // ✅ Encoder (lo mismo que ya tenías)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    // ✅ Provider que le dice a Spring Security: "usa UserDetailsService (BD) + BCrypt"
+    @Bean
+    public DaoAuthenticationProvider authProvider(UserDetailsService userDetailsService,
+                                                  PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService); // <-- tu CustomUserDetailsService
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
+    }
+
+    // ✅ AuthenticationManager (útil si luego quieres login con /api/auth/login usando authenticate())
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
     @Bean
@@ -43,9 +42,10 @@ public class SecurityConfig {
 
         return http
                 .csrf(csrf -> csrf.disable())
-                .cors(Customizer.withDefaults())   // ✅ AÑADE ESTO
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        // 🔓 PÚBLICO
+
+                        // 🔓 Público
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/",
@@ -53,22 +53,21 @@ public class SecurityConfig {
                                 "/assets/**"
                         ).permitAll()
 
-                        // 🛑 SOLO ADMIN
+                        // 🛑 Solo ADMINISTRADOR (según tu BD)
                         .requestMatchers(
                                 "/api/dashboard/**",
                                 "/api/admin/**",
                                 "/api/productos/**",
                                 "/lineadiseno/api/**"
-                        ).hasRole("ADMIN")
+                        ).hasRole("ADMINISTRADOR")
 
                         .anyRequest().authenticated()
                 )
-
-                // 🔐 BASIC AUTH (para Angular)
+                // ✅ Para probar rápido con Angular/Postman usando Basic Auth
                 .httpBasic(Customizer.withDefaults())
-
                 .build();
     }
+
     // ✅ CORS para Angular
     @Bean
     public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
@@ -82,6 +81,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-
 }
-

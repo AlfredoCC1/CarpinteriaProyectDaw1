@@ -50,6 +50,9 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!-- Lombok -->
+        <!-- Spring Security (incluye PasswordEncoder) -->
+
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -72,5 +75,9 @@
             </plugin>
         </plugins>
     </build>
+
+
+
+
 
 </project>

@@ -28,11 +28,14 @@ public class AuthRestController {
         try {
             Usuario usuario = usuarioService.login(username, password);
 
-            // RESPUESTA JSON PARA ANGULAR
+            // ✅ SACAR ROL DESDE BD
+            String rol = usuario.getEmpleado().getRol().getNombre(); // ADMINISTRADOR
+
             return ResponseEntity.ok(Map.of(
                     "idUsuario", usuario.getIdUsuario(),
                     "username", usuario.getUsername(),
-                    "estado", usuario.getEstado().name()
+                    "estado", usuario.getEstado().name(),
+                    "rol", rol
             ));
 
         } catch (RuntimeException e) {

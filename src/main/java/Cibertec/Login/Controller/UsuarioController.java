@@ -1,13 +1,11 @@
 package Cibertec.Login.Controller;
 
-import Cibertec.Login.Enun.EstadoUsuario;
+
 import Cibertec.Login.Model.Usuario;
 import Cibertec.Login.Service.UsuarioService;
+import Cibertec.Login.dto.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -19,49 +17,21 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    // Registrar usuario para un empleado
-    @PostMapping("/empleado/{idEmpleado}")
-    public ResponseEntity<?> registrarParaEmpleado(@PathVariable Integer idEmpleado,
-                                                   @RequestBody Usuario datosUsuario) {
-        try {
-            Usuario guardado = usuarioService.registrarUsuarioParaEmpleado(idEmpleado, datosUsuario);
-            return ResponseEntity.ok(guardado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
-    // Listar todos los usuarios
-    @GetMapping
-    public List<Usuario> listar() {
-        return usuarioService.listarUsuarios();
-    }
+        Usuario usuario = usuarioService.login(
+                request.getUsername(),
+                request.getPassword()
+        );
 
-    // Obtener usuario por ID
-    @GetMapping("/{id}")
-    public ResponseEntity<?> obtener(@PathVariable Integer id) {
-        try {
-            Usuario usuario = usuarioService.obtenerPorId(id);
-            return ResponseEntity.ok(usuario);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(
+                java.util.Map.of(
+                        "mensaje", "Login correcto",
+                        "usuario", usuario.getUsername(),
+                        "rol", usuario.getEmpleado().getRol().getNombre()
+                )
+        );
     }
-
-    // Cambiar estado (ACTIVO / INACTIVO)
-    @PatchMapping("/{id}/estado")
-    public ResponseEntity<?> cambiarEstado(@PathVariable Integer id,
-                                           @RequestParam String estado) {
-        try {
-            EstadoUsuario nuevoEstado = EstadoUsuario.valueOf(estado.toUpperCase());
-            Usuario actualizado = usuarioService.cambiarEstado(id, nuevoEstado);
-            return ResponseEntity.ok(actualizado);
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body("Estado inválido. Use ACTIVO o INACTIVO.");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
 
 }

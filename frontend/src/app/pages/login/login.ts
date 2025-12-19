@@ -18,32 +18,45 @@ export class LoginComponent {
   error = '';
   loading = false;
 
+  // ✅ ESTA ES LA QUE TE FALTA
+  success = false;
+
   constructor(private auth: Auth, private router: Router) {}
 
   login(): void {
     this.error = '';
+    this.success = false;
     this.loading = true;
 
     this.auth.login(this.username, this.password).subscribe({
       next: (usuario: Login) => {
         this.loading = false;
 
-        // ✅ valida estado
+        // ✅ validar estado
         if (usuario.estado !== 'ACTIVO') {
           this.error = 'Tu usuario está inactivo. Contacta al administrador.';
           return;
         }
-        // ✅ ESTO ES LO QUE TE FALTA
-        localStorage.setItem('auth', btoa(`${this.username}:${this.password}`));
-        // ✅ redirige
-        this.router.navigate(['/dashboard']);
+
+        this.success = true;
+
+        // ✅ REDIRECCIÓN SEGÚN ROL
+        setTimeout(() => {
+          if (usuario.rol === 'ADMINISTRADOR') {
+            this.router.navigateByUrl('/dashboard');
+          } else {
+            this.router.navigateByUrl('/');
+          }
+        }, 0);
+
       },
       error: (err) => {
         this.loading = false;
-        // ✅ si backend manda message, lo mostramos
+        this.success = false;
         this.error = err?.error?.message || 'Usuario o contraseña incorrectos';
       },
     });
   }
+
 }
 
