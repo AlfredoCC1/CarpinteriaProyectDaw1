@@ -1,11 +1,16 @@
 package Cibertec.Login.Config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-public class WebConfig  implements WebMvcConfigurer {
+@Configuration   // 👈 ESTO ES OBLIGATORIO
+public class WebConfig implements WebMvcConfigurer {
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LogInterceptor());
+        registry.addInterceptor(new LogInterceptor())
+                .addPathPatterns("/**"); // opcional pero recomendado
     }
 }
+

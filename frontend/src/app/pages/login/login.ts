@@ -33,7 +33,8 @@ export class LoginComponent {
           this.error = 'Tu usuario está inactivo. Contacta al administrador.';
           return;
         }
-
+        // ✅ ESTO ES LO QUE TE FALTA
+        localStorage.setItem('auth', btoa(`${this.username}:${this.password}`));
         // ✅ redirige
         this.router.navigate(['/dashboard']);
       },
