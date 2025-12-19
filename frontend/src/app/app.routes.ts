@@ -7,6 +7,7 @@ import {RegisterComponent} from './pages/register/register';
 import {ServiciosComponent} from './pages/servicios/servicios';
 import {ProductosComponent} from './pages/productos/productos';
 import {ProcesoComponent} from './pages/proceso/proceso';
+import {ContactoComponent} from './pages/contacto/contacto';
 
 
 export const routes: Routes = [
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'servicios', component: ServiciosComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'proceso', component: ProcesoComponent },
+  { path: 'contacto', component: ContactoComponent },
 ];
