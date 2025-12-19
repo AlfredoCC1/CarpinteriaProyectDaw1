@@ -1,0 +1,205 @@
+<div  id="view-productos" class="view-container">
+  
+  <div class="form-view" data-aos="fade-up">
+    <div class="form-header">
+      <h3>Agregar Nuevo Producto</h3>
+      <small>Completa la información del nuevo producto</small>
+    </div>
+
+    <form id="form-producto">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label">Nombre del Producto</label>
+            <input type="text" class="form-control"
+                   id="nombre" name="nombre"
+                   placeholder="Ej: Mesa de Roble, Sofá Moderno" required>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="mb-3">
+            <label class="form-label">Categoría</label>
+            <select class="form-select"
+                    id="categoria" name="categoria" required>
+              <option value="">Seleccionar...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="mb-3">
+            <label class="form-label">Línea de Diseño</label>
+            <select class="form-select"
+                    id="linea" name="linea">
+              <option value="">Seleccionar...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="mb-3">
+            <label class="form-label">Precio (S/.)</label>
+            <input type="number" class="form-control"
+                   id="precio" name="precio"
+                   placeholder="0.00" step="0.01">
+            <small class="text-muted">Dejar vacío para "A cotizar"</small>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="mb-3">
+            <label class="form-label">Largo cm</label>
+            <input type="number" class="form-control"
+                   id="largo" name="largo"
+                   placeholder="70 cm">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="mb-3">
+            <label class="form-label">Ancho cm</label>
+            <input type="number" class="form-control"
+                   id="ancho" name="ancho"
+                   placeholder="80 cm">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="mb-3">
+            <label class="form-label">Alto cm</label>
+            <input type="number" class="form-control"
+                   id="alto" name="alto"
+                   placeholder="80 cm">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="mb-3">
+            <label class="form-label">Peso kg</label>
+            <input type="number" class="form-control"
+                   id="peso" name="peso"
+                   placeholder="20 kg">
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <select class="form-select"
+                    id="activo" name="activo" required>
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label">Material</label>
+            <input type="text" class="form-control"
+                   id="material" name="material"
+                   placeholder="Ej: Roble, Pino, MDF">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Descripción Card</label>
+            <textarea class="form-control" rows="3"
+                      id="descripcionCard" name="descripcionCard"
+                      placeholder="Describe el producto..."></textarea>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Descripción Resumida</label>
+            <textarea class="form-control" rows="3"
+                      id="descripcionCorta" name="descripcionCorta"
+                      placeholder="Describe el producto..."></textarea>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Descripción Detallada</label>
+            <textarea class="form-control" rows="3"
+                      id="descripcionLarga" name="descripcionLarga"
+                      placeholder="Describe el producto..."></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label">URL Imagen Principal</label>
+            <input type="text" class="form-control"
+                   id="imagen1" name="imagen1"
+                   placeholder="https://images.unsplash.com">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label">URL Imagen Secundaria</label>
+            <input type="text" class="form-control"
+                   id="imagen2" name="imagen2"
+                   placeholder="https://images.unsplash.com">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label">URL Tercera Imagen </label>
+            <input type="text" class="form-control"
+                   id="imagen3" name="imagen3"
+                   placeholder="https://images.unsplash.com">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-warning">
+            <i class="fa-solid fa-save me-2"></i> Guardar Producto
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-view" data-aos="fade-up" data-aos-delay="100">
+    <div class="table-header">
+      <h4>PRODUCTOS REGISTRADOS</h4>
+      <div class="table-actions">
+        <div class="input-group input-group-sm" style="width: 250px;">
+          <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+          <input type="text" class="form-control"
+                 id="inputBuscarProducto"
+                 placeholder="Buscar productos...">
+        </div>
+
+        <select class="form-select form-select-sm"
+                id="filtroCategoria" style="width: 180px;">
+          <option value="">Todas las categorías</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+        <tr>
+          <th width="60">ID</th>
+          <th>PRODUCTO</th>
+          <th width="140">CATEGORÍA</th>
+          <th width="140">LÍNEA</th>
+          <th width="120">PRECIO</th>
+          <th width="90">ESTADO</th>
+          <th width="160">ACCIONES</th>
+        </tr>
+        </thead>
+        <tbody id="tbody-productos">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

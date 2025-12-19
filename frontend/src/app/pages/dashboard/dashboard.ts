@@ -1,108 +1,33 @@
-import {AfterViewInit, Component, Inject, PLATFORM_ID} from '@angular/core';
-import {AsideComponent} from './fragments/aside/aside';
-import {TopbarComponent} from './fragments/topbar/topbar';
-import {isPlatformBrowser} from '@angular/common';
+import { Component } from '@angular/core';
+import { AsideComponent } from './fragments/aside/aside';
+import { TopbarComponent } from './fragments/topbar/topbar';
+import { LineaComponent } from './fragments/linea/linea';
+import {GraficosComponent} from './fragments/graficos/graficos';
+import {CategoriaComponent} from './fragments/categoria/categoria';
+import {ProductosComponent} from './fragments/productos/productos';
 
-type ViewId =
-  | 'view-dashboard'
-  | 'view-lineas'
-  | 'view-categorias'
-  | 'view-productos'
-  | 'view-empleados'
-  | 'view-pedidos'
-  | 'view-usuarios'
-  | 'view-configuracion';
 
+type ViewId = 'graficos' | 'linea' | 'categoria' | 'productos';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    AsideComponent,
-    TopbarComponent
-  ],
+  standalone: true,
+  imports: [AsideComponent, TopbarComponent, LineaComponent, GraficosComponent, CategoriaComponent, ProductosComponent],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
+  styleUrls: ['./dashboard.css'],
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent {
+  currentView: ViewId = 'graficos';
 
-  // ✅ vista actual
-  currentView: ViewId = 'view-dashboard';
-
-  // ✅ títulos del topbar
-  readonly viewTitles: Record<ViewId, { title: string; subtitle: string }> = {
-    'view-dashboard': { title: 'Dashboard', subtitle: 'Resumen general de la carpintería' },
-    'view-lineas': { title: 'Líneas de Diseño', subtitle: 'Administra las líneas de diseño' },
-    'view-categorias': { title: 'Categorías', subtitle: 'Administra las categorías de productos' },
-    'view-productos': { title: 'Productos', subtitle: 'Administra tu catálogo de productos' },
-    'view-empleados': { title: 'Empleados', subtitle: 'Gestión de Empleados' },
-    'view-pedidos': { title: 'Pedidos', subtitle: 'Seguimiento de pedidos' },
-    'view-usuarios': { title: 'Usuarios', subtitle: 'Administración de usuarios del sistema' },
-    'view-configuracion': { title: 'Configuración', subtitle: 'Configuración del sistema' },
+  // para títulos en topbar (puedes ampliar)
+  titles: Record<ViewId, { title: string; subtitle: string }> = {
+    graficos: { title: 'Dashboard', subtitle: 'Resumen general de la carpintería' },
+    linea: { title: 'Líneas de Diseño', subtitle: 'Administra las líneas de diseño' },
+    categoria: { title: 'Categorías', subtitle: 'Administra las categorías de productos' },
+    productos: { title: 'Productos', subtitle: 'Productos de productos' },
   };
 
-  // ✅ sidebar móvil
-  sidebarOpen = false;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
-
-  // si quieres inicializar algo al cargar dashboard
-  ngAfterViewInit(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    // Si usas AOS global (CDN), refresca
-    this.refreshAos();
-
-    // Si dashboard necesita charts al inicio
-    this.initChartsIfNeeded(this.currentView);
-  }
-
-  // ✅ Cambiar vista (reemplazo de window.switchView)
-  switchView(viewId: ViewId): void {
-    this.currentView = viewId;
-
-    // cerrar sidebar en móvil
-    if (isPlatformBrowser(this.platformId) && window.innerWidth < 992) {
-      this.sidebarOpen = false;
-    }
-
-    // refrescar AOS (si existe)
-    this.refreshAos();
-
-    // inicializar charts si corresponde
-    this.initChartsIfNeeded(viewId);
-  }
-
-  // ✅ Helpers para mostrar topbar
-  get pageTitle(): string {
-    return this.viewTitles[this.currentView].title;
-  }
-
-  get pageSubtitle(): string {
-    return this.viewTitles[this.currentView].subtitle;
-  }
-
-  toggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen;
-  }
-
-  private refreshAos(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const w = window as any;
-    if (w.AOS && typeof w.AOS.refresh === 'function') {
-      w.AOS.refresh();
-    }
-  }
-
-  private initChartsIfNeeded(viewId: ViewId): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    // si tienes una función global initializeCharts()
-    if (viewId === 'view-dashboard') {
-      const w = window as any;
-      if (typeof w.initializeCharts === 'function') {
-        setTimeout(() => w.initializeCharts(), 100);
-      }
-    }
+  switchView(view: ViewId) {
+    this.currentView = view;
   }
 }
