@@ -1,0 +1,279 @@
+<div th:fragment="mainEmpleados" id="view-empleados" class="view-container">
+
+  <!-- HEADER -->
+  <div class="section-header" data-aos="fade-up">
+    <div>
+      <h2>Empleados</h2>
+      <small>Registra, edita y administra a tu personal</small>
+    </div>
+    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalNuevoEmpleado">
+      <i class="fa-solid fa-user-plus me-1"></i> Nuevo Empleado
+    </button>
+  </div>
+
+  <!-- FORM (opcional inline) -->
+  <div class="form-view" data-aos="fade-up">
+    <div class="form-header">
+      <h3>Registrar Empleado</h3>
+      <small>Completa los datos del trabajador</small>
+    </div>
+
+    <form th:action="@{/empleados/guardar}" method="post" id="form-empleado">
+      <div class="row g-4">
+
+        <div class="col-md-3">
+          <label class="form-label">Código</label>
+          <input type="text" class="form-control" name="codigoTrabajador"
+                 placeholder="Ej: JPEREZ123" required maxlength="20">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Rol</label>
+          <select class="form-select" name="idRol" required>
+            <option value="">Seleccionar...</option>
+            <option th:each="r : ${roles}" th:value="${r.idRol}" th:text="${r.nombre}"></option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">DNI</label>
+          <input type="text" class="form-control" name="dni"
+                 placeholder="12345678" required maxlength="15">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Celular</label>
+          <input type="text" class="form-control" name="celular"
+                 placeholder="999888777" maxlength="20">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Nombres</label>
+          <input type="text" class="form-control" name="nombre"
+                 placeholder="Juan" required maxlength="100">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Apellidos</label>
+          <input type="text" class="form-control" name="apellidos"
+                 placeholder="Pérez Ramírez" required maxlength="150">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Correo</label>
+          <input type="email" class="form-control" name="correo"
+                 placeholder="correo@carpinteria.com" required maxlength="100">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Fecha nacimiento</label>
+          <input type="date" class="form-control" name="fechaNacimiento" required>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Fecha contratación</label>
+          <input type="date" class="form-control" name="fechaContratacion" required>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Género</label>
+          <select class="form-select" name="genero">
+            <option value="">Seleccionar...</option>
+            <option>Masculino</option>
+            <option>Femenino</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+        <div class="col-md-8">
+          <label class="form-label">Dirección</label>
+          <input type="text" class="form-control" name="direccion"
+                 placeholder="Av. Ejemplo 123 - Lima" maxlength="255">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-warning">
+            <i class="fa-solid fa-save me-2"></i> Guardar Empleado
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <!-- TABLA -->
+  <div class="table-view" data-aos="fade-up" data-aos-delay="100">
+    <div class="table-header">
+      <h4>EMPLEADOS REGISTRADOS</h4>
+
+      <div class="table-actions">
+        <div class="input-group input-group-sm" style="width: 280px;">
+          <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+          <input type="text" class="form-control" id="inputBuscarEmpleado"
+                 placeholder="Buscar por nombre, DNI, código...">
+        </div>
+
+        <select class="form-select form-select-sm" id="filtroRol" style="width: 170px;">
+          <option value="">Todos los roles</option>
+          <option th:each="r : ${roles}" th:value="${r.nombre}" th:text="${r.nombre}"></option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0 table-empleados">
+        <thead>
+        <tr>
+          <th width="60">ID</th>
+          <th width="120">CÓDIGO</th>
+          <th>EMPLEADO</th>
+          <th width="150">ROL</th>
+          <th width="120">DNI</th>
+          <th width="220">CORREO</th>
+          <th width="130">CELULAR</th>
+          <th width="130" class="text-end">ACCIONES</th>
+        </tr>
+        </thead>
+
+        <tbody id="tbody-empleados">
+        <!-- THYMELEAF -->
+        <tr th:each="emp : ${empleados}">
+          <td th:text="${emp.idEmpleado}">1</td>
+          <td th:text="${emp.codigoTrabajador}">JPEREZ123</td>
+          <td>
+            <strong th:text="${emp.nombre + ' ' + emp.apellidos}">Juan Pérez Ramírez</strong><br>
+            <small class="text-muted">
+              Ingreso:
+              <span th:text="${#temporals.format(emp.fechaContratacion, 'dd/MM/yyyy')}">10/01/2020</span>
+            </small>
+          </td>
+          <td th:text="${emp.rol.nombre}">ADMINISTRADOR</td>
+          <td th:text="${emp.dni}">12345678</td>
+          <td th:text="${emp.correo}">admin@carpinteria.com</td>
+          <td th:text="${emp.celular}">999888777</td>
+          <td class="text-end">
+            <button type="button" class="btn btn-sm btn-outline-primary me-1"
+                    data-bs-toggle="modal" data-bs-target="#modalEditarEmpleado"
+                    th:attr="data-id=${emp.idEmpleado},
+                             data-codigo=${emp.codigoTrabajador},
+                             data-nombre=${emp.nombre},
+                             data-apellidos=${emp.apellidos},
+                             data-dni=${emp.dni},
+                             data-correo=${emp.correo},
+                             data-celular=${emp.celular},
+                             data-genero=${emp.genero},
+                             data-direccion=${emp.direccion},
+                             data-fechanac=${emp.fechaNacimiento},
+                             data-fechacon=${emp.fechaContratacion},
+                             data-rol=${emp.rol.idRol}">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+
+            <a class="btn btn-sm btn-outline-danger"
+               th:href="@{/empleados/eliminar/{id}(id=${emp.idEmpleado})}"
+               onclick="return confirm('¿Seguro de eliminar este empleado?')">
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="modalEditarEmpleado" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Empleado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form th:action="@{/empleados/actualizar}" method="post">
+        <div class="modal-body">
+          <input type="hidden" id="edit-idEmpleado" name="idEmpleado">
+
+          <div class="row g-3">
+
+            <div class="col-md-4">
+              <label class="form-label">Código</label>
+              <input class="form-control" id="edit-codigo" name="codigoTrabajador" required>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Rol</label>
+              <select class="form-select" id="edit-rol" name="idRol" required>
+                <option value="">Seleccionar...</option>
+                <option th:each="r : ${roles}" th:value="${r.idRol}" th:text="${r.nombre}"></option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">DNI</label>
+              <input class="form-control" id="edit-dni" name="dni" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Nombres</label>
+              <input class="form-control" id="edit-nombre" name="nombre" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Apellidos</label>
+              <input class="form-control" id="edit-apellidos" name="apellidos" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Correo</label>
+              <input type="email" class="form-control" id="edit-correo" name="correo" required>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">Celular</label>
+              <input class="form-control" id="edit-celular" name="celular">
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">Género</label>
+              <select class="form-select" id="edit-genero" name="genero">
+                <option value="">Seleccionar...</option>
+                <option>Masculino</option>
+                <option>Femenino</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Fecha nacimiento</label>
+              <input type="date" class="form-control" id="edit-fechaNacimiento" name="fechaNacimiento" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Fecha contratación</label>
+              <input type="date" class="form-control" id="edit-fechaContratacion" name="fechaContratacion" required>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">Dirección</label>
+              <input class="form-control" id="edit-direccion" name="direccion">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-save me-2"></i> Guardar Cambios
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
