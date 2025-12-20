@@ -50,7 +50,8 @@ public class SecurityConfig {
                                 "/api/auth/login",
                                 "/",
                                 "/index.html",
-                                "/assets/**"
+                                "/assets/**",
+                                "/producto/public/**"
                         ).permitAll()
 
                         // 🛑 Solo ADMINISTRADOR (según tu BD)
@@ -58,7 +59,8 @@ public class SecurityConfig {
                                 "/api/dashboard/**",
                                 "/api/admin/**",
                                 "/api/productos/**",
-                                "/lineadiseno/api/**"
+                                "/lineadiseno/api/**",
+                                "/producto/api/**"
                         ).hasRole("ADMINISTRADOR")
 
                         .anyRequest().authenticated()

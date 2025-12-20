@@ -10,7 +10,9 @@ export class ProductoService {
   constructor(private http: HttpClient) {}
 
   private authHeaders(): { headers: HttpHeaders } {
-    const auth = localStorage.getItem('auth'); // Basic base64(user:pass)
+    const auth =
+      typeof window !== 'undefined' ? localStorage.getItem('auth') : null;
+
     return {
       headers: new HttpHeaders({
         Authorization: auth ? `Basic ${auth}` : '',
@@ -51,4 +53,11 @@ export class ProductoService {
   eliminar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/eliminar/${id}`, this.authHeaders());
   }
+  // ================== CATÁLOGO PÚBLICO ==================
+  listarPublico(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(
+      'http://localhost:8080/producto/public/listar'
+    );
+  }
+
 }

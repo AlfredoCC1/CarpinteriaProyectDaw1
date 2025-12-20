@@ -47,13 +47,17 @@
 <section class="py-4">
   <div class="container text-center" data-aos="fade-up">
     <h3 class="mb-3">Filtrar por categoría</h3>
+
     <div class="d-flex flex-wrap justify-content-center gap-2">
-      <button class="btn btn-outline-dark filter-btn active">Todo</button>
-      <button class="btn btn-outline-dark filter-btn">Mesas</button>
-      <button class="btn btn-outline-dark filter-btn">Sillas</button>
-      <button class="btn btn-outline-dark filter-btn">Cocinas</button>
-      <button class="btn btn-outline-dark filter-btn">Closets</button>
-      <button class="btn btn-outline-dark filter-btn">Decoración</button>
+      <button
+        *ngFor="let f of filtros"
+        type="button"
+        class="btn btn-outline-dark filter-btn"
+        [class.active]="filtroActivo === f.value"
+        (click)="setFiltro(f.value)"
+      >
+        {{ f.label }}
+      </button>
     </div>
   </div>
 </section>
@@ -61,114 +65,52 @@
 <!-- GRID DE PRODUCTOS -->
 <section class="py-4" id="grid-productos">
   <div class="container">
-    <div class="row g-4">
 
-      <!-- CARD 1 -->
-      <div class="col-md-4" data-aos="fade-up">
-        <div class="product-card">
-          <img class="product-img"
-               src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80"
-               alt="Mesa">
-          <div class="p-3">
-            <h5>Mesa de Comedor Rústica</h5>
-            <p class="small text-muted">Madera de roble — Acabado natural</p>
-            <p class="price-tag">S/ 1250.00</p>
-            <a class="btn btn-warning w-100 mt-2 d-inline-flex align-items-center justify-content-center gap-2"
-              >
-              <i class="fa-solid fa-eye"></i>
-              Ver detalles
-            </a>
-          </div>
-        </div>
-      </div>
+    <!-- CARGANDO -->
+    <div *ngIf="cargando" class="text-center py-4">
+      <span class="text-muted">Cargando productos...</span>
+    </div>
 
-      <!-- CARD 2 -->
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+    <!-- ERROR -->
+    <div *ngIf="error" class="alert alert-danger text-center">
+      {{ error }}
+    </div>
+
+    <!-- SIN RESULTADOS -->
+    <div *ngIf="!cargando && !error && productosFiltrados.length === 0" class="text-center py-4">
+      <span class="text-muted">No hay productos para esta categoría.</span>
+    </div>
+
+    <div class="row g-4" *ngIf="!cargando && !error && productosFiltrados.length > 0">
+
+      <!-- CARD DINÁMICA -->
+      <div class="col-md-4" data-aos="fade-up" *ngFor="let p of productosFiltrados">
         <div class="product-card">
+
           <img class="product-img"
-               src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80"
-               alt="Estantería">
+               [src]="img1(p)"
+               [alt]="p.nombre">
+
           <div class="p-3">
-            <h5>Estantería Modular Premium</h5>
-            <p class="small text-muted">Configurable — Ideal para sala u oficina</p>
-            <p class="price-tag">S/ 890.00</p>
+            <h5>{{ p.nombre }}</h5>
+            <p class="small text-muted">{{ descCard(p) }}</p>
+
+            <p class="price-tag fw-bold text-success">
+              {{ precioTexto(p) }}
+            </p>
+
+            <!-- Si quieres mantener el botón sin funcionalidad por ahora -->
             <button class="btn btn-warning w-100 mt-2">
               <i class="fa-solid fa-eye"></i> Ver detalles
             </button>
           </div>
-        </div>
-      </div>
 
-      <!-- CARD 3 -->
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="product-card">
-          <img class="product-img"
-               src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80"
-               alt="Silla">
-          <div class="p-3">
-            <h5>Silla de Diseño Escandinavo</h5>
-            <p class="small text-muted">Ergonómica — Madera con tapiz</p>
-            <p class="price-tag">S/ 320.00</p>
-            <button class="btn btn-warning w-100 mt-2">
-              <i class="fa-solid fa-eye"></i> Ver detalles
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD 4 -->
-      <div class="col-md-4" data-aos="fade-up">
-        <div class="product-card">
-          <img class="product-img"
-               src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80"
-               alt="Closet">
-          <div class="p-3">
-            <h5>Closet Empotrado Moderno</h5>
-            <p class="small text-muted">Puertas corredizas — LED integrado</p>
-            <p class="price-tag">A cotizar</p>
-            <button class="btn btn-warning w-100 mt-2">
-              <i class="fa-solid fa-eye"></i> Ver detalles
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD 5 -->
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="product-card">
-          <img class="product-img"
-               src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80"
-               alt="Decoración">
-          <div class="p-3">
-            <h5>Juego de Repisas Decorativas</h5>
-            <p class="small text-muted">Pack de 3 — Madera a elección</p>
-            <p class="price-tag">S/ 180.00</p>
-            <button class="btn btn-warning w-100 mt-2">
-              <i class="fa-solid fa-eye"></i> Ver detalles
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD 6 -->
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="product-card">
-          <img class="product-img"
-               src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=900&q=80"
-               alt="Mesa café">
-          <div class="p-3">
-            <h5>Mesa de Centro Minimalista</h5>
-            <p class="small text-muted">Madera maciza — Excelente acabado</p>
-            <p class="price-tag">S/ 540.00</p>
-            <button class="btn btn-warning w-100 mt-2">
-              <i class="fa-solid fa-eye"></i> Ver detalles
-            </button>
-          </div>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
 
 <app-footer></app-footer>
