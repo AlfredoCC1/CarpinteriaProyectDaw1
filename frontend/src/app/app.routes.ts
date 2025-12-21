@@ -10,6 +10,7 @@ import { ProcesoComponent } from './pages/proceso/proceso';
 import { ContactoComponent } from './pages/contacto/contacto';
 import { AdminGuard } from './core/services/Login/AdminGuard';
 import { DetalleComponent } from './pages/detalle/detalle';
+import {EmpleadosComponent} from './pages/dashboard/fragments/empleados/empleados';
 
 export const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -25,7 +26,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'servicios', component: ServiciosComponent },
   { path: 'productos', component: ProductosComponent },
-
+  {path: 'empleados', component: EmpleadosComponent},
   // ✅ SOLO ESTA RUTA PARA DETALLE
   { path: 'detalle/:id', component: DetalleComponent },
 

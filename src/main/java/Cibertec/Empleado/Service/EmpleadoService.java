@@ -113,4 +113,20 @@ public class EmpleadoService {
 
         empleadoRepository.delete(empleado);
     }
+
+
+    // 🔍 NUEVO MÉTODO DE BÚSQUEDA
+    public List<Empleado> buscar(String texto, Integer idRol) {
+
+        boolean textoVacio = (texto == null || texto.trim().isEmpty());
+
+        if (textoVacio && idRol == null) {
+            return empleadoRepository.findAll();
+        }
+
+        return empleadoRepository.buscarPorTextoYRol(
+                texto == null ? "" : texto,
+                idRol
+        );
+    }
 }

@@ -1,87 +1,163 @@
 <div id="view-empleados" class="view-container">
 
-  <!-- FORM (opcional inline) -->
+  <!-- ERROR -->
+  <div *ngIf="error" class="alert alert-danger py-2">
+    {{ error }}
+  </div>
+
+  <!-- ================= FORM REGISTRAR ================= -->
   <div class="form-view" data-aos="fade-up">
     <div class="form-header">
       <h3>Registrar Empleado</h3>
       <small>Completa los datos del trabajador</small>
     </div>
 
-    <form  method="post" id="form-empleado">
+    <!-- 🚫 ENTER NO GUARDA -->
+    <form
+      id="form-empleado"
+      (ngSubmit)="guardar()"
+      (keydown.enter)="$event.preventDefault()"
+    >
       <div class="row g-4">
 
         <div class="col-md-3">
           <label class="form-label">Código</label>
-          <input type="text" class="form-control" name="codigoTrabajador"
-                 placeholder="Ej: JPEREZ123" required maxlength="20">
+          <input
+            type="text"
+            class="form-control"
+            name="codigoTrabajador"
+            [(ngModel)]="form.codigoTrabajador"
+            placeholder="Ej: JPEREZ123"
+            required
+            maxlength="20"
+          >
         </div>
 
         <div class="col-md-3">
           <label class="form-label">Rol</label>
-          <select class="form-select" name="idRol" required>
+          <select
+            class="form-select"
+            name="idRol"
+            [(ngModel)]="form.idRol"
+            required
+          >
             <option value="">Seleccionar...</option>
-            <option></option>
+            <option *ngFor="let r of roles" [value]="r.idRol">
+              {{ r.nombre }}
+            </option>
           </select>
         </div>
 
         <div class="col-md-3">
           <label class="form-label">DNI</label>
-          <input type="text" class="form-control" name="dni"
-                 placeholder="12345678" required maxlength="15">
+          <input
+            type="text"
+            class="form-control"
+            name="dni"
+            [(ngModel)]="form.dni"
+            placeholder="12345678"
+            required
+            maxlength="15"
+          >
         </div>
 
         <div class="col-md-3">
           <label class="form-label">Celular</label>
-          <input type="text" class="form-control" name="celular"
-                 placeholder="999888777" maxlength="20">
+          <input
+            type="text"
+            class="form-control"
+            name="celular"
+            [(ngModel)]="form.celular"
+            placeholder="999888777"
+            maxlength="20"
+          >
         </div>
 
         <div class="col-md-6">
           <label class="form-label">Nombres</label>
-          <input type="text" class="form-control" name="nombre"
-                 placeholder="Juan" required maxlength="100">
+          <input
+            type="text"
+            class="form-control"
+            name="nombre"
+            [(ngModel)]="form.nombre"
+            required
+            maxlength="100"
+          >
         </div>
 
         <div class="col-md-6">
           <label class="form-label">Apellidos</label>
-          <input type="text" class="form-control" name="apellidos"
-                 placeholder="Pérez Ramírez" required maxlength="150">
+          <input
+            type="text"
+            class="form-control"
+            name="apellidos"
+            [(ngModel)]="form.apellidos"
+            required
+            maxlength="150"
+          >
         </div>
 
         <div class="col-md-6">
           <label class="form-label">Correo</label>
-          <input type="email" class="form-control" name="correo"
-                 placeholder="correo@carpinteria.com" required maxlength="100">
+          <input
+            type="email"
+            class="form-control"
+            name="correo"
+            [(ngModel)]="form.correo"
+            required
+            maxlength="100"
+          >
         </div>
 
         <div class="col-md-3">
           <label class="form-label">Fecha nacimiento</label>
-          <input type="date" class="form-control" name="fechaNacimiento" required>
+          <input
+            type="date"
+            class="form-control"
+            name="fechaNacimiento"
+            [(ngModel)]="form.fechaNacimiento"
+            required
+          >
         </div>
 
         <div class="col-md-3">
           <label class="form-label">Fecha contratación</label>
-          <input type="date" class="form-control" name="fechaContratacion" required>
+          <input
+            type="date"
+            class="form-control"
+            name="fechaContratacion"
+            [(ngModel)]="form.fechaContratacion"
+            required
+          >
         </div>
 
         <div class="col-md-4">
           <label class="form-label">Género</label>
-          <select class="form-select" name="genero">
+          <select
+            class="form-select"
+            name="genero"
+            [(ngModel)]="form.genero"
+          >
             <option value="">Seleccionar...</option>
-            <option>Masculino</option>
-            <option>Femenino</option>
-            <option>Otro</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
           </select>
         </div>
 
         <div class="col-md-8">
           <label class="form-label">Dirección</label>
-          <input type="text" class="form-control" name="direccion"
-                 placeholder="Av. Ejemplo 123 - Lima" maxlength="255">
+          <input
+            type="text"
+            class="form-control"
+            name="direccion"
+            [(ngModel)]="form.direccion"
+            maxlength="255"
+          >
         </div>
 
         <div class="col-12">
-          <button type="submit" class="btn btn-warning">
+          <button type="submit" class="btn btn-warning" [disabled]="loading">
             <i class="fa-solid fa-save me-2"></i> Guardar Empleado
           </button>
         </div>
@@ -90,22 +166,51 @@
     </form>
   </div>
 
-  <!-- TABLA -->
+  <!-- ================= TABLA ================= -->
   <div class="table-view" data-aos="fade-up" data-aos-delay="100">
     <div class="table-header">
       <h4>EMPLEADOS REGISTRADOS</h4>
 
       <div class="table-actions">
-        <div class="input-group input-group-sm" style="width: 280px;">
-          <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
-          <input type="text" class="form-control" id="inputBuscarEmpleado"
-                 placeholder="Buscar por nombre, DNI, código...">
+
+        <!-- 🔍 BUSCADOR -->
+        <div class="input-group input-group-sm" style="width: 300px;">
+          <span class="input-group-text">
+            <i class="fa-solid fa-search"></i>
+          </span>
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Buscar por nombre, DNI, código..."
+            [(ngModel)]="textoBuscar"
+            [ngModelOptions]="{ standalone: true }"
+            (keydown.enter)="$event.preventDefault(); listar()"
+          >
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="listar()"
+          >
+            Buscar
+          </button>
         </div>
 
-        <select class="form-select form-select-sm" id="filtroRol" style="width: 170px;">
+        <!-- FILTRO ROL -->
+        <select
+          class="form-select form-select-sm"
+          style="width: 170px;"
+          [(ngModel)]="filtroRol"
+          [ngModelOptions]="{ standalone: true }"
+          (change)="listar()"
+        >
           <option value="">Todos los roles</option>
-          <option></option>
+          <option *ngFor="let r of roles" [value]="r.idRol">
+            {{ r.nombre }}
+          </option>
         </select>
+
       </div>
     </div>
 
@@ -113,143 +218,57 @@
       <table class="table table-hover align-middle mb-0 table-empleados">
         <thead>
         <tr>
-          <th width="60">ID</th>
-          <th width="120">CÓDIGO</th>
+          <th>ID</th>
+          <th>CÓDIGO</th>
           <th>EMPLEADO</th>
-          <th width="150">ROL</th>
-          <th width="120">DNI</th>
-          <th width="220">CORREO</th>
-          <th width="130">CELULAR</th>
-          <th width="130" class="text-end">ACCIONES</th>
+          <th>ROL</th>
+          <th>DNI</th>
+          <th>CORREO</th>
+          <th>CELULAR</th>
+          <th class="text-end">ACCIONES</th>
         </tr>
         </thead>
 
-        <tbody id="tbody-empleados">
-        <!-- THYMELEAF -->
-        <tr>
-          <td >1</td>
-          <td >JPEREZ123</td>
+        <tbody>
+        <tr *ngFor="let e of empleados">
+          <td>{{ e.idEmpleado }}</td>
+          <td>{{ e.codigoTrabajador }}</td>
           <td>
-            <strong >Juan Pérez Ramírez</strong><br>
+            <strong>{{ e.nombre }} {{ e.apellidos }}</strong><br>
             <small class="text-muted">
-              Ingreso:
-              <span >10/01/2020</span>
+              Ingreso: {{ e.fechaContratacion }}
             </small>
           </td>
-          <td >ADMINISTRADOR</td>
-          <td >12345678</td>
-          <td >admin@carpinteria.com</td>
-          <td >999888777</td>
+          <td>{{ e.rol?.nombre }}</td>
+          <td>{{ e.dni }}</td>
+          <td>{{ e.correo }}</td>
+          <td>{{ e.celular || '-' }}</td>
           <td class="text-end">
-            <button type="button" class="btn btn-sm btn-outline-primary me-1"
-                    data-bs-toggle="modal" data-bs-target="#modalEditarEmpleado">
+            <button
+              class="btn btn-sm btn-outline-primary me-1"
+              data-bs-toggle="modal"
+              data-bs-target="#modalEditarEmpleado"
+              (click)="abrirEditar(e)"
+            >
               <i class="fa-solid fa-pen"></i>
             </button>
 
-            <a class="btn btn-sm btn-outline-danger"
-               onclick="return confirm('¿Seguro de eliminar este empleado?')">
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="eliminar(e.idEmpleado)"
+            >
               <i class="fa-solid fa-trash"></i>
-            </a>
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="!loading && empleados.length === 0">
+          <td colspan="8" class="text-center text-muted py-4">
+            No hay empleados para mostrar.
           </td>
         </tr>
         </tbody>
-
       </table>
-    </div>
-  </div>
-
-</div>
-
-<!-- MODAL EDITAR -->
-<div class="modal fade" id="modalEditarEmpleado" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title">Editar Empleado</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <form method="post">
-        <div class="modal-body">
-          <input type="hidden" id="edit-idEmpleado" name="idEmpleado">
-
-          <div class="row g-3">
-
-            <div class="col-md-4">
-              <label class="form-label">Código</label>
-              <input class="form-control" id="edit-codigo" name="codigoTrabajador" required>
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label">Rol</label>
-              <select class="form-select" id="edit-rol" name="idRol" required>
-                <option value="">Seleccionar...</option>
-                <option></option>
-              </select>
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label">DNI</label>
-              <input class="form-control" id="edit-dni" name="dni" required>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Nombres</label>
-              <input class="form-control" id="edit-nombre" name="nombre" required>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Apellidos</label>
-              <input class="form-control" id="edit-apellidos" name="apellidos" required>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Correo</label>
-              <input type="email" class="form-control" id="edit-correo" name="correo" required>
-            </div>
-
-            <div class="col-md-3">
-              <label class="form-label">Celular</label>
-              <input class="form-control" id="edit-celular" name="celular">
-            </div>
-
-            <div class="col-md-3">
-              <label class="form-label">Género</label>
-              <select class="form-select" id="edit-genero" name="genero">
-                <option value="">Seleccionar...</option>
-                <option>Masculino</option>
-                <option>Femenino</option>
-                <option>Otro</option>
-              </select>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Fecha nacimiento</label>
-              <input type="date" class="form-control" id="edit-fechaNacimiento" name="fechaNacimiento" required>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Fecha contratación</label>
-              <input type="date" class="form-control" id="edit-fechaContratacion" name="fechaContratacion" required>
-            </div>
-
-            <div class="col-12">
-              <label class="form-label">Dirección</label>
-              <input class="form-control" id="edit-direccion" name="direccion">
-            </div>
-
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">
-            <i class="fa-solid fa-save me-2"></i> Guardar Cambios
-          </button>
-        </div>
-
-      </form>
     </div>
   </div>
 </div>

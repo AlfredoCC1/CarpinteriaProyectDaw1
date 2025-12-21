@@ -59,6 +59,9 @@ public class SecurityConfig {
                                 "/api/dashboard/**",
                                 "/api/admin/**",
                                 "/api/productos/**",
+                                "/api/empleados/**",   // ✅ ESTA ES LA CLAVE
+                                "/api/roles/**",
+
                                 "/lineadiseno/api/**",
                                 "/producto/api/**"
                         ).hasRole("ADMINISTRADOR")

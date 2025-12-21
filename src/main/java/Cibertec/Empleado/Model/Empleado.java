@@ -2,6 +2,7 @@ package Cibertec.Empleado.Model;
 
 import Cibertec.Login.Model.Rol;
 import Cibertec.Login.Model.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -54,5 +55,6 @@ public class Empleado {
 
     @OneToOne(mappedBy = "empleado")
     @ToString.Exclude     // ⛔ evita ciclo infinito con Usuario
+    @JsonIgnore
     private Usuario usuario;
 }

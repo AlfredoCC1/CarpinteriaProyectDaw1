@@ -67,4 +67,13 @@ public class EmpleadoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // 🔍 BUSCAR (texto + rol)
+    @GetMapping("/buscar")
+    public List<Empleado> buscar(
+            @RequestParam(required = false) String texto,
+            @RequestParam(required = false) Integer idRol
+    ) {
+        return empleadoService.buscar(texto, idRol);
+    }
 }

@@ -2,6 +2,7 @@ package Cibertec.Login.Model;
 
 import Cibertec.Empleado.Model.Empleado;
 import Cibertec.Login.Enun.EstadoUsuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -20,6 +21,7 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "id_empleado", nullable = false)
     @ToString.Exclude   // ← evita el ciclo infinito
+    @JsonIgnore
     private Empleado empleado;
 
     @Column(name = "username", nullable = false, unique = true, length = 50)
