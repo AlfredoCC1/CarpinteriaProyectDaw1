@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import {RouterLink, RouterModule} from '@angular/router';
 import { NavbarComponent } from '../../core/navbar/navbar';
 import { FooterComponent } from '../../core/footer/footer';
 
@@ -12,7 +12,7 @@ type Filtro = { label: string; value: string };
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, CommonModule, RouterModule],
+  imports: [NavbarComponent, FooterComponent, CommonModule, RouterModule,RouterLink],
   templateUrl: './productos.html',
   styleUrl: './productos.css',
 })
