@@ -59,6 +59,11 @@ export class ProductoService {
       'http://localhost:8080/producto/public/listar'
     );
   }
+  buscarPublicoPorId(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`http://localhost:8080/producto/public/${id}`);
+  }
+
+
 
 
 }
