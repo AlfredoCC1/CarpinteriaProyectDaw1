@@ -5,8 +5,10 @@ import { LineaComponent } from './fragments/linea/linea';
 import { GraficosComponent } from './fragments/graficos/graficos';
 import { CategoriaComponent } from './fragments/categoria/categoria';
 import { ProductosComponent } from './fragments/productos/productos';
+import { EmpleadosComponent } from './fragments/empleados/empleados';
+import { ClientesComponent} from './fragments/clientes/clientes';
 
-type ViewId = 'graficos' | 'linea' | 'categoria' | 'productos';
+type ViewId = 'graficos' | 'linea' | 'categoria' | 'productos' | 'empleados' | 'clientes';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +19,9 @@ type ViewId = 'graficos' | 'linea' | 'categoria' | 'productos';
     LineaComponent,
     GraficosComponent,
     CategoriaComponent,
-    ProductosComponent
+    ProductosComponent,
+    EmpleadosComponent,
+    ClientesComponent,
   ],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
@@ -33,6 +37,8 @@ export class DashboardComponent {
     linea: { title: 'Líneas de Diseño', subtitle: 'Administra las líneas de diseño' },
     categoria: { title: 'Categorías', subtitle: 'Administra las categorías de productos' },
     productos: { title: 'Productos', subtitle: 'Productos de productos' },
+    empleados: { title: 'Empleados', subtitle: 'Registro de Empleados'},
+    clientes: { title: 'Clientes', subtitle: 'Registro de cliente' },
   };
 
   switchView(view: ViewId) {

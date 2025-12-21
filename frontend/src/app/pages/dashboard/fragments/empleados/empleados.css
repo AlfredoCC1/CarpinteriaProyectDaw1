@@ -1,27 +1,17 @@
-/* ===========================
-   EMPLEADOS (FORM + TABLE)
-   Paleta: madera (#8B5A2B)
-   =========================== */
-
-:root{
-  --wood: #8B5A2B;
-  --wood-2: #d4a76a;
+:host{
+  /* neutrales */
   --ink: #111827;
   --muted: #6b7280;
   --line: #e5e7eb;
   --soft: #f9fafb;
   --card: #ffffff;
-  --shadow: 0 6px 18px rgba(15,23,42,.06);
-}
 
-/* -------- Encabezado de sección -------- */
-.section-header h2{
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0;
-}
-.section-header small{
-  color: var(--muted);
+  /* sombras */
+  --shadow: 0 6px 18px rgba(15,23,42,.06);
+  --shadow-2: 0 18px 45px rgba(0,0,0,.18);
+
+  display:block;
+  background: var(--bg);
 }
 
 /* -------- Contenedor Formulario -------- */
@@ -45,17 +35,17 @@
 
 .form-header h3{
   margin: 0;
-  color: var(--ink);
-  font-weight: 700;
+  color: var(--primary-dark);
+  font-weight: 800;
   font-size: 1.05rem;
 }
 .form-header small{
   color: var(--muted);
 }
 
-/* inputs más pro (sin pelear con Bootstrap) */
+/* inputs */
 .form-view .form-label{
-  font-weight: 600;
+  font-weight: 700;
   color: #374151;
   margin-bottom: 6px;
   font-size: .9rem;
@@ -71,21 +61,17 @@
 
 .form-view .form-control:focus,
 .form-view .form-select:focus{
-  border-color: var(--wood);
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(139,90,43,.16);
   background: #fff;
 }
 
-.form-view .text-muted{
-  color: var(--muted) !important;
-}
-
-/* botón principal (warning ya es amarillo, lo afinamos) */
+/* botón principal */
 .btn.btn-warning{
   border: 0;
-  background: linear-gradient(135deg, var(--wood) 0%, var(--wood-2) 100%);
-  color: #fff;
-  font-weight: 700;
+  background: var(--accent);
+  color: #000000;
+  font-weight: 800;
   border-radius: 999px;
   padding: .55rem 1.1rem;
   box-shadow: 0 6px 16px rgba(139,90,43,.28);
@@ -112,7 +98,7 @@
 
 /* header tabla */
 .table-header{
-  background: #fafafa;
+  background: linear-gradient(0deg, rgba(255,200,87,.12), rgba(255,200,87,.12)), #fff;
   padding: 16px 18px;
   border-bottom: 1px solid var(--line);
   display:flex;
@@ -123,8 +109,8 @@
 
 .table-header h4{
   margin: 0;
-  font-weight: 800;
-  color: var(--ink);
+  font-weight: 900;
+  color: var(--primary-dark);
   letter-spacing: .04em;
   font-size: .95rem;
 }
@@ -141,7 +127,7 @@
   border: 1px solid #d6d9e0;
   border-right: 0;
   border-radius: 999px 0 0 999px;
-  color: var(--wood);
+  color: var(--primary);
 }
 .table-actions .form-control{
   border: 1px solid #d6d9e0;
@@ -151,7 +137,7 @@
 }
 .table-actions .form-control:focus{
   box-shadow: 0 0 0 3px rgba(139,90,43,.14);
-  border-color: var(--wood);
+  border-color: var(--primary);
 }
 
 /* select filtro */
@@ -162,7 +148,7 @@
 }
 .table-actions .form-select:focus{
   box-shadow: 0 0 0 3px rgba(139,90,43,.14);
-  border-color: var(--wood);
+  border-color: var(--primary);
 }
 
 /* tabla interna */
@@ -179,11 +165,11 @@
 .table-empleados tbody td{
   padding: 12px 14px;
   border-top: 1px solid #f0f2f5;
-  color: #111827;
+  color: var(--ink);
   vertical-align: middle;
 }
 
-/* hover pro */
+/* hover */
 .table-empleados tbody tr{
   transition: background .15s ease;
 }
@@ -191,12 +177,17 @@
   background: rgba(139,90,43,.045);
 }
 
-/* rol como pill */
+/* rol como pill sutil */
+.table-empleados tbody td:nth-child(4){
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+.table-empleados tbody td:nth-child(4){
+  position: relative;
+}
 .table-empleados tbody td:nth-child(4){
   font-weight: 700;
-}
-.table-empleados tbody td:nth-child(4)::first-letter{
-  text-transform: uppercase;
+  color: var(--primary-dark);
 }
 
 /* botones acciones */
@@ -205,17 +196,21 @@
   padding: .34rem .55rem;
 }
 .table-empleados .btn-outline-primary{
-  border-color: rgba(63,137,255,.35);
+  border-color: rgba(139,90,43,.35);
+  color: var(--primary-dark);
+}
+.table-empleados .btn-outline-primary:hover{
+  background: rgba(139,90,43,.10);
 }
 .table-empleados .btn-outline-danger{
   border-color: rgba(239,68,68,.35);
 }
 
-/* -------- Modal (pulido) -------- */
+/* -------- Modal -------- */
 .modal-content{
   border: 0;
   border-radius: 16px;
-  box-shadow: 0 18px 45px rgba(0,0,0,.18);
+  box-shadow: var(--shadow-2);
 }
 
 .modal-header{
@@ -224,8 +219,8 @@
 }
 
 .modal-title{
-  font-weight: 800;
-  color: var(--ink);
+  font-weight: 900;
+  color: var(--primary-dark);
 }
 
 .modal-body{

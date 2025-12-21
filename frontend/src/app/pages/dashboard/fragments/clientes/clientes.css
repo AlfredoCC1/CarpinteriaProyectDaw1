@@ -1,3 +1,10 @@
+/* ===========================
+   CLIENTES (FORM + TABLE)
+   Igual al estilo de EMPLEADOS
+   Paleta global:
+   --primary, --primary-dark, --accent, --bg
+   =========================== */
+
 :host{
   /* neutrales */
   --ink: #111827;
@@ -39,6 +46,9 @@
   font-weight: 800;
   font-size: 1.05rem;
 }
+.form-header small{
+  color: var(--muted);
+}
 
 /* inputs */
 .form-view .form-label{
@@ -54,12 +64,6 @@
   border: 1px solid #d6d9e0;
   background: var(--soft);
   transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
-}
-
-.form-view textarea.form-control{
-  border-radius: 12px;
-  resize: vertical;
-  min-height: 90px;
 }
 
 .form-view .form-control:focus,
@@ -143,8 +147,8 @@
   border-color: var(--primary);
 }
 
-/* tabla interna (en categorías es .table, no .table-empleados) */
-.table thead th{
+/* tabla interna (en clientes es .table-clientes) */
+.table-clientes thead th{
   background: #fcfcfd;
   color: #374151;
   font-size: .78rem;
@@ -154,7 +158,7 @@
   padding: 12px 14px;
 }
 
-.table tbody td{
+.table-clientes tbody td{
   padding: 12px 14px;
   border-top: 1px solid #f0f2f5;
   color: var(--ink);
@@ -162,21 +166,15 @@
 }
 
 /* hover */
-.table tbody tr{
+.table-clientes tbody tr{
   transition: background .15s ease;
 }
-.table tbody tr:hover{
+.table-clientes tbody tr:hover{
   background: rgba(139,90,43,.045);
 }
 
-/* Estado (columna 4) más marcado */
-.table tbody td:nth-child(4){
-  font-weight: 800;
-  color: var(--primary-dark);
-}
-
-/* -------- Botones acciones (iconos) -------- */
-.table .btn{
+/* acción: botones */
+.table-clientes .btn{
   border-radius: 10px;
   width: 38px;
   height: 38px;
@@ -187,24 +185,25 @@
 }
 
 /* Editar */
-.table .btn-outline-primary{
+.table-clientes .btn-outline-primary{
   border-color: rgba(139,90,43,.35);
   color: var(--primary-dark);
   background: #fff;
 }
-.table .btn-outline-primary:hover{
+.table-clientes .btn-outline-primary:hover{
   background: rgba(139,90,43,.10);
 }
 
 /* Eliminar */
-.table .btn-outline-danger{
+.table-clientes .btn-outline-danger{
   border-color: rgba(239,68,68,.35);
   color: #ef4444;
   background: #fff;
 }
-.table .btn-outline-danger:hover{
+.table-clientes .btn-outline-danger:hover{
   background: rgba(239,68,68,.08);
 }
+
 
 /* -------- Modal -------- */
 .modal-content{
@@ -225,27 +224,6 @@
 
 .modal-body{
   padding: 18px;
-}
-
-/* labels dentro del modal (tu HTML usa <label> sin clase) */
-.modal-body label{
-  font-weight: 700;
-  color: #374151;
-  margin-bottom: 6px;
-  display: inline-block;
-}
-
-.modal-body .form-control,
-.modal-body .form-select{
-  border-radius: 10px;
-  border: 1px solid #d6d9e0;
-  background: var(--soft);
-}
-.modal-body .form-control:focus,
-.modal-body .form-select:focus{
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(139,90,43,.16);
-  background: #fff;
 }
 
 .modal-footer{

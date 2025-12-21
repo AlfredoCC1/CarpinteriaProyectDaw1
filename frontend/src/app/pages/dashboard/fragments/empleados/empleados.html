@@ -1,15 +1,4 @@
-<div th:fragment="mainEmpleados" id="view-empleados" class="view-container">
-
-  <!-- HEADER -->
-  <div class="section-header" data-aos="fade-up">
-    <div>
-      <h2>Empleados</h2>
-      <small>Registra, edita y administra a tu personal</small>
-    </div>
-    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalNuevoEmpleado">
-      <i class="fa-solid fa-user-plus me-1"></i> Nuevo Empleado
-    </button>
-  </div>
+<div id="view-empleados" class="view-container">
 
   <!-- FORM (opcional inline) -->
   <div class="form-view" data-aos="fade-up">
@@ -18,7 +7,7 @@
       <small>Completa los datos del trabajador</small>
     </div>
 
-    <form th:action="@{/empleados/guardar}" method="post" id="form-empleado">
+    <form  method="post" id="form-empleado">
       <div class="row g-4">
 
         <div class="col-md-3">
@@ -31,7 +20,7 @@
           <label class="form-label">Rol</label>
           <select class="form-select" name="idRol" required>
             <option value="">Seleccionar...</option>
-            <option th:each="r : ${roles}" th:value="${r.idRol}" th:text="${r.nombre}"></option>
+            <option></option>
           </select>
         </div>
 
@@ -115,7 +104,7 @@
 
         <select class="form-select form-select-sm" id="filtroRol" style="width: 170px;">
           <option value="">Todos los roles</option>
-          <option th:each="r : ${roles}" th:value="${r.nombre}" th:text="${r.nombre}"></option>
+          <option></option>
         </select>
       </div>
     </div>
@@ -137,40 +126,27 @@
 
         <tbody id="tbody-empleados">
         <!-- THYMELEAF -->
-        <tr th:each="emp : ${empleados}">
-          <td th:text="${emp.idEmpleado}">1</td>
-          <td th:text="${emp.codigoTrabajador}">JPEREZ123</td>
+        <tr>
+          <td >1</td>
+          <td >JPEREZ123</td>
           <td>
-            <strong th:text="${emp.nombre + ' ' + emp.apellidos}">Juan Pérez Ramírez</strong><br>
+            <strong >Juan Pérez Ramírez</strong><br>
             <small class="text-muted">
               Ingreso:
-              <span th:text="${#temporals.format(emp.fechaContratacion, 'dd/MM/yyyy')}">10/01/2020</span>
+              <span >10/01/2020</span>
             </small>
           </td>
-          <td th:text="${emp.rol.nombre}">ADMINISTRADOR</td>
-          <td th:text="${emp.dni}">12345678</td>
-          <td th:text="${emp.correo}">admin@carpinteria.com</td>
-          <td th:text="${emp.celular}">999888777</td>
+          <td >ADMINISTRADOR</td>
+          <td >12345678</td>
+          <td >admin@carpinteria.com</td>
+          <td >999888777</td>
           <td class="text-end">
             <button type="button" class="btn btn-sm btn-outline-primary me-1"
-                    data-bs-toggle="modal" data-bs-target="#modalEditarEmpleado"
-                    th:attr="data-id=${emp.idEmpleado},
-                             data-codigo=${emp.codigoTrabajador},
-                             data-nombre=${emp.nombre},
-                             data-apellidos=${emp.apellidos},
-                             data-dni=${emp.dni},
-                             data-correo=${emp.correo},
-                             data-celular=${emp.celular},
-                             data-genero=${emp.genero},
-                             data-direccion=${emp.direccion},
-                             data-fechanac=${emp.fechaNacimiento},
-                             data-fechacon=${emp.fechaContratacion},
-                             data-rol=${emp.rol.idRol}">
+                    data-bs-toggle="modal" data-bs-target="#modalEditarEmpleado">
               <i class="fa-solid fa-pen"></i>
             </button>
 
             <a class="btn btn-sm btn-outline-danger"
-               th:href="@{/empleados/eliminar/{id}(id=${emp.idEmpleado})}"
                onclick="return confirm('¿Seguro de eliminar este empleado?')">
               <i class="fa-solid fa-trash"></i>
             </a>
@@ -194,7 +170,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
-      <form th:action="@{/empleados/actualizar}" method="post">
+      <form method="post">
         <div class="modal-body">
           <input type="hidden" id="edit-idEmpleado" name="idEmpleado">
 
@@ -209,7 +185,7 @@
               <label class="form-label">Rol</label>
               <select class="form-select" id="edit-rol" name="idRol" required>
                 <option value="">Seleccionar...</option>
-                <option th:each="r : ${roles}" th:value="${r.idRol}" th:text="${r.nombre}"></option>
+                <option></option>
               </select>
             </div>
 

@@ -5,6 +5,7 @@
   <div class="form-view" data-aos="fade-up">
     <div class="form-header">
       <h3>Agregar Nueva Categoría</h3>
+      <small>Completa la información de la categoria</small>
     </div>
 
     <form id="form-categoria" (ngSubmit)="guardar()">
@@ -78,16 +79,16 @@
           <td>{{ c.activo ? 'Activo' : 'Inactivo' }}</td>
           <td>
             <button
-              class="btn btn-sm btn-primary me-2"
+              class="btn btn-sm btn-outline-primary me-1"
               data-bs-toggle="modal"
               data-bs-target="#modalEditarCategoria"
               (click)="abrirEditar(c)"
             >
-              Editar
+              <i class="fa-solid fa-pen"></i>
             </button>
 
-            <button class="btn btn-sm btn-danger" (click)="eliminar(c.id)">
-              Eliminar
+            <button class="btn btn-sm btn-outline-danger" (click)="eliminar(c.id)">
+              <i class="fa-solid fa-trash"></i>
             </button>
           </td>
         </tr>

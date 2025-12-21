@@ -41,8 +41,18 @@
       </div>
       }
       <!-- ========== VISTA 5: EMPLEADOS  ========== -->
-      <div></div>
+      @if (currentView === 'empleados') {
+      <div>
+        <app-empleados></app-empleados>
+      </div>
+      }
 
+      <!-- ========== VISTA 6: Clientes  ========== -->
+      @if (currentView === 'clientes') {
+        <div>
+          <app-clientes></app-clientes>
+        </div>
+      }
 
       <!-- ========== VISTA 6: PEDIDOS ========== -->
       <div id="view-pedidos" class="view-container">

@@ -28,7 +28,14 @@
       <i class="fa-solid fa-chair"></i> Productos
     </a>
     </li>
-    <li><a href="#" data-view="view-empleados" ><i class="fa-solid fa-user-tie"></i> Empleados</a></li>
+    <li><a class="nav-link" href="javascript:void(0)" (click)="go('empleados')" [class.active]="activeView === 'empleados'" >
+      <i class="fa-solid fa-user-tie"></i> Empleados
+    </a>
+    </li>
+    <li><a class="nav-link" href="javascript:void(0)" (click)="go('clientes')" [class.active]="activeView === 'clientes'" >
+      <i class="fa-solid fa-user-tie"></i> Clientes
+    </a>
+    </li>
     <li><a href="#"><i class="fa-solid fa-file-invoice-dollar"></i> Pedidos</a></li>
     <li><a href="#"><i class="fa-solid fa-users-gear"></i> Usuarios</a></li>
     <li><a href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>

@@ -1,16 +1,14 @@
 <div id="view-lineas" class="view-container">
 
-  <div class="section-header">
-    <div>
-      <h2>Agregar Nueva Linea</h2>
-    </div>
-  </div>
-
   <!-- ERROR (no cambia diseño si no hay error) -->
   <div *ngIf="error" class="alert alert-danger py-2">{{ error }}</div>
 
   <!-- FORM -->
-  <div class="form-view">
+  <div class="form-view" data-aos="fade-up">
+    <div class="form-header">
+      <h3>Agregar Nueva Linea</h3>
+      <small>Completa la información de la Linea de Diseño</small>
+    </div>
 
     <form id="form-linea" (ngSubmit)="guardar()">
       <div class="row g-3">
@@ -53,11 +51,14 @@
       <h4>Líneas Registradas</h4>
 
       <div class="table-actions">
+        <div class="input-group input-group-sm">
+          <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
         <input id="inputBuscarLinea"
                class="form-control form-control-sm"
                placeholder="Buscar línea..."
                [(ngModel)]="texto"
                (keyup.enter)="buscar()">
+        </div>
       </div>
     </div>
 
@@ -80,16 +81,16 @@
         <td>{{ l.descripcion }}</td>
         <td>{{ l.activo ? 'Activo' : 'Inactivo' }}</td>
         <td class="text-end">
-          <button class="btn btn-sm btn-primary me-2"
+          <button class="btn btn-sm btn-outline-primary me-2"
                   data-bs-toggle="modal"
                   data-bs-target="#modalEditarLinea"
                   (click)="abrirEditar(l)">
-            Editar
+            <i class="fa-solid fa-pen"></i>
           </button>
 
-          <button class="btn btn-sm btn-danger"
+          <button class="btn btn-sm btn-outline-danger"
                   (click)="eliminar(l.id)">
-            Eliminar
+            <i class="fa-solid fa-trash"></i>
           </button>
         </td>
       </tr>
