@@ -19,4 +19,10 @@ public class ProductoPublicController {
     public List<Producto> listarPublico() {
         return productoService.listar();
     }
+    @GetMapping("/{id}")
+    public Producto obtenerPublicoPorId(@PathVariable Long id) {
+        return productoService.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("No existe el producto con id " + id));
+    }
+
 }

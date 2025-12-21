@@ -8,8 +8,8 @@ import { ServiciosComponent } from './pages/servicios/servicios';
 import { ProductosComponent } from './pages/productos/productos';
 import { ProcesoComponent } from './pages/proceso/proceso';
 import { ContactoComponent } from './pages/contacto/contacto';
-import { AdminGuard } from './core/services/Login/AdminGuard'; //👈 IMPORTANTE
-import { DetalleComponent} from './pages/detalle/detalle';
+import { AdminGuard } from './core/services/Login/AdminGuard';
+import { DetalleComponent } from './pages/detalle/detalle';
 
 export const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -18,14 +18,20 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AdminGuard]   // ✅ ESTO FALTABA
+    canActivate: [AdminGuard]
   },
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'servicios', component: ServiciosComponent },
   { path: 'productos', component: ProductosComponent },
-  { path: 'detalle', component: DetalleComponent },
+
+  // ✅ SOLO ESTA RUTA PARA DETALLE
+  { path: 'detalle/:id', component: DetalleComponent },
+
   { path: 'proceso', component: ProcesoComponent },
   { path: 'contacto', component: ContactoComponent },
+
+  // opcional: redirección
+  { path: '**', redirectTo: '' }
 ];
