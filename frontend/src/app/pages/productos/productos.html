@@ -9,37 +9,12 @@
       <span>Muebles de carpintería hechos a medida</span>
     </div>
 
-    <h1 class="hero-title mb-2">
-      Catálogo de Productos
-    </h1>
+    <h1 class="hero-title mb-2">Catálogo de Productos</h1>
 
     <p class="hero-subtitle mb-3">
       Explora nuestras mesas, closets, cocinas y piezas decorativas,
       diseñadas artesanalmente para darle calidez y carácter a cada espacio.
     </p>
-
-    <div class="hero-actions">
-      <a routerLink="/" class="btn btn-hero-ghost d-inline-flex align-items-center gap-2">
-        <i class="fa-solid fa-arrow-left"></i>
-        Volver al inicio
-      </a>
-      <a class="btn btn-hero-main d-inline-flex align-items-center gap-2">
-        Ver productos
-        <i class="fa-solid fa-arrow-down"></i>
-      </a>
-    </div>
-
-    <div class="hero-meta">
-      <span><i class="fa-solid fa-circle-check me-1"></i> Diseños personalizables</span> ·
-      <span><i class="fa-solid fa-tree me-1"></i> Maderas seleccionadas</span> ·
-      <span><i class="fa-solid fa-truck me-1"></i> Entrega e instalación</span>
-    </div>
-  </div>
-
-  <!-- Indicador "Desplázate" -->
-  <div class="scroll-indicator d-none d-md-flex">
-    <span>Desplázate</span>
-    <div class="scroll-indicator-dot"></div>
   </div>
 </header>
 
@@ -51,45 +26,37 @@
     <div class="d-flex flex-wrap justify-content-center gap-2">
       <button
         *ngFor="let f of filtros"
-        type="button"
         class="btn btn-outline-dark filter-btn"
         [class.active]="filtroActivo === f.value"
-        (click)="setFiltro(f.value)"
-      >
+        (click)="setFiltro(f.value)">
         {{ f.label }}
       </button>
     </div>
   </div>
 </section>
 
-<!-- GRID DE PRODUCTOS -->
-<section class="py-4" id="grid-productos">
+<!-- GRID -->
+<section class="py-4">
   <div class="container">
 
-    <!-- CARGANDO -->
-    <div *ngIf="cargando" class="text-center py-4">
+    <div *ngIf="cargando" class="text-center py-5">
       <span class="text-muted">Cargando productos...</span>
     </div>
 
-    <!-- ERROR -->
     <div *ngIf="error" class="alert alert-danger text-center">
       {{ error }}
     </div>
 
-    <!-- SIN RESULTADOS -->
-    <div *ngIf="!cargando && !error && productosFiltrados.length === 0" class="text-center py-4">
-      <span class="text-muted">No hay productos para esta categoría.</span>
+    <div *ngIf="!cargando && productosFiltrados.length === 0"
+         class="text-center py-5 text-muted">
+      No hay productos para esta categoría.
     </div>
 
-    <div class="row g-4" *ngIf="!cargando && !error && productosFiltrados.length > 0">
-
-      <!-- CARD DINÁMICA -->
-      <div class="col-md-4" data-aos="fade-up" *ngFor="let p of productosFiltrados">
+    <div class="row g-4" *ngIf="!cargando && productosFiltrados.length > 0">
+      <div class="col-md-4" *ngFor="let p of productosFiltrados" data-aos="fade-up">
         <div class="product-card">
 
-          <img class="product-img"
-               [src]="img1(p)"
-               [alt]="p.nombre">
+          <img class="product-img" [src]="img1(p)" [alt]="p.nombre">
 
           <div class="p-3">
             <h5>{{ p.nombre }}</h5>
@@ -99,19 +66,16 @@
               {{ precioTexto(p) }}
             </p>
 
-            <!-- Si quieres mantener el botón sin funcionalidad por ahora -->
-            <button class="btn btn-warning w-100 mt-2" [routerLink]="['/detalle', p.id]">
+            <button class="btn btn-warning w-100 mt-2">
               <i class="fa-solid fa-eye"></i> Ver detalles
             </button>
-
           </div>
 
         </div>
       </div>
-
     </div>
+
   </div>
 </section>
-
 
 <app-footer></app-footer>

@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  Inject,
+  PLATFORM_ID
+} from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from '../../core/navbar/navbar';
@@ -6,6 +12,8 @@ import { FooterComponent } from '../../core/footer/footer';
 
 import { ProductoService } from '../../core/services/Producto/Producto.service';
 import { Producto } from '../../../Model/Producto';
+
+declare const AOS: any;
 
 type Filtro = { label: string; value: string };
 
@@ -28,10 +36,11 @@ export class ProductosComponent implements OnInit {
   ];
 
   filtroActivo = 'todo';
+
   productos: Producto[] = [];
   productosFiltrados: Producto[] = [];
 
-  cargando = false;
+  cargando = true;
   error = '';
 
   constructor(
@@ -41,12 +50,8 @@ export class ProductosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // ✅ IMPORTANTE: solo en navegador
     if (isPlatformBrowser(this.platformId)) {
       this.cargar();
-    } else {
-      // SSR: no cargar
-      this.cargando = false;
     }
   }
 
@@ -59,12 +64,21 @@ export class ProductosComponent implements OnInit {
         this.productos = data ?? [];
         this.aplicarFiltro(this.filtroActivo);
         this.cargando = false;
-        this.cdr.detectChanges(); // ✅ pinta sin esperar click
+
+        // 🔑 FIX DEFINITIVO
+        this.cdr.detectChanges();
+
+        setTimeout(() => {
+          if (typeof AOS !== 'undefined') {
+            AOS.refreshHard?.();
+            AOS.refresh?.();
+          }
+        }, 0);
       },
       error: (err) => {
         console.error('ERROR catálogo', err);
         this.cargando = false;
-        this.error = err?.error?.message || 'No se pudo cargar los productos.';
+        this.error = 'No se pudo cargar los productos.';
         this.cdr.detectChanges();
       },
     });
@@ -73,6 +87,12 @@ export class ProductosComponent implements OnInit {
   setFiltro(value: string): void {
     this.filtroActivo = value;
     this.aplicarFiltro(value);
+
+    setTimeout(() => {
+      if (typeof AOS !== 'undefined') {
+        AOS.refreshHard?.();
+      }
+    }, 0);
   }
 
   private aplicarFiltro(value: string): void {
@@ -81,10 +101,9 @@ export class ProductosComponent implements OnInit {
       return;
     }
 
-    this.productosFiltrados = this.productos.filter((p) => {
-      const cat = this.norm(p.categoria?.nombre);
-      return cat === value;
-    });
+    this.productosFiltrados = this.productos.filter(p =>
+      this.norm(p.categoria?.nombre) === value
+    );
   }
 
   img1(p: Producto): string {
