@@ -8,7 +8,8 @@ import { ServiciosComponent } from './pages/servicios/servicios';
 import { ProductosComponent } from './pages/productos/productos';
 import { ProcesoComponent } from './pages/proceso/proceso';
 import { ContactoComponent } from './pages/contacto/contacto';
-import { AdminGuard } from './core/services/Login/AdminGuard'; // 👈 IMPORTANTE
+import { AdminGuard } from './core/services/Login/AdminGuard'; //👈 IMPORTANTE
+import { DetalleComponent} from './pages/detalle/detalle';
 
 export const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'servicios', component: ServiciosComponent },
   { path: 'productos', component: ProductosComponent },
+  { path: 'detalle', component: DetalleComponent },
   { path: 'proceso', component: ProcesoComponent },
   { path: 'contacto', component: ContactoComponent },
 ];

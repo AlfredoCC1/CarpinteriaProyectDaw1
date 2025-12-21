@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from '../../core/navbar/navbar';
 import { FooterComponent } from '../../core/footer/footer';
@@ -28,17 +28,26 @@ export class ProductosComponent implements OnInit {
   ];
 
   filtroActivo = 'todo';
-
   productos: Producto[] = [];
   productosFiltrados: Producto[] = [];
 
   cargando = false;
   error = '';
 
-  constructor(private productoService: ProductoService) {}
+  constructor(
+    private productoService: ProductoService,
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
-    this.cargar();
+    // ✅ IMPORTANTE: solo en navegador
+    if (isPlatformBrowser(this.platformId)) {
+      this.cargar();
+    } else {
+      // SSR: no cargar
+      this.cargando = false;
+    }
   }
 
   cargar(): void {
@@ -50,15 +59,16 @@ export class ProductosComponent implements OnInit {
         this.productos = data ?? [];
         this.aplicarFiltro(this.filtroActivo);
         this.cargando = false;
+        this.cdr.detectChanges(); // ✅ pinta sin esperar click
       },
       error: (err) => {
         console.error('ERROR catálogo', err);
         this.cargando = false;
-        this.error = 'No se pudo cargar los productos.';
+        this.error = err?.error?.message || 'No se pudo cargar los productos.';
+        this.cdr.detectChanges();
       },
     });
   }
-
 
   setFiltro(value: string): void {
     this.filtroActivo = value;
@@ -77,7 +87,6 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  // helpers para la vista
   img1(p: Producto): string {
     return p.imagen1?.trim() || 'assets/img/no-image.png';
   }
@@ -87,15 +96,10 @@ export class ProductosComponent implements OnInit {
   }
 
   precioTexto(p: Producto): string {
-    // Si viene precio numérico
     if (p.precio !== null && p.precio !== undefined) {
       const n = Number(p.precio);
-      if (!Number.isNaN(n)) {
-        return `S/ ${n.toFixed(2)}`;
-      }
+      if (!Number.isNaN(n)) return `S/ ${n.toFixed(2)}`;
     }
-
-    // Si no hay precio → etiqueta o "A cotizar"
     return p.etiquetaPrecio?.trim() || 'A cotizar';
   }
 
@@ -104,6 +108,6 @@ export class ProductosComponent implements OnInit {
       .trim()
       .toLowerCase()
       .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, ''); // quita tildes (Decoración -> decoracion)
+      .replace(/[\u0300-\u036f]/g, '');
   }
 }
