@@ -268,6 +268,147 @@
           </td>
         </tr>
         </tbody>
+
+
+        <!-- MODAL EDITAR -->
+        <div class="modal fade" id="modalEditarEmpleado" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <form (ngSubmit)="actualizar()" #fEdit="ngForm" (keydown.enter)="$event.preventDefault()">
+
+                <div class="modal-header">
+                  <h5 class="modal-title">Editar empleado</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="row g-3">
+
+                    <!-- Código trabajador -->
+                    <div class="col-md-6">
+                      <label class="form-label">Código trabajador</label>
+                      <input class="form-control"
+                             [(ngModel)]="edit.codigoTrabajador"
+                             name="editCodigoTrabajador"
+                             required>
+                    </div>
+
+                    <!-- Rol -->
+                    <div class="col-md-6">
+                      <label class="form-label">Rol</label>
+                      <select class="form-select"
+                              [(ngModel)]="edit.idRol"
+                              name="editIdRol"
+                              required>
+                        <option [ngValue]="''" disabled>Seleccione...</option>
+                        <option *ngFor="let r of roles" [ngValue]="r.idRol">
+                          {{ r.nombre }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <!-- DNI -->
+                    <div class="col-md-6">
+                      <label class="form-label">DNI</label>
+                      <input class="form-control"
+                             [(ngModel)]="edit.dni"
+                             name="editDni"
+                             maxlength="15"
+                             required>
+                    </div>
+
+                    <!-- Celular -->
+                    <div class="col-md-6">
+                      <label class="form-label">Celular</label>
+                      <input class="form-control"
+                             [(ngModel)]="edit.celular"
+                             name="editCelular"
+                             maxlength="20"
+                             required>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="col-md-6">
+                      <label class="form-label">Nombres</label>
+                      <input class="form-control"
+                             [(ngModel)]="edit.nombre"
+                             name="editNombre"
+                             required>
+                    </div>
+
+                    <!-- Apellidos -->
+                    <div class="col-md-6">
+                      <label class="form-label">Apellidos</label>
+                      <input class="form-control"
+                             [(ngModel)]="edit.apellidos"
+                             name="editApellidos"
+                             required>
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="col-md-12">
+                      <label class="form-label">Correo</label>
+                      <input class="form-control"
+                             type="email"
+                             [(ngModel)]="edit.correo"
+                             name="editCorreo"
+                             required>
+                    </div>
+
+                    <!-- Fecha nacimiento -->
+                    <div class="col-md-6">
+                      <label class="form-label">Fecha nacimiento</label>
+                      <input class="form-control"
+                             type="date"
+                             [(ngModel)]="edit.fechaNacimiento"
+                             name="editFechaNacimiento"
+                             required>
+                    </div>
+
+                    <!-- Fecha contratación -->
+                    <div class="col-md-6">
+                      <label class="form-label">Fecha contratación</label>
+                      <input class="form-control"
+                             type="date"
+                             [(ngModel)]="edit.fechaContratacion"
+                             name="editFechaContratacion"
+                             required>
+                    </div>
+
+
+                    <!-- Dirección -->
+                    <div class="col-md-6">
+                      <label class="form-label">Dirección</label>
+                      <input class="form-control"
+                             [(ngModel)]="edit.direccion"
+                             name="editDireccion"
+                             required>
+                    </div>
+                  </div>
+
+                  <!-- Mensaje de error si usas this.error -->
+                  <div class="alert alert-danger mt-3" *ngIf="error">
+                    {{ error }}
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <button class="btn btn-primary"
+                          type="submit"
+                          [disabled]="loading || fEdit.invalid">
+                    Guardar cambios
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+
       </table>
     </div>
   </div>
